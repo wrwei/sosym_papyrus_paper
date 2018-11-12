@@ -1,0 +1,9 @@
+let memberEnds=self.base_Association.memberEnd in
+let toolEnd=memberEnds(*$\rightarrow$*)select(type.oclIsKindOf(UML::Class) and type.oclAsType(UML::Class).extension_Tool(*$\rightarrow$*)notEmpty()),
+personEnd=memberEnds(*$\rightarrow$*)select(type.oclIsKindOf(UML::Class) and type.oclAsType(UML::Class).extension_Person(*$\rightarrow$*)notEmpty()) in
+if personEnd(*$\rightarrow$*)notEmpty() and toolEnd(*$\rightarrow$*)notEmpty() then
+personEnd(*$\rightarrow$*)first().isNavigable() = false and
+toolEnd(*$\rightarrow$*)first().isNavigable() = true
+else
+false
+endif

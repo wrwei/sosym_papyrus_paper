@@ -1,0 +1,7 @@
+rule PersonUML2PersonEMF
+	transform s: UMLProcess!Person
+	to t: EMFProcess!Person {
+		t.name = s.name;
+		t.age = s.age;
+		t.familiarWith ::= s.familiarWith;
+	}

@@ -1,0 +1,12 @@
+Label[type=StereotypeLabel]{
+	visible:false;
+}
+
+[% 
+var allNodeStereotypes = Source!EClass.all().select(c|c.getEAnnotation("Node").isDefined());
+for (stereo in allNodeStereotypes) {%]
+[appliedStereotypes~=[%=stereo.name%]][% if (hasMore){%], 
+[%}
+}%] { 
+	fontColor:red;
+}

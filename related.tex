@@ -1,0 +1,128 @@
+\section{Related Work} 
+\label{sec:related}
+
+%\noindent \textcolor{blue}{A few words about the use of UML profiles}\\\
+UML profiles are equipped with suitable extension mechanisms (e.g., 
+stereotypes, tagged 
+definitions and constraints) that enable the customisation of UML  and 
+facilitate the development of DSMLs~\cite{UML2015OMG}. 
+Over the past years, several UML profiles have been standardised by the OMG 
+(e.g., MARTE~\cite{omg2011marte}, SySML~\cite{friedenthal2014practical}) and 
+are now included in most common UML tools (e.g., 
+Papyrus~\cite{lanusse2009papyrus}. 
+Many researchers, taking advantage of the open-ended boundaries of UML 
+profiles, have developed profiles in applications as diverse as Web 
+development~\cite{Moreno2007:IETS}, security 
+specification~\cite{Bouaziz2012:ICCSE,Rodriguez2010:SERENE}, verification of 
+railway systems~\cite{Bernardi2013:JRESS} context modelling (e.g., a 
+meeting system) in mobile distributed systems~\cite{Simons2007:JVLC}, and smart 
+homecare services~\cite{Walderhaug2009:MODELS}.
+Several other researchers have designed UML profiles for the 
+specification~\cite{Debnath2006:ICCSA,Mak2004:ICSE} and visualisation of 
+design patterns~\cite{Dong2007:TSE}. A list of recently published UML 
+profiles is available in~\cite{Pardillo2010:MODELS}. 
+Irrespective of the way these UML profiles were developed, either 
+following ad-hoc processes or based on guidelines for designing well-structured 
+UML profiles~\cite{FuentesFernandez2004:UMLME,Selic2007:ISORC},
+they required substantial designer effort. Also, the learning 
+curve for new designers interested in exploring whether UML profiles suit their 
+business needs is steep.
+Our approach, subject to the concerns raised in Section~\ref{sec:evaluation}, 
+automates the process of generating such profiles and reduces significantly the 
+designer-driven effort for specifying, designing and validating UML Papyrus 
+profiles. 
+
+%A manual definition of a UML profile typically is a tedious, time-consuming 
+%and error-prone process
+
+%Useful guidelines for designing well-structured UML profiles are proposed 
+%in~\cite{FuentesFernandez2004:UMLME,Lagarde2008:FASE}.
+
+%in several domains including designing and developing Web 
+%applications~\cite{Moreno2007:IETS}, engineering secure applications
+%~\cite{Bouaziz2012:ICCSE}, and modelling and analysing real-time 
+%embedded systems~\cite{omg2011marte}.
+
+
+%\textcolor{blue}{Approaches that automate UML profile generation}
+Relevant to our work is research introducing methodologies for the automatic 
+generation of UML profiles from an Ecore-based metamodel. 
+The work in~\cite{Lagarde2008:FASE} proposes a partially automated approach for 
+generating UML profiles using a set of specific design patterns. However, this 
+approach requires the manual definition of an initial UML profile skeleton, 
+which is typically a tedious and error-prone task~\cite{Wimmer2009:IJWIS}. 
+The methodology introduced in~\cite{Giachetti2008:ER,Giachetti2009:CAISE} 
+facilitates the derivation of a UML profile using a DSML as input. 
+The methodology requires the manual definition of an intermediate metamodel 
+that captures the abstract syntax to be integrated into a UML profile, and 
+automates the comparison of this intermediate metamodel against the UML 
+metamodel to automatically identify a set of required UML extensions, as well 
+as the transformation of the intermediate metamodel into a corresponding 
+functioning UML profile. 
+Despite the potential of these approaches, they usually involve
+non-trivial human-driven tasks, e.g., a UML profile 
+skeleton~\cite{Lagarde2008:FASE} or an intermediate 
+metamodel~\cite{Giachetti2008:ER,Giachetti2009:CAISE}. In contrast, our 
+approach builds on top of standard Ecore metamodels (which are usually 
+available in MBSE). Furthermore, our approach supports the customisation of  
+UML profiles, and the corresponding Papyrus plugin, through the definition of 
+optional polishing transformations (cf. 
+Section~\ref{sec:transformationPatches}).
+
+
+%~\cite{Bergmayr2014:MODELS}
+
+
+
+Our work also subsumes research that focuses on bridging the gap between 
+MOF-based metamodels (e.g., Ecore) and UML profiles.
+% and illustrating how derived models can be used interchangeably. 
+In~\cite{abouzahra2005practical}, the authors propose a methodology 
+that consumes a UML profile and its corresponding Ecore metamodel, and uses
+M2M transformation and model weaving to transform UML models to 
+Ecore models, and vice versa. The methodology proposed 
+in~\cite{Wimmer2009:IJWIS} simplifies the specification of mappings 
+between a profile and its corresponding Ecore metamodel using a dedicated 
+bridging language. Through an automatic generation process that consumes
+these mappings, the technique produces UML profiles and suitable model 
+transformations. 
+Along the same path, the approach in~\cite{Giachetti2009:ICRCIS} employs an 
+integration metamodel to facilitate the interchange of modelling information 
+between Ecore-based models and UML models. Compared to this research, our 
+approach automatically generates UML 
+profiles (like~\cite{Wimmer2009:IJWIS} 
+and~\cite{Giachetti2009:ICRCIS}), but requires only a single annotated Ecore 
+metamodel and does not need any mediator 
+languages~\cite{Wimmer2009:IJWIS} 
+or integration metamodels~\cite{Giachetti2009:ICRCIS}. Also, the transformation 
+of models from UML profiles to Ecore is only a small part of our generic 
+approach~(Section \ref{sec:uml2emf}) that generates not only a fully-fledged 
+UML profile but also a distributable custom graphical editor. 
+%; we are currently working towards the opposite transformation. 
+
+ 
+
+
+%The issue of defining a bridge between specific technical spaces and MDA has 
+%been addressed in several works, such as
+
+%\ \\JUMP [8]  is a tool to reverse engineer Java programs (with annotations)
+%into profiled UML class diagrams.
+%\ \\ a fully automatic approach to generate profiles from annotation-based 
+%Java libraries\cite{Bergmayr2014:MODELS}
+
+%In \cite{langer2011uml}, the authors propose the adaption of the UML Profiles 
+%concept into EMF. More specifically, they advocate the use of EMF Profiles as 
+%an easier extension mechanism of DSMLs. A metamodel for defining EMF Profiles 
+%is proposed along with re-usable EMF Profiles that are developed to tackle 
+%specific cases.
+
+
+%\noindent \textcolor{blue}{Tools that support domain-specific graphical 
+%editors}
+%\ \\Sirius~\cite{viyovic2014sirius}
+%\ \\Eugenia~\cite{kolovos2015eugenia}
+
+
+
+

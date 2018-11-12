@@ -1,0 +1,27 @@
+@namespace(uri="sdpl",prefix="sdpl")
+@Diagram(name="SDPL", icon="ic/sdpl.png")
+package Process;
+
+@Node(base="Class", shape="sh/step.svg", icon="ic/step.png")
+class Step {
+	attr String stepId;
+	ref Step[1] next;
+}
+@Node(base="Class", shape="sh/tool.svg", icon="ic/tool.png")
+class Tool {
+	attr String name;
+	attr int version;
+}
+@Node(base="Class", shape="sh/per.svg", icon="ic/per.png")
+class Person {
+	attr String name;
+	attr int age;
+	@Edge(base="Association", icon="ic/line.png")
+	ref Tool[*] familiarWith;
+}
+@Edge(base="Association", icon="ic/line.png", source="src", target="tar")
+class Role {
+	attr String name;
+	ref Step[1] src;
+	ref Person[1] tar;
+}

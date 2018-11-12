@@ -1,0 +1,22 @@
+The following are all the currently supported parameters for the annotations.
+
+\subsection{@Diagram}
+\begin{itemize}
+	\item[--] name: The name of the created diagrams as it appears on the diagram creation menus of Papyrus. [required]
+	\item[--] icon: The icon that will appear next to the name on the diagram creation menus of Papyrus. [optional]
+\end{itemize}
+
+\subsection{@Node}
+\begin{itemize}
+	\item[--] base: The name of the UML meta-element that this stereotype should extend. [required]
+	\item[--] shape: The shape that should be used to represent the node on the diagram. [required]		\item[--] icon: The icon that will appear next to the name of the stereotype in the custom palette. [optional]
+\end{itemize}
+
+\subsection{@Edge}
+\begin{itemize}
+	\item[--] base: The name of the UML meta-element that this stereotype should extend. [required]
+	\item[--] icon: The icon that will appear next to the name of the stereotype in the custom palette. [optional]
+	\item[--] lineStyle: The style of the line (possible values: solid, dashed, dotted, hidden, double). [optional]
+	\item[--] source (\textit{for EClasses only}): The name of the EReference of the EClass that denotes the type of the source node for the edge. [required]
+		\item[--] target (\textit{for EClasses only}): The name of the EReference of the EClass that denotes the type of the target node for the edge. [required]
+\end{itemize}

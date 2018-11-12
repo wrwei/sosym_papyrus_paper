@@ -1,0 +1,9 @@
+Label[type=StereotypeLabel]{
+	visible:false;
+}
+
+[appliedStereotypes~=Step], 
+[appliedStereotypes~=Tool], 
+[appliedStereotypes~=Person] {
+	fontColor:red;
+}

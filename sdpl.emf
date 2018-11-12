@@ -1,0 +1,24 @@
+@namespace(uri="sdpl",prefix="sdpl")
+package Process;
+
+class Step {
+	attr String stepId;
+	ref Step[1] next;
+}
+
+class Tool {
+	attr String name;
+	attr int version;
+}
+
+class Person {
+	attr String name;
+	attr int age;
+	ref Tool[*] familiarWith;
+}
+
+class Role {
+	attr String name;
+	ref Step[1] src;
+	ref Person[1] tar;
+}

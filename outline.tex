@@ -1,0 +1,48 @@
+\section{Introduction}
+
+Extended version of the abstract + outline of the rest of the paper.
+
+\section{Background}
+
+Users of EMF-based modelling tools (e.g. Papyrus) can choose among a wide range of mature and research-oriented languages (e.g. Acceleo, Xpand, ATL, Epsilon) for carrying out model management tasks such as model-to-text transformation.
+
+Users of commercial modelling tools such as Rhapsody, PTC Integrity Modeller etc. are presented with two options: (1) restricting themselves to the model scripting facilities provided by the tool (e.g. VBScript in the case of PTC IM) or (2) exporting models into a standard format (e.g. XMI) which can be consumed by EMF-based model management languages. Explain why both of these options are suboptimal (the second option is OK-ish but not when consuming large models or when changes need to be made to models - diagrams are not exported)
+
+\section{Model-Based Engineering in Rolls-Royce}
+
+Here we will need some text from Stuart to outline the model-based engineering activities that take place in Rolls-Royce (e.g. construct  models of engine controllers in UML extended with an ADA/Spark profile and then generate code). Discuss some of the challenges related to PTC IM's scripting interface (e.g. verbose, no support for template-based text/code generation).
+
+\section{Bridging Epsilon with PTC Integrity Modeller}
+
+\subsection{Epsilon}
+Brief introduction to Epsilon and its model connectivity framework (can be reused from past papers)
+
+\subsection{The Epsilon PTC IM Bridge}
+
+PTC IM: Introduce the tool, talk about its persistence format (centralised object database), talk about how model elements are represented (unique ids, indexed by name) and about the scripting API offered by the tool.
+
+Challenges: Windows-based - had to bridge the technical gap with Java. Needed to minimise the overhead so that performance is comparable to the built-in scripting interface.
+
+Class diagram of the PTC IM driver and discussion on the role of each class/function.
+
+\begin{figure}[]
+	\centering
+	\includegraphics[width=\textwidth]{diagrams/driverClassDiagram.pdf}
+	\caption{Class diagram of the PTC IM Epsilon driver}
+	\label{fig:driverClassDiagram}
+\end{figure}
+
+\subsection{Applications}
+
+Screenshot of configuring a PTC IM model in an Epsilon launch configuration + small contrived EGL/EVL examples (unless Stuart has developed any interesting scripts so far in which case we should use these instead)
+
+\section{Evaluation}
+
+We can evaluate (1) performance and (2) conciseness compared to VBScript. Reviewers may want to see all kinds of experimental evaluation so it's important to clarify that e.g. (1) comparing PTC IM with Papyrus/CDO or any other modelling tool is out of scope (2) comparing Epsilon with other languages (e.g. OCL, Acceleo) would require implementing respective bridges, which was out of the scope of this \textbf{industrial} paper.
+
+\section{Future Work}
+
+Incremental model management: explain how change tracking works in PTC IM and how it can be used to identify fine-grained changes that can be used to support incremental validation and transformation
+
+Migration to an open-source environment: Implement M2M transformations using the driver that can be used to progressively migrate to an open-source modelling tool such as Papyrus
+
