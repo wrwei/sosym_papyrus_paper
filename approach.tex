@@ -1,7 +1,14 @@
 \section{Proposed Approach}
 \label{sec:approach}
 
-In order to minimise the labour intensive and repetitive process required for the definition of a UML Profile and its relevant Papyrus-specific implementation-level artefacts, we propose an automatic approach, in which information about the abstract and concrete (graphical) syntax of a profile is captured in an Ecore metamodel. In the proposed approach, information like the stereotypes that should be instantiated in the profile, structural (e.g., references or attributes) or graphical syntax related information (e.g., shapes and icons) are captured as high-level annotations in the Ecore metamodel, and is transformed into Papyrus-specific artefacts using automated M2M and M2T transformations. Figure~\ref{fig:approachOverview} presents an overview of the proposed approach. The steps are described in detail in the remainder of this section, followed by a running example. Technical details and the model transformations involved in the proposed approach are provided in Section~\ref{sec:implementation}.
+In order to minimise the labour intensive and repetitive process required for the definition of a UML Profile and its relevant Papyrus-specific implementation level artefacts, we propose an automatic approach. 
+%where the information about the abstract and concrete (graphical) syntax of a profile is captured in an Ecore metamodel.
+In our approach, we capture the information about the abstract syntax and the concrete (graphical) syntax of a UML profile in the form of an Ecore metamodel.
+In the proposed approach, information like the stereotypes that should be instantiated in the profile, structural (e.g., references or attributes) or graphical syntax related information (e.g., shapes and icons) are captured as high-level annotations in the Ecore metamodel, and is transformed into Papyrus-specific artefacts using automated M2M and M2T transformations. 
+
+Figure~\ref{fig:approachOverview} presents an overview of the proposed approach. 
+The steps are described in detail in the remainder of this section, followed by a running example. 
+Technical details and the model transformations involved in the proposed approach are provided in Section~\ref{sec:implementation}.
 
 \begin{figure}[t]
 	\centering
@@ -11,7 +18,12 @@ In order to minimise the labour intensive and repetitive process required for th
 	\vspace{-6mm}
 \end{figure}
 
-All EClasses in the Ecore metamodel are automatically transformed into stereotypes. Stereotypes are also created from annotated EReferences (more about this below). Depending on the required graphical syntax of the stereotype (i.e., if it should be represented as a \textit{node} or as an \textit{edge} on the diagram), developers need to use the annotation on EClasses/EReferences. The approach supports the following annotations. A detailed list of all valid annotation properties is given in the Appendix. 
+All EClasses in the Ecore metamodel are automatically transformed into stereotypes. 
+Stereotypes are also created from annotated EReferences (more about this below). 
+Depending on the required graphical syntax of the stereotype (i.e., if it should be represented as a \textit{node} or as an \textit{edge} on the diagram), developers need to use the annotation on EClasses/EReferences. 
+The approach supports the following annotations. 
+A detailed list of all valid annotation properties is given in the Appendix. 
+
 \begin{enumerate}[label=\arabic*.]
 	\item \textbf{@Diagram} annotations are used to define diagram-specific 
 	information like the name and the icon of the diagram type. This annotation 

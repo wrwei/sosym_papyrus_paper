@@ -5,7 +5,6 @@
 \usepackage{cite}
 \usepackage{graphicx}
 \usepackage{stfloats}
-%\usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{multirow}
 \usepackage{enumitem}
 \usepackage{subfigure}
@@ -18,6 +17,7 @@
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
 \definecolor{MyDarkBlue}{rgb}{0,0.08,0.45}
 \definecolor{light-gray}{gray}{0.5}
 \definecolor{dark-green}{rgb}{0,.6,0}
@@ -26,7 +26,6 @@
 %--------
 %Notes
 \usepackage{todonotes}
-
 
 \lstset{
 	backgroundcolor=\color{codebackground},
@@ -47,15 +46,16 @@
 
 
 \begin{document}
-\title{Towards Automatic Generation of \\ UML Profiles for Papyrus}
+\title{Towards Automatic Generation of UML Profiles for Papyrus}
 
-\author{Ran Wei\inst{1} \and Athanasios Zolotas\inst{1} \and Simos Gerasimou\inst{1} \and Dimitrios S. Kolovos\inst{1} \and Richard F. Paige\inst{2}
+\author{Ran Wei\inst{1} \and Athanasios Zolotas\inst{1} \and Horacio Hoyos Rodriguez\inst{1} \and Simos Gerasimou\inst{1} \and Dimitrios S. Kolovos\inst{1} \and Richard F. Paige\inst{1}\inst{2}
 %	Department of Computer Science, University of York, York, United Kingdom\\
-%		Email:\{thanos.zolotas, ran.wei, simos.gerasimou, dimitris.kolovos, richard.paige\}@york.ac.uk
+%		Email:\{ran.wei thanos.zolotas, horacio.hoyos, simos.gerasimou, dimitris.kolovos, richard.paige\}@york.ac.uk
 	}
-\institute{Department of Computer Science, University of York, York, United Kingdom \and Department of Computer Science, McMaster University, Hamilton, Canada}
+\institute{Department of Computer Science, University of York, York, United Kingdom \\\email{\{ran.wei thanos.zolotas, horacio.hoyos, simos.gerasimou,\\ dimitris.kolovos, richard.paige\}@york.ac.uk}
+\and Department of Computer Science, McMaster University, Hamilton, Canada \\\email{paigeri@mcmaster.ca}}
 
-\date{1st February, 2019}
+\date{3rd March, 2019}
 \maketitle{}
 
 \input{abstract}
@@ -68,12 +68,9 @@
 \input{future}
 
 \noindent\textbf{Acknowledgments.}
-This work was partially supported by Innovate UK and the UK aerospace industry 
-through the SECT-AIR project, by the EU through the DEIS project (\#732242) and 
-by the Defence Science and Technology Laboratory through the project "Technical 
-Obsolescence Management Strategies for Safety-Related Software for Airborne 
-Systems".
-\appendix[Annotations and Parameters]
+This work was partially supported by Innovate UK and the UK aerospace industry through the SECT-AIR project, by the EU through the DEIS project (\#732242) and by the Defence Science and Technology Laboratory through the project "Technical Obsolescence Management Strategies for Safety-Related Software for Airborne Systems".
+\appendix
+\section{Annotations and Parameters}
 \input{appendix.tex}
 \clearpage
 \bibliographystyle{splncs03}
