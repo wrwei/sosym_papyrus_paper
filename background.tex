@@ -11,25 +11,26 @@ In order to create a new UML Profile, developers need to create instances of \te
 
 Papyrus offers, among other choices, the mechanism of creating the UML profile using a \textit{Profile Diagram}. 
 Users can create UML profile related elements from the palette provided in the UML Profile Diagram editor.
-The properties of each element (e.g., data types of properties, multiplicity, navigability, etc.) can be then set using the properties view. 
+The properties of each element (e.g., data types of properties, multiplicity, navigability, etc.) can then be set using the properties view. 
 In a profile, each \textit{Stereotype} needs to extend a UML concept (hereby referred to as \textit{base element} or \textit{meta-element}). 
-Thus, users also need to define which \textit{meta-element} their \textit{Stereotype}s extend. 
+Users also need to define which \textit{meta-element} their \textit{Stereotype}s extend. 
 The users can import meta-elements and add appropriate extension links between their \textit{Stereotypes} and the \textit{meta-elements} by using the tool provided in the palette.
 The process of creating the profile can be repetitive and labour-intensive, depending on the size of the profile.
 Having created a profile, users can then apply it on a UML model. 
-Users typically create instances of UML meta-elements (e.g. UML::Class) and apply their \textit{Stereotype}s defined in their UML profile. In this sense, the users are creating instances of the elements they define in the DSLs. 
+Users typically create instances of UML meta-elements (e.g. UML::Class) and apply their \textit{Stereotype}s defined in their UML profiles. 
 For example, if a \textit{Stereotype} extends the ``Class'' meta-element in UML, users can apply it to selected classes in the model. 
+In this sense, the users are creating instances of the elements they define in their DSLs. 
 
 One of the limitations of UML Profiles in Papyrus is that links between stereotypes can be instantiated as edges in a diagram only if they extend a \textit{Connector} meta-element (e.g., Association).  
 For example, if ``Stereotype A'' refers to ``Stereotype B'' via an ``A\_to\_B'' reference then in order to be able to draw this connection as an edge on the diagram, ``A\_to\_B'' should be created as a separate \textit{Stereotype}. 
-These connector \textit{Stereotype}s do not hold any information about the \textit{Stereotype}s that they can connect, so users need to define such restrictions by manually writing OCL constraints to validate at least 1) if the source and target nodes are of the correct type and 2) if the connector is in the correct direction (e.g. the ``A\_to\_B''). 
+These connector \textit{Stereotype}s do not hold any information about the \textit{Stereotype}s that they can connect, so users need to define such restrictions by manually writing OCL constraints to validate at least two things: 1) if the source and target nodes are of the correct type and 2) if the connector is in the correct direction (e.g. the ``A\_to\_B''). 
 These constraints can be rather long and need to be manually written and customised for \textit{each} edge \textit{Stereotype}. This can also be a labour-intensive and error-prone process.
 
 \subsection{Distributable Custom Graphical Editor}
 With the UML profile created, users can apply it on UML diagrams. 
 Users select a UML element (e.g., Class) and manually apply the stereotype. 
 A stereotype can only be applied to the UML element that was defined as its base element. 
-For example, a stereotype that extends the ``Package'' UML meta-class in the profile cannot be applied to a ``Class'' element. 
+For example, a stereotype that extends UML::Package meta-element in the profile cannot be applied to an instance of UML::Class. 
 This task is likely to be problematic as users need to remember the base elements for each domain-specific stereotype and apply the Stereotype to base elements. 
 %It is even more 
 %problematic in scenarios where the profile was created by someone else. In 
@@ -39,17 +40,13 @@ This task is likely to be problematic as users need to remember the base element
 
 % Although the aforementioned manual creation and use of the profile sometimes covers all the needs of the stakeholders and includes trade-offs they are willing to take, it is usually the case that stakeholders require the definition of custom shapes for the stereotypes and/or a custom palette of stereotypes. The later is important if one thinks that in smaller profiles, users actually need to navigate through tenths of elements available in the default palette, to pick the one that should be used and apply the stereotype. 
 
-To address this recurring concern, Papyrus offers at least three possible options for creating a custom palette which allows users to create base UML elements and apply selected stereotypes on them in a single step. 
+To address this recurring concern, Papyrus offers at least three possible options for creating a custom palette which allows users to create  UML elements and apply selected \textit{Stereotype}s on them in a single step. 
 The first option involves customisation through a user interface where users add elements in the palette for their stereotypes. 
 Although this is an easy-to-use approach, it has to be done manually when a new diagram is created while it cannot be shared in case the profile needs to be distributed with collaborators. 
-
-The other two options require the manual definition of palette configuration files that are automatically loaded every time the profile is applied on a diagram. 
-Although the first is simpler and requires the definition of a single XML file, it is not encouraged as it does not allow the full use of Papyrus functionality. 
-Furthermore, this option is based on a deprecated framework, and its use is not encouraged.
-
-%While the first is simpler and requires the definition of one XML file, is not 
-%encouraged as it does not allow the full use of Papyrus functionality while it 
-%is deprecated in the latest versions of the tool.
+The second option is the manual definition of a palette configuration file (in XML format), that is automatically loaded every time the profile is applied to a diagram. 
+This option however, is discouraged by Papyrus as it does not allow the full use of Papyrus functionality.
+Furthermore, this option is based on a deprecated framework, and its use is not encouraged. \will{@Thanos, please clarify}
+The third option is to create a UML profile editor, which includes the creation of various models, including a palette configuration model. 
 
 The definition of custom shapes for the instantiated stereotypes is another common requirement. 
 Scalable Vector Graphics (SVG) shapes can be bound to stereotypes at the profile creation process. 
