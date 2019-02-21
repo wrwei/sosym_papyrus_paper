@@ -3,24 +3,32 @@
 
 The Unified Modelling Language (UML)~\cite{UML2015OMG} is the \emph{de facto} standard for object-oriented software and systems modelling. 
 It offers a broad range of abstractions that can be used to express different views of a system, including Class, Use Case, State, Collaboration and Sequence diagrams. 
-Since version 2.0, UML offers a domain-specific extension and customisation mechanism named  \emph{UML Profiling}~\cite{FuentesFernandez2004:UMLME}. 
-Using UML Profiles users can add new concepts to the modelling language in the form of \textit{Stereotypes}. 
-Each Stereotype extends a core UML concept (e.g., Class, Actor, etc.) and includes extra information that 
-supports the modelling needs of users of the target domain that is missing from the base concept.
+Since version 2.0, UML offers a extension and customisation mechanism named \emph{UML Profiling}~\cite{FuentesFernandez2004:UMLME}.
+UML profiling enables the users to derive Domain-Specific Languages (DSL) from UML's set of general language concepts.
+An important advantage of this approach to DSL design is that it allows the reuse of existing UML tools and widely available UML expertise.
+The basic premise of profiles is that all domain specific concepts are derived as extensions or refinements of existing UML concepts, called UML \textit{meta-classe}s. 
+These extensions are called \textit{Stereotype}s. 
+A \textit{Stereotype} definition must be consistent with the abstract syntax and semantics of standard UML \textit{meta-classe}s it extends. 
+Consequently, a profile-based model can be created and manipulated by any tool that supports standard UML. 
+Moreover, because the concepts underlying a profile specialisations of existing UML concepts, users with UML knowledge can adapt to the approach more easily.
 
-With profiles, UML offers a way for users to build Domain-Specific Modelling Languages (DSML) by re-using and extending UML concepts. 
-Although domain-specific modelling languages and tools that support them, like Sirius~\cite{viyovic2014sirius} or Eugenia~\cite{kolovos2015eugenia}, are becoming more popular, UML is still widely used in model-based software 
-engineering (MBSE)~\cite{erickson2007theoretical}. 
+%Using UML Profiles users can add new concepts to the modelling language in the form of \textit{Stereotypes}. 
+%Each Stereotype extends a core UML concept (e.g., Class, Actor, etc.) and includes extra information that 
+%supports the modelling needs of users of the target domain that is missing from the base concept.
+
+%With profiles, UML offers a way for users to build Domain-Specific Modelling Languages (DSML) by re-using and extending UML concepts. 
+Although domain-specific modelling languages and tools that support them, like Sirius~\cite{viyovic2014sirius} or Eugenia~\cite{kolovos2015eugenia}, are becoming more popular, UML is still widely used in model-based software engineering (MBSE)~\cite{erickson2007theoretical}. 
 As a result, alternative ways to define domain-specific languages using dedicated metamodels and textual/graphical editors are available to the users~\cite{Bergmayr2014:MODELS,Pardillo2010:MODELS}. 
 %Those approaches have their benefits and shortcomings which are, however, beyond the scope of this paper.   
 
-Papyrus \cite{lanusse2009papyrus} is a leading open-source UML modelling tool developed under the Eclipse Foundation and driven by the PolarSys Initiative and the Papyrus Industry Consortium, which are spearheaded by large high-technology companies such as Airbus, Thales, Saab and Ericsson. 
+Papyrus \cite{lanusse2009papyrus} is a leading open-source UML modelling tool developed under the Eclipse Foundation and driven by the PolarSys Initiative and the Papyrus Industry Consortium, which are spearheaded by large high-technology companies such as Airbus, Thales, Saab and Ericsson. \will{Is this still the case?}
 After more than a decade in development, Papyrus is close to developing a critical mass for wider adoption in industry as means of (1) escaping proprietary UML tooling lock-in, (2) leveraging the MBSE-related developments in the Eclipse modelling ecosystem enabling automated management of UML models (e.g. model validation and model-to-model (M2M) and model-to-text (M2T) transformation languages), and (3) enabling multi-paradigm modelling using a combination of UML and EMF-based DSLs. 
 Widely used UML profiles, like SysML~\cite{friedenthal2014practical} and MARTE~\cite{omg2011marte} offer implementations for Papyrus. 
 However, the ability of Papyrus to support non-trivial UML profiles and the effort and learning curve related to developing such profiles are recurring concerns. 
 As reported in~\cite{Wimmer2009:IJWIS}, the manual definition of new UML profiles is typically a tedious, time-consuming and error-prone process.
 
-In this paper, we simplify and automate the process of developing UML profiles for Papyrus. We propose an approach supported by a prototype Eclipse plugin, where annotated Ecore metamodels are used to capture the abstract and graphical syntax of profiles at a high-level of abstraction, and are then automatically transformed to the Papyrus-specific artefacts for distribution and deployment. 
+In this paper, we simplify and automate the process of developing UML profiles for Papyrus. 
+We propose an approach supported by a prototype Eclipse plugin, where annotated Ecore metamodels are used to capture the abstract and graphical syntax of profiles at a high-level of abstraction, and are then automatically transformed to the Papyrus-specific artefacts for distribution and deployment. 
 In particular, our approach, called Jorvik, produces a fully-fledged UML profile and a distributable Papyrus graphical editor as an Eclipse plugin. 
 
 We evaluate the effectiveness of our approach for the automatic generation of a non-trivial enterprise modelling language (Archimate) and its corresponding Papyrus editor against an equivalent developer-driven UML profile and Papyrus editor. 
