@@ -37,12 +37,13 @@ A detailed list of all valid annotation properties is given in the Appendix.
 	\item \textbf{@Edge} annotations are used to denote stereotypes that should be instantiated as edges in the diagrams. The UML meta-element extended by this stereotype is provided through the \emph{base} property. The icon of the specific element in the palette is also passed as property along with the desired style of the line. This annotation can be applied either to an EClass or to an EReference.
 \end{enumerate}
 
-Annotated Ecore metamodels are then consumed by a workflow of M2M and M2T 
+Annotated Ecore metamodels are firstly checked by a custom made model validation script written in the Epsilon Validation Language (EVL)~\cite{evlKolovos} (see Figure~\ref{fig:approachOverview}). The validation rules (which we describe in detail in Section~\ref{sec:implementation}) check if the annotations provided and their attributes match the expected ones by Jorvik (e.g., each annotated element includes a reference to the UML base element it extends). If the validation fails, feedback is provided to users to fix the problems detected. 
+Otherwise, the annotated Ecore metamodels are consumed by a workflow of M2M and M2T 
 transformations illustrated in Figure~\ref{fig:transformationWorkflow} and 
 described in detail in Section~\ref{sec:implementation}. The transformations 
 are written in the Epsilon Transformation Language (ETL)~\cite{Kolovos2008} and 
-the Epsilon Generation Language (EGL)~\cite{rose2008egl} but in principle, any 
-other M2M and M2T language could be used (e.g., ATL~\cite{jouault2006atl}). The 
+the Epsilon Generation Language (EGL)~\cite{rose2008egl}. In principle, any 
+other model validation, M2M and M2T language could be used (e.g., ATL~\cite{jouault2006atl}). The 
 transformations produce the UML 
 profile with the appropriate OCL constraints and all the configuration models 
 and files needed by Papyrus. In addition, an M2M transformation is also generated that can be used 
