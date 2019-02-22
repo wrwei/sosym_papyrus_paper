@@ -1,7 +1,7 @@
 \section{Evaluation}
 \label{sec:evaluation}
 
-In this section we evaluate AMIGO in two different ways. 
+In this section we evaluate AMIGO in three different ways. 
 Firstly, we apply it to generate a Papyrus editor for the non-trivial Archimate 
 UML profile~\cite{iacob2009archimate,haren2012archimate}. The Adocus Archimate 
 for Papyrus\footnote{\url{https://github.com/Adocus/ArchiMate-for-Papyrus}} is 
@@ -10,7 +10,8 @@ editors for Papyrus. This way, we can compare the proportion of the tool that
 AMIGO is able to generate automatically, check the number of polishing 
 transformations that the user needs to write to complete the missing parts and 
 finally, identify the aspects of the editor that our approach is not able to 
-generate. As a result we can to measure the \textit{efficiency} of AMIGO in generating profiles/editors against an existing relatively large 
+generate. As a result we can to measure the \textit{efficiency} of AMIGO in
+generating profiles/editors against an existing relatively large 
 profile/editor. 
 
 Secondly, we assess the completeness of our approach by applying it on a number 
@@ -19,9 +20,15 @@ in~\cite{williams2013metamodels}. This way, the approach is tested to check if
 it can successfully generate profiles and editors for a wide variety of 
 scenarios.
 
-\subsection{Efficiency}
+Last, we conducted an experiment in which we asked software engineers to build Papyrus
+editors for a set of metamodels, both using AMIGO and creating all the required assets
+manually.
+
+\subsection{The Archimate Profile}
 \label{sec:efficiencyEvaluation}
-The Archimate for Papyrus tool offers five kind of diagrams (i.e., Application, Business, Implementation and Migration, Motivation and Technology diagrams). Each of the diagrams uses different stereotypes from the Archimate profile. 
+The Archimate for Papyrus tool offers five kind of diagrams (i.e., Application,
+Business, Implementation and Migration, Motivation and Technology diagrams). Each
+of the diagrams uses different stereotypes from the Archimate profile. 
 
 As shown in Figure~\ref{fig:approachOverview}, our approach starts by 
 implementing the Ecore metamodel for the profile/editor we would like to 
@@ -44,7 +51,15 @@ such missing features, we need to write the extra polishing transformations.
 For brevity, we will not go into details on the content of the polishing 
 transformations for this specific example.
 
-Table~\ref{tab:evaluation}, summarises the lines of code we had to write manually to generate each file needed by Papyrus to create the 5 basic diagrams (column ``AMIGO'' / ``Handwritten'') and the number of lines of the polishing transformations that were needed to produce the enhanced editor (column ``AMIGO'' / ``Handwritten (Polishing)''). The totals are given in column ``AMIGO'' / ``Total''. For easier comparison, the total lines of code the authors of the Archimate for Papyrus had to write manually are provided in column ``Archimate for Papyrus'' / ``Total Handwritten''\footnote{The produced plugins generated with AMIGO for the Archimate profile can be downloaded from \url{http://www.zolotas.net/AMIGO/}}.
+Table~\ref{tab:evaluation}, summarises the lines of code we had to write manually
+to generate each file needed by Papyrus to create the 5 basic diagrams (column
+``AMIGO'' / ``Handwritten'') and the number of lines of the polishing
+transformations that were needed to produce the enhanced editor (column ``AMIGO'' 
+/ ``Handwritten (Polishing)''). The totals are given in column ``AMIGO'' / 
+``Total''. For easier comparison, the total lines of code the authors of the 
+Archimate for Papyrus had to write manually are provided in column ``Archimate 
+for Papyrus'' / ``Total Handwritten''\footnote{The produced plugins generated 
+    with AMIGO for the Archimate profile can be downloaded from \url{http://www.zolotas.net/AMIGO/}}.
 
 \begin{table}[t]
 	\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
@@ -81,7 +96,20 @@ tool that we are comparing with (i.e., Archimate for Papyrus) allows any edge
 to connect any two types of nodes. We leave this evaluation as part of our 
 future work.
 
-\subsection{Completeness}
+\subsubsection{Threats to Validity}
+There were a few minor features of the original Archimate for Papyrus tool
+that our approach could not support. Most of them are related to custom menu
+entries and wizards. For those to be created developer needs to extend the
+``plugin.xml'' file. In addition, the line decoration shapes of stereotypes
+that extend the aggregation base element (i.e., diamond) can only be applied
+dynamically by running Java code that will update the property each time the
+stereotype is applied. Our default and polishing transformations are not
+able to generate those features automatically; these should be implemented
+manually. For that reason, we \textit{excluded} these lines of code needed
+by Archimate for Papyrus to implement these features from the data provided
+in Table~\ref{tab:evaluation} to have a fair comparison. 
+
+\subsection{Other Metamodels}
 \label{sec:completenessEvaluation}
 In addition to the generation of the Archimate profile/editors, we tested the 
 proposed approach with nine more Ecore metamodels from different domains. The 
@@ -117,8 +145,70 @@ desired artifacts for a wide spectrum of domains. The time needed for the
 generation varied from miliseconds up to a few seconds. In the future, we plan 
 to assess further the scalability of our approach using larger metamodels.
 
+\subsection{Experiment}
+We have argued that using AMIGO provides significant gains in productivity when building custom editors for Papyrus.
+The experiment was designed to ascertain how significant the gains can be. The time taken to build a custom editor was recorded for both the AMIGO and the non-automated approach by novice and intermediate UML and Profiles users. The results suggest that regardless of the user expertise, the gains in productivity can be as high as 10 fold.
 
-\subsection{Threats to Validity}
-There were a few minor features of the original Archimate for Papyrus tool that our approach could not support. Most of them are related to custom menu entries and wizards. For those to be created developer needs to extend the ``plugin.xml'' file. In addition, the line decoration shapes of stereotypes that extend the aggregation base element (i.e., diamond) can only be applied dynamically by running Java code that will update the property each time the stereotype is applied. Our default and polishing transformations are not able to generate those features automatically; these should be implemented manually. For that reason, we \textit{excluded} these lines of code needed by Archimate for Papyrus to implement these features from the data provided in Table~\ref{tab:evaluation} to have a fair comparison. 
+\subsubsection{Method}
+\todo{Are we using Sina as participant or not?}
+Three participants completed all conditions of this study: two where novice and one intermediate users.
+Participants are all computer science graduates with Masters Degree in CS too.
+All participants were naive to the purpose of the experiment.
+
+\subsection{Materials}
+All participants used a computer with the Eclipse IDE available with the Papyrus and AMIGO plugins installed.
+The computer has internet access.
+Two questionnaires where used. One, before the experiment, so participants could self asses their expertise in UML, UML profiles and Papyrus.
+The second one, after the experiment, to record how participants perceived the difficulty of completing each of the tasks.
+The second questionnaire uses a 10-point Likert response scale to measure their confidence for completing each of the tasks.
+Questionnairs are available in Appendix\,\ref{app:quest}
+
+\subsection{Procedure}
+Participants run the experiments individually.
+We identified eight main tasks required to build a custom editor for a Papyrus profile in the non-automated approach.
+For the AMIGO approach two main tasks are required.
+Each task was given a total allotted time for completion. Further, this time was divided into two sections: basic and essential.
+In the basic section participants are expected to complete the task only using their knowledge and any information available on-line or elsewhere.
+In the essential section, essential information\footnote{The essential information is provided as a set of step-by-step instructions.} on how to complete the task is given to the participants.
+
+Participants are asked to complete each of the tasks individually and the total time to complete the task is recorded.
+When a participant expresses that he/she has completed the task the timer is paused and an assessment of their progress is made.
+If the assets they have developed will not be sufficient to have a functional editor they are asked to continue working and the timer is resumed.
+After the basic time is up, if the participant has not completed the task, the timer is paused and the essential information (in the form of instructions written in paper\todo{paper or digital?})
+is provided.
+The timer is resumed and participants are allowed to continue working.
+
+Since each task depends on the previous being completed, at the beginning of each task, the participants are given a partial solution that contains complete and correct assets for all the previous tasks.
+
+\begin{table}
+    \caption{Tasks and times for the non-automated approach}
+    \centering
+    \setlength{\tabcolsep}{3.5pt} 
+    \begin{tabular}{|c|c|c|c|}
+        Task & Total Time (m) & Basic Time (m) & Essential Time (m) \\ 
+        UML Profile & 60 & 40 & 20 \\
+        Element Types Configuration model & 60 & 40 & 20 \\
+        Palette Configuration model & 60 & 40 & 20 \\
+        Cascading Style Sheet & 30 & 20 & 10 \\
+    \end{tabular}
+\end{table}
+
+\begin{table}
+    \caption{Tasks and times for the AMIGO approach}
+    \centering
+    \setlength{\tabcolsep}{3.5pt} 
+    \begin{tabular}{|c|c|c|c|}
+        Task & Total Time (m) & Basic Time (m) & Essential Time (m) \\ 
+        Profile Metamodel & 60 & 40 & 20 \\
+        Run AMIGO & 60 & 40 & 20 \\
+    \end{tabular}
+\end{table}
+
+\subsubsection{Results}
+
+
+
+\subsubsection{Discussion}
+Weaknesses/Threats!
 
 %The implementation of our approach was driven initially by examining the Archimate for Papyrus tool. Although we believe that Archimate for Papyrus offers a complete UML profile solution, there might be other editors that offer other functionality which our approach cannot offer. As a result, the efficiency gain reported might not be that substantial when comparing with other editors. \dk{This can be a showstopper as we're evaluating against the main example we used to develop the tool. I don't think there's a reason to alarm the reviewers.}
