@@ -2,8 +2,8 @@
 \label{sec:implementation}
 In this section, we discuss the implementation of the proposed approach. 
 
-Figure~\ref{fig:transformationWorkflow} shows the transformations workflow. Each transformation is identified by a number (1-7 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
-In addition to the transformations, supporting files needed for the creation of the Papyrus plugin are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
+Figure~\ref{fig:transformationWorkflow} shows the transformations workflow. Each transformation is identified by a number (\#2-\#8 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
+In addition to the transformations, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is run to verify the correctness of the annotations and provide useful feedback to the users if there is anything wrong. Moreover, supporting files needed for the creation of the Papyrus plugin are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
 As the transformations consists of about 1000 lines of code we will describe them omitting low level technical details\footnote{Full implementations and instructions are available at \url{http://www.zolotas.net/AMIGO/}}. 
 
 \begin{figure*}[t]
@@ -13,6 +13,7 @@ As the transformations consists of about 1000 lines of code we will describe the
 	\label{fig:transformationWorkflow}
 	\vspace*{-3mm}
 \end{figure*}
+\input{validationDetails}
 
 \subsection{EMF to UML Profile Generation (\#1)}
 \label{sec:profileGeneration}
