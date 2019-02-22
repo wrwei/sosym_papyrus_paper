@@ -23,6 +23,26 @@
 \definecolor{dark-green}{rgb}{0,.6,0}
 \definecolor{codebackground}{rgb}{0.95,0.95,0.95}
 \input{codeFormat.tex}
+
+%---- Questionnaire stuff
+\makeatletter
+\DeclareRobustCommand{\onontimes}{%
+    \mathbin{\mathpalette\on@ntimes\relax}%
+}
+\newcommand{\on@ntimes}[2]{%
+    \vcenter{\hbox{%
+            \sbox0{\m@th$#1\otimes$}%
+            \setlength\unitlength{\wd0}%
+            \begin{picture}(1,1)
+            \linethickness{0.35pt}
+            \put(.5,.5){\circle{.9}}
+            \end{picture}%
+    }}%
+}
+\makeatother
+
+%-------------------
+
 %--------
 %Notes
 \usepackage{todonotes}
@@ -69,6 +89,7 @@ This work was partially supported by Innovate UK and the UK aerospace industry t
 \appendix
 \section{Annotations and Parameters}
 \input{appendix.tex}
+\input{quest.tex}
 \clearpage
 \bibliographystyle{splncs03}
 \bibliography{bibliography}

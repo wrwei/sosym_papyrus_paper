@@ -1,0 +1,79 @@
+\section{Questionnaires}\label{app:quest}
+\def\ctick{$\onontimes$}
+\def\myscale#1#2{%
+    &\space\expandafter\myscaleA\expandafter{\the\numexpr#1\expandafter}%
+    \expandafter{\the\numexpr#2}% evaluate params
+}
+\def\myscaleA#1#2{#1\space&\ifnum#1<#2 \space \myscaleB{\the\numexpr#1+1\relax}{#2}\fi}
+\def\myscaleB#1\fi{\fi \expandafter\myscaleA\expandafter#1}
+
+\def\ticks#1#2#3#4{%
+    #1&\space\expandafter\ticksA\expandafter{\the\numexpr#2\expandafter}%
+    \expandafter{\the\numexpr#3}#4% evaluate params
+}
+\def\ticksA#1#2{\ctick\space&\ifnum#1<#2 \space \ticksB{\the\numexpr#1+1\relax}{#2}\fi}
+\def\ticksB#1\fi{\fi \expandafter\ticksA\expandafter#1}
+
+
+\newcommand\linearSacle[3]%
+  {\newcount\cols%
+   \cols=#1%
+   \advance\cols by 2%
+  \begin{tabular}{*{\cols}{c}}
+     \myscale{1}{#1} \\
+     \ticks{#2}{1}{#1}{#3} \\
+  \end{tabular}%
+}
+
+\newcommand\YesNo{%
+    \begin{tabular}{cl} 
+        \ctick & Yes \\
+        \ctick & No \\
+    \end{tabular}
+}
+
+\subsection{Questionnaire A}
+Pre-experiment Self Assessment
+
+\begin{enumerate}
+    \item In a scale from 1 to 5, how would you describe your UML knowledge?
+        \linearSacle{5}{Novice}{Expert}
+    \item Have you ever created a UML Profile in the past? \\
+        \YesNo
+    \item In a scale from 1 to 5, how would you describe your Papyrus Tool expertise? \\
+        \linearSacle{5}{Novice}{Expert}
+    \item Have you ever created a UML Profile using Papyrus in the past? \\
+        \YesNo
+\end{enumerate}
+
+\subsection{Questionnaire B}
+Post-experiment Self Assessment
+\begin{enumerate}
+    \item Overall, do you feel the time assigned to the tasks was enough? \\
+        \YesNo
+    \item On a scale of 1 to 10, how easy it was to find the documentation needed to perform the tasks? \\
+        \linearSacle{10}{Very Hard}{Very Easy}    
+\end{enumerate}
+
+For each task:
+\begin{enumerate}
+    \item On a scale of 1 to 10, before the essential information was given, how confident did you feel about completing this task? \\
+        \linearSacle{10}{Very Hard}{Very Easy}
+    \item On a scale of 1 to 10, after the essential information was given, how confident did you feel about completing this task? \\
+        \linearSacle{10}{Very Hard}{Very Easy}
+    \item Did you found the given time to complete the task sufficient? \\
+        \YesNo
+    \item Did you, at any point before receiving the essential information, felt completely lost on how to complete the task? \\
+        \YesNo
+    \item If you answered yes to the previous question, is this because:\\
+        \begin{tabular}{cp{0.8\textwidth}} 
+            \ctick & The task objective was not clear to me \\
+            \ctick & I didn’t know how to complete the task although it was clear to me what I the goal is \\
+            \ctick & Other...(Please provide details below)
+        \end{tabular}\\
+        Other: \underline{\hspace{0.9\textwidth}}
+    \item On a scale from 1 to 10, how much easier was the task to complete after receiving the essential information?\\
+     \linearSacle{10}{No difference}{Much easier}
+\end{enumerate}
+
+
