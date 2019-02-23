@@ -1,94 +1,206 @@
 \section{Implementation}
 \label{sec:implementation}
-In this section, we discuss the implementation of the proposed approach. 
+In this section, we discuss the technical implementation of Jorvik which underpins the process of our approach discussed in the previous section. 
 
-Figure~\ref{fig:transformationWorkflow} shows the transformations workflow. Each transformation is identified by a number (\#2-\#8 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
-In addition to the transformations, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is run to verify the correctness of the annotations and provide useful feedback to the users if there is anything wrong. Moreover, supporting files needed for the creation of the Papyrus plugin are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
-As the transformations consists of about 1000 lines of code we will describe them omitting low level technical details\footnote{Full implementations and instructions are available at \url{http://www.zolotas.net/AMIGO/}}. 
+Figure~\ref{fig:transformationWorkflow} shows the transformations workflow. 
+Each transformation is identified by a number (\#2-\#8 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
+In addition to the transformations, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is executed to verify the correctness of the annotations and provide useful feedback to the users if there is anything wrong. 
+Moreover, supporting files needed for the creation of the Papyrus plugin are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
+As the transformations consists of about 1000 lines of code we will describe them omitting low level technical details\footnote{Full implementations and instructions are available at \url{https://github.com/wrwei/Jorvik}}. 
 
-\begin{figure*}[t]
+\begin{figure}[ht!]
 	\centering
-	\includegraphics[width=1	\textwidth]{diagrams/transformationWorkflow.pdf}
+	\includegraphics[width=1\textwidth]{diagrams/transformationWorkflow.pdf}
 	\caption[]{An overview of the transformation workflow}
 	\label{fig:transformationWorkflow}
-	\vspace*{-3mm}
-\end{figure*}
-\input{validationDetails}
+%	\vspace*{-3mm}
+\end{figure}
 
-\subsection{EMF to UML Profile Generation (\#1)}
+\subsection{Pre-transformation Validation (\#1)}
+To check the correctness of the annotated ECore metamodel, a model validation program is firstly executed against the metamodel.
+The program is written using EVL and consists of several rules that check if the annotated ECore elements have all the necessary information (e.g., a UML base class) and if the values provided are correct (e.g., font size for labels is a positive integer). 
+Listing~\ref{lst:evlRulesBold} presents an example of a rule written in EVL which checks if the value provided for the ``bold'' details in a @Node annotation is correct (i.e., true or false). More specifically, in lines 2--3 a guard is applied to check that the rule is only applied to elements that have the @Node annotation attached to them (line 2) while tests the rule only on those annotations that have the ``bold'' detail defined (line 3). 
+In lines 4--6, the condition to check is provided, which is that the value of the ``bold'' detail is either \textit{true} or \textit{false}. 
+Finally, in line 7--8 a message is displayed to the users in case the rule is violated providing information regarding the acceptable values and the name of the element(s) that violated this rule.
+
+\lstinputlisting[
+caption={Example a rule that check that the values provided to the ``bold'' styling detail for @Node annotations is correct.},
+label={lst:evlRulesBold},
+captionpos=b, 
+language=EVL, 
+tabsize=2, 
+numbers=left, 
+numbersep=5pt, 
+numberstyle=\tiny, 
+breaklines=6true]{evlRulesBold.evl}
+
+\begin{table}[ht!]
+	\begin{tabular}{|l|L{5cm}|L{5cm}|}
+		\hline
+		\textbf{\#} & \textbf{Rule Description} & \textbf{Condition Checked} \\ \hline
+		1 & Diagram annotation has a name detail & The name detail is defined \\ \hline
+		2 & Diagram annotation has acceptable details provided & There are no other details provided rather than name and/or icon \\ \hline
+		3 & Node/Edge annotations have base class set & Any string is provided\\ \hline
+		4 & Edge annotations of EClasses have source/target defined & The source/target details are defined \\ \hline
+		5 & An acceptable lineStyle value for Edge annotations is provided & The value is dashed, solid, dotted, hidden or double\\ \hline
+		6 & An acceptable bold value for Node/Edge annotations is provided & The value is either true or false\\ \hline
+		7 & An acceptable fontHeight value for Node/Edge annotations is provided & The value is a positive integer\\ \hline
+		8 & Node annotations have acceptable details provided & There are no other details provided rather than base, fontHeight and/or bold \\ \hline
+		9 & Edge annotations have acceptable details provided & There are no other details provided rather than base, source, target, fontHeight, bold, and/or lineStyle\\ \hline
+	\end{tabular}
+	\caption{The list of the rules checked for the annotated ECore metamodel.}
+	\label{tab:evlRules}
+\end{table}
+
+Table~\ref{tab:evlRules} enumerates all the rules applied along with their descriptions and the conditions to be checked. 
+The implementation of the rules in EVL can be found in the paper's webpage\footnote{\url{https://github.com/wrwei/Jorvik}}. 
+
+
+\subsection{EMF to UML Profile Generation (\#2)}
 \label{sec:profileGeneration}
-This transformation consists of two rules, one that creates one stereotype for each EClass element of the metamodel and a second that creates a stereotype for EReferences annotated as @Edge. 
+The EMF to UML Profile Generation executes a Model-to-Model transformation written in ETL. 
 The source model of this transformation is the annotated Ecore metamodel (e.g,  Listing~\ref{lst:annotatedSdplEmfatic}) and the target model is a UML profile model.
-%\footnote{UML profiles in Papyrus are actually EMF models that are instances of the UML's EMF metamodel}. 
+This transformation consists of two main rules, one that creates a \textit{Stereotype} for each EClass element of the metamodel and a second that creates a \textit{Stereotype} for each EReference annotated as @Edge.
 
 \begin{itemize}
-	\item[--] \textbf{rule eclass2stereotype:} This transformation rule transforms each EClass element in the Ecore metamodel to an element of type \textit{Stereotype} in the target UML model. All the attributes of each EClass are also copied across to the created stereotype.  
-	\item[--] \textbf{rule reference2stereotype:} This rule creates a new \textit{Stereotype} with the same name in the UML profile model for each of the \textit{EReferences} that are annotated as @Edge in the Ecore metamodel. No attributes are added to the stereotype as EReferences do not support attributes in Ecore. 
+	\item[--] \textbf{rule eclass2stereotype:} This transformation rule transforms each EClass element in the annotated Ecore metamodel to an element of type \textit{Stereotype} in the target UML model. 
+	All attributes of each EClass are also transformed across to the created \textit{Stereotype}. 
+	\item[--] \textbf{rule reference2stereotype:} This rule creates a new \textit{Stereotype} with the same name in the UML profile model for each of the \textit{EReferences} that are annotated as @Edge in the Ecore metamodel. 
+	No attributes are added to the stereotype as EReferences do not support attributes in Ecore. 
+	\item [--] \textbf{NB:} It is the users' responsibilities to make sure that they handle name collisions for EReferences themselves (for that EClasses may have EReferences with the same name).
 \end{itemize}
 
-When all stereotypes are created, a number of post-transformation operations are executed to 1) create the generalisation relationships between the 
-stereotypes, 2) add the references/containment relationships between the stereotypes, 3) create the extension with the UML base meta-element and 4) 
-generate and add the needed OCL constraints for each edge: 
+When all stereotypes are created, a number of post-transformation operations are executed to 1) create the generalisation relationships between the \textit{Stereotype}s, 2) add the references/containment relationships between the \textit{Stereotype}s, 3) create the extension with the UML base meta-element and 4) generate and add the needed OCL constraints for each edge: 
 
 \begin{enumerate}[label=\arabic*)]
 	\item For each of the superclasses of an EClass in the metamodel we create a \textit{Generalisation} UML element. 
 	The generalisation element is added to the stereotype created for this specific EClass and refers via the \textit{generalization} reference to the stereotype that was created for the superclass.
-	\item For each reference (ref or val) in the metamodel a new \textit{Property} UML element is created and added to the stereotype that 
-	represents the EClass. 
-	A new \textit{Association} UML element should also be created and added to the stereotype. The name and the multiplicities are also set.
-	\item By default the stereotypes extend the \textit{Class} base element unless a different value is passed in the \textit{base} property of the @Node/@Edge annotation. 
-	In this post-transformation operation the necessary \textit{Import Metaclass} element and \textit{Extension} reference are created and attached to the stereotype.
-	\item In the last operation,  the OCL constraints are created for each stereotype that will be represented as an edge on the diagram. 
-	Two \textit{Constraint} and two \textit{OpaqueExpression} elements are created for each edge stereotype that check the two necessary constraints. 
+	\item For each reference (ref or val) in the metamodel a new \textit{Property} UML element is created and added to the \textit{Stereotype} that represents the EClass. 
+	A new \textit{Association} UML element should also be created and added to the \textit{Stereotype}. The name and the multiplicities are also set.
+	\item By default the \textit{Stereotype}s extend the \textit{Class} base element unless a different value is passed in the \textit{base} property of the @Node/@Edge annotation. 
+	In this post-transformation operation the necessary \textit{Import Metaclass} element and \textit{Extension} reference are created and attached to the \textit{Stereotype}.
+	\item In the last operation, the OCL constraints are created for each stereotype that will be represented as an edge on the diagram. 
+	Two \textit{Constraint} and two \textit{OpaqueExpression} elements are created for each edge \textit{Stereotype} that check the two necessary constraints. 
 	The OCL constraints are explained in details in the section that follows.
 \end{enumerate}
 
-\input{constraints}
+\subsection{OCL Constraints}
+\label{sec:constraints}
 
-\subsection{Palette Generation (\#2)}
+To illustrate the OCL constraints, we provide a partial view of the SDPL UML profile in Figure \ref{fig:sample_profile}\footnote{The attributes of the stereotypes are omitted for simplicity.}.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=1\textwidth]{diagrams/example_profile}
+	\caption[]{Example UML profile for SDPL showing Person, Tool and the familiarWith association}
+	\label{fig:sample_profile}
+\end{figure}
+
+In Figure \ref{fig:sample_profile}, there are three \emph{Stereotype}s - \emph{Person} and \emph{Tool} both extend meta-element \emph{UML::Class}, and they correspond to classes \emph{Person} and \emph{Tool} in the Emfatic code in Listing \ref{lst:annotatedSdplEmfatic}. 
+\emph{Stereotype} \emph{familiarWith}, which extends meta-element \emph{UML::Association}, corresponds to the reference \emph{familiarWith} in the \emph{Person} class in Listing \ref{lst:annotatedSdplEmfatic}.
+
+In Figure~\ref{fig:sdplEditor}, the \textit{familiarWith} association is used to connect \textit{Person} \emph{Alice} with \textit{Tool} \emph{StarUML}. 
+However, the \emph{familiarWith} stereotype can be applied to any \emph{Association}, and not strictly to \emph{Associations} which connect \emph{Person} and \emph{Tool} stereotyped elements. 
+Therefore, constraints are needed to check (at least) two aspects:
+
+\begin{itemize}
+	\item \textbf{End Types}: the elements that a \emph{familiarWith} association connects to that have \emph{Person} and \emph{Tool} \textit{Stereotype}s applied to them;
+	\item \textbf{Navigability}: the \emph{familiarWith} association starts from an element stereotyped as \emph{Person} and points to an element stereotyped as \emph{Tool}.
+\end{itemize}
+
+\subsubsection{End Types}
+Listing \ref{lst:endTypes} shows the OCL code for the \emph{End Types} constraint. 
+Line 1 accesses the types that \emph{familiarWith} connects. 
+Lines 3 and 4 check if the types that \emph{familiarWith} connects are of type that either has \textit{Stereotype} \emph{Person} or \emph{Tool}. 
+In this way, if a \emph{familiarWith} association connects two types that are not \emph{Person} or \emph{Tool}, the constraint fails.
+
+\lstinputlisting[
+	caption={The End Types constraint in OCL},
+	label={lst:endTypes}, 
+	captionpos=b, 
+	language=OCL, 
+	tabsize=2, 
+	numbers=left, 
+	numbersep=5pt, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	escapeinside={(*}{*)}]{endtypes.txt}
+
+\subsubsection{Navigability}
+Listing \ref{lst:navigability} shows the OCL code for the \emph{Navigability} constraint. 
+In this case, we are interested in checking the \emph{isNavigable} property of each end. 
+Thus, in lines 2 and 3, we obtain the member ends that \emph{familiarWith} connects with. 
+If these ends are obtained successfully (line 4), we check that the \emph{personEnd} (connecting element stereotyped as \emph{Person}) is not navigable (line 5) and the \emph{toolEnd} (connecting element stereotyped as \emph{Tool}) is navigable (line 6). 
+Therefore, we are checking that a \emph{familiarWith} association can only go from \emph{Person} to \emph{Tool} and not the other way around. 
+We need to highlight, that currently, opposite references are not supported; plans for future work are outlined in Section~\ref{sec:future}.
+
+\begin{figure}[h]
+	\lstinputlisting[caption={The Navigability constraint in 
+		OCL},label={lst:navigability}, captionpos=b, language=OCL, tabsize=2, 
+	numbers=left, numbersep=5pt, numberstyle=\tiny, breaklines=true, 
+	escapeinside={(*}{*)}]{navigability.txt}
+%	\vspace*{-5mm}
+\end{figure}
+
+With these two constraints implemented, we are able to automatically generate OCL constraints for \textit{Stereotype}s that extend \emph{UML::Association}. 
+We use the \emph{End Types} and \emph{Navigability} constraints as templates with dynamic sections (where the specific \textit{Stereotype} names are inserted dynamically, e.g., \emph{Person} and \emph{Tool}). 
+So far we have only explored constraints for \textit{Stereotype}s that extend \emph{UML::Association}. 
+The constraint templates for \textit{Stereotype}s that extend other UML relationships need to be developed separately as the means to access source/target elements of the relationship are different.
+
+\subsection{Element Types Configuration Configuration Transformation(\#3)}
+\label{sec:elementTypes}
+Apart from the UML profile, Papyrus graphical editor requires an Element Types Configuration model, which associates the \textit{Stereotype}s defined in the UML profile with their abstract syntax (the meta-elements in UML they extend) and their concrete syntax (the graphical notations of the meta-elements in UML they extend). 
+
+This transformation is responsible for creating an Element Types Configuration (of extension .elementtypesconfiguration) that contains type specialisation information for the \textit{Stereotype}s in the UML profile. 
+Since our previous work \cite{zolotas2018towards}, the \textit{ElementTypesConfiguration} metamodel for Papyrus has changed. 
+As a result, we have to re-implement this transformation. 
+For each \textit{Stereotype}, two \textit{SpecializationTypeConfiguration}s are created, one links the \textit{Stereotype} to its UML meta-element, another links the \textit{Stereotype} to the concrete syntax of its UML meta-element.
+For example, a \textit{Stereotype} that extends UML::Class needs to specialise the UML::Class \textit{MetamodelTypeConfiguration}; and it needs to specialise the UML::Class Shape \textit{SpecializationTypeConfiguration}. 
+In addition to \textit{SpecializationTypeConfiguration}s, for each \textit{Stereotype} an \textit{ApplyStereotypeAdviceConfiguration} needs to be created, which associates the \textit{SpecializationTypeConfiguration} to the actual \textit{Stereotype} in the UML profile.
+
+The transformed Element Types Configuration model is a crucial part to Papyrus graphical editor creation, it is used in conjunction with other models/artefacts and it drives the creation of model elements in the editor.
+
+\subsection{Palette Configuration Transformation (\#4)}
 \label{sec:paletteGeneration}
-This transformation is responsible for creating a model (of extension.paletteconfiguration) that configures the contents of the custom palette for 
-the diagram in Papyrus. 
-The model conforms to the \textit{PaletteConfiguration} metamodel that ships with Papyrus. 
+This transformation is responsible for creating a model (of extension .paletteconfiguration) that configures the contents of the custom palette for the diagram in Papyrus. 
+The model conforms to the \textit{PaletteConfiguration} metamodel that ships with Papyrus, which also changed since our previous work. 
 The transformation creates a new \textit{PaletteConfiguration} element and adds two new \textit{DrawerConfiguration} elements that represent the two different tool compartments in our palette (i.e., one for the tools that create nodes and one for those creating edges). 
-For each element in the Ecore source annotated as @Node/@Edge a new \textit{ToolConfiguration} element is created and added to the nodes/edges drawer respectively. 
-An \textit{IconDescriptor} element is also created and added to the ToolConfiguration pointing to the path of the icon for that tool (this is the path passed as argument to the \textit{icon} property of the @Node/@Edge annotation).
+For each element in the Ecore metamodel annotated as @Node/@Edge a new \textit{ToolConfiguration} element is created and added to the nodes/edges drawer respectively. 
+The kind of \textit{ToolConfiguration} are decided based on the @Node/@Edge annotation, for nodes, the kind is \textit{CreationTool}, for edges, the kind is \textit{ConnectionTool}.
+An \textit{IconDescriptor} element is also created and added to the \textit{ToolConfiguration} pointing to the path of the icon for that tool (this is the path passed as argument to the \textit{icon} property of the @Node/@Edge annotation).
+Finally, for each \textit{ToolConfiguration}, they need to refer to the element types they conform to, which are defined in the Element Types Configuration model transformed in Step \#3. 
+In this way, when an element is created in the diagram using the palette, behind the scene, Papyrus is able to locate the \textit{Stereotype} and infer the UML syntax they specialise.
 
-\subsection{Diagram Configuration (\#3, \#4 \& \#5)}
-\label{sec:diagramConfiguration}
-Firstly, in order for Papyrus to offer the choice of creating new custom diagrams for the generated profile via its menus, a \textit{Viewpoint Configuration} needs to be created. 
-This creates a new entry in the ``New Diagram'' menu of Papyrus, hides the default palette and attaches the custom one created for the profile (see transformation \#2). 
-It is also responsible for binding the generated CSS stylesheet file (see transformation \#6) to the diagram. 
-The transformation (i.e., \#3) creates a new model that conforms to the \textit{Configuration} metamodel that ships with Papyrus. 
-A new \textit{Viewpoint Configuration} element is created that sets the visibility of the default palette (via the \textit{permit} attribute) to false. 
-It also populates the value of the \textit{Custom Palette} feature to point to the \emph{.paletteconfiguration} file created by transformation \#2. Finally, it sets the value of the \textit{Custom Style} attribute to point to the CSS file generated by transformation \#6.
-
-The second artefact that needs to be created is the types configuration model (i.e., .typesconfiguration file) that conforms to the \textit{Element Types 
-Configuration} metamodel provided by Papyrus. 
-This is achieved through transformation \#4. This model is responsible for binding the types of the drawn elements to stereotypes. 
-For each stereotype a new element of type \textit{Specialization Type Configuration} is created and a unique \textit{id} is created in the format ``ProfileName.StereotypeName'' (e.g., ``SDPL.Step''). 
-The value of the \textit{Hint} attribute is set to the qualified name of the meta-element that this type specialises (e.g., ``UML::Class''). 
-A new element of type \textit{Stereotype Application Matcher Configuration} is also created that holds the qualified name of the stereotype that should be applied to the drawn element. 
-Binding is performed by creating a new \textit{Apply Stereotype Advice Configuration} element for each stereotype that points to the equivalent stereotype application matcher configuration element created before. 
-Having this file, when an element of a specific type is drawn the appropriate stereotype is applied automatically. 
-
-The last model (i.e., the .elementtypesconfiguration file) that needs to be created for the custom diagram is the elements types configuration that 
-conforms to the \textit{Element Types Configuration} metamodel available in Papyrus. 
-This is done by transformation \#5. As all the stereotypes created extend a UML meta-element, this model is responsible for specializing the meta-element \textit{shapes} to the custom ones created by the profile. 
-Thus, for each stereotype, a new \textit{Specialization Type Configuration} element is created. 
-This element points to the two elements that it specializes: the specialization type configuration created in transformation \#4 via its id (e.g., ``Process.Step'') and the shape of the UML meta-element that this element specializes via its uri (e.g., ``org.eclipse.papyrus.umldi.Class\_Shape'').
-
-\subsection{Stylesheet Generation (\#6)}
+\subsection{CSS File Generation (\#5)}
 \label{sec:cssGeneration}
 As stated above, in Papyrus, the look and feel of diagram elements can be customised using CSS. 
 In this transformation we generate the CSS style rules that define the appearance of nodes and edges in diagrams. 
 Each node on a diagram has a set of compartments where the attributes, the shape, etc. appear. 
-Initially, for all the nodes that will appear on the diagram, we create a CSS rule to hide all their compartments and another rule to enable the compartment that holds the shape. 
+Initially, for all nodes that will appear on the diagram, we create a CSS rule to hide all their compartments and another rule to enable the compartment that holds the shape. 
 The latter rule also hides the default shape inherited from the meta-element tat the stereotype extends. 
 Then, for each stereotype that appears as a node, a CSS rule is generated to place the SVG figure in the shape compartment. 
-For elements of type \textit{Stereotype}, the connection of the SVG figure to the stereotypes is achieved by assigning the path of the SVG file to the 
-\textit{svgFile} property available in CSS. 
+For elements of type \textit{Stereotype}, the connection of the SVG figure to the stereotypes is achieved by assigning the path of the SVG file to the \textit{svgFile} property available in CSS. 
 Finally, we generate the CSS rules for each edge, e.g., if a \emph{lineStyle} parameter is set, then the \textit{style} property for that Edge stereotype is set to the value of the lineStyle parameter (e.g., ``solid'', ``dashed'', etc.).
+
+\subsection{Creation Command Generation (\#6)}
+\label{sec:creationCommand}
+In order for Papyrus to create a diagram, it requires the initialisation of the diagram.
+The Creation Command is a Java class which is responsible for initialising Papyrus diagrams. 
+The Creation Command class is needed since Papyrus 3.0+ (after our previous work).
+The rationale for the creation command is that it creates a UML model from the UMLFactory as the root element of the diagram.
+The minimal requirement for diagram initialisations are:
+\begin{itemize}
+	\item UML primitive types: the primitive types need to be imported to the diagram in order for the users to reference to them;
+	\item UML profiles: the standard UML profile and the user defined UML profile need to be applied in order to initialise the diagram.
+\end{itemize}
+
+In order to apply the user defined UML profiles, they need to use the pathmap defined in their plug-ins, which is explained in \#8.
+The Java class is generated using a Model-to-Text transformation written in EGL, with the source model the annotated Ecore metamodel and the output text the CreationCommand.java class.
+
+\subsection{Architecture Model Transformation (\#7)}
+\label{sec:architectureModel}
+Papyrus adopted the notion of an Architecture model in order to describe the architecture of the graphical editors.
+This transformation syntheses an Architecture model using the 
 
 \subsection{UML to EMF Transformation Generation (\#7)}
 \label{sec:uml2emf}

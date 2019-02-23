@@ -1,4 +1,4 @@
 let classes = self.base_Association.endType(*$\rightarrow$*)
-	selectByKind(UML::Class) in 
-	classes(*$\rightarrow$*)exists(c|c.extension_Person(*$\rightarrow$*)notEmpty()) and 
-		classes(*$\rightarrow$*)exists(c|c.extension_Tool(*$\rightarrow$*)notEmpty())
+    selectByKind(UML::Class) in 
+    classes(*$\rightarrow$*)exists(c|c.extension_Person(*$\rightarrow$*)notEmpty()) and 
+    classes(*$\rightarrow$*)exists(c|c.extension_Tool(*$\rightarrow$*)notEmpty())

@@ -1,7 +1,9 @@
 constraint NodeAnnotationBoldValueIsCorrect {
-	guard : self.getEAnnotation("Node").isDefined() and 
-		self.getEAnnotation("Node").details.get("bold").isDefined()
-	check : self.getEAnnotation("Node").details.get("bold").equals("true") or 
-		self.getEAnnotation("Node").details.get("bold").equals("false")
-	message : "Bold value for element " + self.name + " is not correct. Possible values are: true or false."
+    guard : self.getEAnnotation("Node").isDefined() and 
+            self.getEAnnotation("Node").details.get("bold").isDefined()
+    check : self.getEAnnotation("Node").details.get("bold").equals("true")  
+            or 
+            self.getEAnnotation("Node").details.get("bold").equals("false")
+    message : "Bold value for element " + self.name + " is not correct. 
+            Possible values are: true or false."
 }
