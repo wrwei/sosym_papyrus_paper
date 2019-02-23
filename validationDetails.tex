@@ -1,1 +1,23 @@
 \subsection{Pre-transformation Validation}
+In order to check the correctness of the annotated ECore metamodel we first feed this as an input to a model validation script. The script is written using EVL and consists of several rules that check if the annotated elements have all the necessary information (e.g., a UML base class) and if the values provided are correct (e.g., font size for labels is a positive integer). Listing~\ref{lst:evlRulesBold} presents an example of a rule written in EVL which checks if the value provided for the ``bold'' details in a @Node annotation is correct (i.e., true or false). More specifically, in lines 2-3 a guard is applied to check that the rule is only applied to elements that have the @Node annotation attached to them (line 2) while tests the rule only on those annotations that have the ``bold'' detail defined (line 3). In lines 4-5, the condition is provided. The condition checks that the value of the ``bold'' detail is either \textit{true} or \textit{false}. Finally, in line 6 a message is displayed to the users in case the rule is violated providing information regarding the acceptable values and the name of the element(s) that violated this rule.
+
+\lstinputlisting[caption={Example a rule that check that the values provided to the ``bold'' styling detail for @Node annotations is correct.},label={lst:evlRulesBold},captionpos=b, language=EVL, tabsize=2, numbers=left, numbersep=5pt, numberstyle=\tiny, breaklines=true]{evlRulesBold.evl}
+
+Table~\ref{tab:evlRules} presents the list of all the rules applied along with a description and the condition that is checked. The implementation of the rules in EVL can be found in the paper's webpage. \thanos{William add a footnote to the EVL file when the website is up}
+\begin{table}[]
+	\begin{tabular}{|l|L{5cm}|L{5cm}|}
+		\hline
+		\textbf{\#} & \textbf{Rule Description} & \textbf{Condition Checked} \\ \hline
+		1 & Diagram annotation has a name detail & The name detail is defined \\ \hline
+		2 & Diagram annotation has acceptable details provided & There are no other details provided rather than name and/or icon \\ \hline
+		3 & Node/Edge annotations have base class set & Any string is provided\\ \hline
+		4 & Edge annotations of EClasses have source/target defined & The source/target details are defined \\ \hline
+		5 & An acceptable lineStyle value for Edge annotations is provided & The value is dashed, solid, dotted, hidden or double\\ \hline
+		6 & An acceptable bold value for Node/Edge annotations is provided & The value is either true or false\\ \hline
+		7 & An acceptable fontHeight value for Node/Edge annotations is provided & The value is a positive integer\\ \hline
+		8 & Node annotations have acceptable details provided & There are no other details provided rather than base, fontHeight and/or bold \\ \hline
+		9 & Edge annotations have acceptable details provided & There are no other details provided rather than base, source, target, fontHeight, bold, and/or lineStyle\\ \hline
+	\end{tabular}
+	\caption{The list of the rules checked for the annotated ECore metamodel.}
+	\label{tab:evlRules}
+\end{table}
