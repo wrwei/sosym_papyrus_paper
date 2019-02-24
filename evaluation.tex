@@ -1,65 +1,37 @@
 \section{Evaluation}
 \label{sec:evaluation}
 
-In this section we evaluate AMIGO in three different ways. 
-Firstly, we apply it to generate a Papyrus editor for the non-trivial Archimate 
-UML profile~\cite{iacob2009archimate,haren2012archimate}. The Adocus Archimate 
-for Papyrus\footnote{\url{https://github.com/Adocus/ArchiMate-for-Papyrus}} is 
-an open-source tool that includes a profile for Archimate and the appropriate 
-editors for Papyrus. This way, we can compare the proportion of the tool that 
-AMIGO is able to generate automatically, check the number of polishing 
-transformations that the user needs to write to complete the missing parts and 
-finally, identify the aspects of the editor that our approach is not able to 
-generate. As a result we can to measure the \textit{efficiency} of AMIGO in
-generating profiles/editors against an existing relatively large 
-profile/editor. 
+In this section we evaluate Jorvik in three different ways. 
+Firstly, we apply it to generate a Papyrus editor for the non-trivial Archimate UML profile~\cite{iacob2009archimate,haren2012archimate}. 
+The Adocus Archimate for Papyrus\footnote{\url{https://github.com/Adocus/ArchiMate-for-Papyrus}} is an open-source tool that includes a profile for Archimate and the appropriate 
+editors for Papyrus. 
+This way, we can compare the proportion of the tool that Jorvik is able to generate automatically, check the number of polishing transformations that the user needs to write to complete the missing parts and finally, identify the aspects of the editor that our approach is not able to generate.
+As a result we can to measure the \textit{efficiency} of Jorvik in generating profiles/editors against an existing relatively large profile/editor. 
 
-Secondly, we assess the completeness of our approach by applying it on a number 
-of other metamodels collected as part of the work presented 
-in~\cite{williams2013metamodels}. This way, the approach is tested to check if 
-it can successfully generate profiles and editors for a wide variety of 
-scenarios.
+Secondly, we assess the completeness of our approach by applying it on a number of other metamodels collected as part of the work presented in~\cite{williams2013metamodels}. 
+This way, the approach is tested to check if it can successfully generate profiles and editors for a wide variety of scenarios.
 
-Last, we conducted an experiment in which we asked software engineers to build Papyrus
-editors for a set of metamodels, both using AMIGO and creating all the required assets
-manually.
+Last, we conducted an experiment in which we asked software engineers to build Papyrus editors for a set of metamodels, both using Jorvik and creating all the required assets manually.
 
 \subsection{The Archimate Profile}
 \label{sec:efficiencyEvaluation}
-The Archimate for Papyrus tool offers five kind of diagrams (i.e., Application,
-Business, Implementation and Migration, Motivation and Technology diagrams). Each
-of the diagrams uses different stereotypes from the Archimate profile. 
+The Archimate for Papyrus tool offers five kind of diagrams (i.e., Application, Business, Implementation and Migration, Motivation and Technology diagrams). 
+Each of the diagrams uses different stereotypes from the Archimate profile. 
 
-As shown in Figure~\ref{fig:approachOverview}, our approach starts by 
-implementing the Ecore metamodel for the profile/editor we would like to 
-generate. Thus, in this scenario we need to create the 5 Ecore metamodels and 
-annotate those EClasses/EReferences that need to appear as nodes or edges on 
-the diagrams. The profiles for each type of Archimate diagram and the editors 
-can now be generated. At this point, five fully functional editors are 
-generated that can be used to create each of the five types of diagrams that 
-the Archimate for Papyrus tool also supports. 
+As shown in Figure~\ref{fig:approachOverview}, our approach starts by implementing the Ecore metamodel for the profile/editor we would like to generate. 
+Thus, in this scenario we need to create the 5 Ecore metamodels and annotate those EClasses/EReferences that need to appear as nodes or edges on the diagrams. 
+The profiles for each type of Archimate diagram and the editors can now be generated. 
+At this point, five fully functional editors are generated that can be used to create each of the five types of diagrams that the Archimate for Papyrus tool also supports. 
 
-Nevertheless, our generated editors do 
-not offer some special features that the Archimate for Papyrus tool offers. For 
-example, the latter offers a third drawer in the palette for some diagrams that 
-is called ``Common'' and includes two tools (i.e., ``Grouping'' and 
-``Comment''). Another feature that is not supported by our default 
-transformations is the fact that in Archimate for Papyrus, users are able to 
-have the elements represented either by their shapes or by a coloured rectangle 
-depending on the CSS class applied to them. In order to be able to implement 
-such missing features, we need to write the extra polishing transformations. 
-For brevity, we will not go into details on the content of the polishing 
-transformations for this specific example.
+Nevertheless, our generated editors do not offer some special features that the Archimate for Papyrus tool offers. 
+For example, the latter offers a third drawer in the palette for some diagrams that is called ``Common'' and includes two tools (i.e., ``Grouping'' and ``Comment''). 
+Another feature that is not supported by our default transformations is the fact that in Archimate for Papyrus, users are able to have the elements represented either by their shapes or by a coloured rectangle depending on the CSS class applied to them. 
+In order to be able to implement such missing features, we need to write the extra polishing transformations. 
+For brevity, we will not go into details on the content of the polishing transformations for this specific example.
 
-Table~\ref{tab:evaluation}, summarises the lines of code we had to write manually
-to generate each file needed by Papyrus to create the 5 basic diagrams (column
-``AMIGO'' / ``Handwritten'') and the number of lines of the polishing
-transformations that were needed to produce the enhanced editor (column ``AMIGO'' 
-/ ``Handwritten (Polishing)''). The totals are given in column ``AMIGO'' / 
-``Total''. For easier comparison, the total lines of code the authors of the 
-Archimate for Papyrus had to write manually are provided in column ``Archimate 
-for Papyrus'' / ``Total Handwritten''\footnote{The produced plugins generated 
-    with AMIGO for the Archimate profile can be downloaded from \url{http://www.zolotas.net/AMIGO/}}.
+Table~\ref{tab:evaluation}, summarises the lines of code we had to write manually to generate each file needed by Papyrus to create the 5 basic diagrams (column ``Jorvik'' / ``Handwritten'') and the number of lines of the polishing transformations that were needed to produce the enhanced editor (column ``Jorvik'' / ``Handwritten (Polishing)''). 
+The totals are given in column ``Jorvik'' / ``Total''. 
+For easier comparison, the total lines of code the authors of the Archimate for Papyrus had to write manually are provided in column ``Archimate for Papyrus'' / ``Total Handwritten''\footnote{The produced plugins generated with Jorvik for the Archimate profile can be downloaded from \url{https://github.com/wrwei/Jorvik}}.
 
 \begin{table}[t]
 	\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
@@ -67,7 +39,7 @@ for Papyrus'' / ``Total Handwritten''\footnote{The produced plugins generated
 	\setlength{\tabcolsep}{3.5pt} 
 	\begin{tabular}{M{2cm}|c|M{1.5cm}|c|M{1.9cm}|}
 		\cline{2-5}
-		& \multicolumn{3}{c}{\textbf{AMIGO}} & \textbf{Archimate for Papyrus}\\ \hline
+		& \multicolumn{3}{c}{\textbf{Jorvik}} & \textbf{Archimate for Papyrus}\\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{File}} & \textbf{Handwritten} & \textbf{Handwritten (Polishing)} & \textbf{Total} & \textbf{Total Handwritten}\\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{ECore}} & 436 & 0 & 436 & 0 \\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{Profile}} & 0 & 0 & 0 & 1867 \\ \hline
@@ -146,8 +118,8 @@ generation varied from miliseconds up to a few seconds. In the future, we plan
 to assess further the scalability of our approach using larger metamodels.
 
 \subsection{Experiment}
-We have argued that using AMIGO provides significant gains in productivity when building custom editors for Papyrus.
-The experiment was designed to ascertain how significant the gains can be. The time taken to build a custom editor was recorded for both the AMIGO and the non-automated approach by novice and intermediate UML and Profiles users. The results suggest that regardless of the user expertise, the gains in productivity can be as high as 10 fold.
+We have argued that using Jorvik provides significant gains in productivity when building custom editors for Papyrus.
+The experiment was designed to ascertain how significant the gains can be. The time taken to build a custom editor was recorded for both the Jorvik and the non-automated approach by novice and intermediate UML and Profiles users. The results suggest that regardless of the user expertise, the gains in productivity can be as high as 10 fold.
 
 \subsubsection{Method}
 \todo{Are we using Sina as participant or not?}
@@ -156,7 +128,7 @@ Participants are all computer science graduates with Masters Degree in CS too.
 All participants were naive to the purpose of the experiment.
 
 \subsection{Materials}
-All participants used a computer with the Eclipse IDE available with the Papyrus and AMIGO plugins installed.
+All participants used a computer with the Eclipse IDE available with the Papyrus and Jorvik plugins installed.
 The computer has internet access.
 Two questionnaires where used. One, before the experiment, so participants could self asses their expertise in UML, UML profiles and Papyrus.
 The second one, after the experiment, to record how participants perceived the difficulty of completing each of the tasks.
@@ -166,7 +138,7 @@ Questionnairs are available in Appendix\,\ref{app:quest}
 \subsection{Procedure}
 Participants run the experiments individually.
 We identified eight main tasks required to build a custom editor for a Papyrus profile in the non-automated approach.
-For the AMIGO approach two main tasks are required.
+For the Jorvik approach two main tasks are required.
 Each task was given a total allotted time for completion. Further, this time was divided into two sections: basic and essential.
 In the basic section participants are expected to complete the task only using their knowledge and any information available on-line or elsewhere.
 In the essential section, essential information\footnote{The essential information is provided as a set of step-by-step instructions.} on how to complete the task is given to the participants.
@@ -196,13 +168,13 @@ Tasks 1-4 are scheduled in the morning and tasks 4-8 in the afternoon with a 1 h
 \end{table}
 
 \begin{table}
-    \caption{Tasks and times for the AMIGO approach}
+    \caption{Tasks and times for the Jorvik approach}
     \centering
     \setlength{\tabcolsep}{3.5pt} 
     \begin{tabular}{|c|c|c|c|}
         Task & Total Time (m) & Basic Time (m) & Essential Time (m) \\ 
         Profile Metamodel & 60 & 40 & 20 \\
-        Run AMIGO & 60 & 40 & 20 \\
+        Run Jorvik & 60 & 40 & 20 \\
     \end{tabular}
 \end{table}
 
