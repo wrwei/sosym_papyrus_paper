@@ -3,7 +3,7 @@
 In this section, we discuss the technical implementation of Jorvik which underpins the process of our approach discussed in the previous section. 
 
 Figure~\ref{fig:transformationWorkflow} shows the transformations workflow. 
-Each transformation is identified by a number (\#2-\#8 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
+Each transformation is identified by a number (\#2 -- \#9 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
 In addition to the transformations, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is executed to verify the correctness of the annotations and provide useful feedback to the users if there is anything wrong. 
 Moreover, supporting files needed for the creation of the Papyrus plugin are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
 As the transformations consists of about 1000 lines of code we will describe them omitting low level technical details\footnote{Full implementations and instructions are available at \url{https://github.com/wrwei/Jorvik}}. 
@@ -24,7 +24,7 @@ In lines 4--6, the condition to check is provided, which is that the value of th
 Finally, in lines 7--8 a message is displayed to the users in case the rule is violated providing information regarding the acceptable values and the name of the element(s) that violated this rule.
 
 \lstinputlisting[
-caption={Example a rule that check that the values provided to the ``bold'' styling detail for @Node annotations is correct.},
+caption={Example rule that checks that the values provided to the ``bold'' styling detail for @Node annotations is correct.},
 label={lst:evlRulesBold},
 captionpos=b, 
 language=EVL, 
@@ -73,7 +73,7 @@ This transformation consists of two main rules, one that creates a \textit{Stere
 When all stereotypes are created, a number of post-transformation operations are executed to 1) create the generalisation relationships between the \textit{Stereotype}s, 2) add the references/containment relationships between the \textit{Stereotype}s, 3) create the extension with the UML base meta-element and 4) generate and add the needed OCL constraints for each edge: 
 
 \begin{enumerate}[label=\arabic*)]
-	\item For each of the superclasses of an EClass in the metamodel we create a \textit{Generalisation} UML element. 
+	\item For each superclass of an EClass in the metamodel we create a \textit{Generalisation} UML element. 
 	The generalisation element is added to the stereotype created for this specific EClass and refers via the \textit{generalization} reference to the stereotype that was created for the superclass.
 	\item For each reference (ref or val) in the metamodel a new \textit{Property} UML element is created and added to the \textit{Stereotype} that represents the EClass. 
 	A new \textit{Association} UML element is also created and added to the \textit{Stereotype}. The name and the multiplicities are also set.
@@ -202,7 +202,7 @@ The Java class is generated using a model-to-text transformation written in EGL.
 \subsection{Architecture Model Generation (\#7)}
 \label{sec:architectureModel}
 Papyrus adopted the notion of an Architecture model in order to describe the architecture of the graphical editors since Papyrus 3.0+.
-This transformation syntheses an Architecture model using a model creation program using the Epsilon Object Language (EOL) \cite{kolovos2006epsilon}. 
+This transformation synthesises an Architecture model using a model creation program using the Epsilon Object Language (EOL) \cite{kolovos2006epsilon}. 
 The program needs 1) the annotated Ecore metamodel for the DSL, 2) the Element Types Configuration model, 3) the Palette Configuration model, 4) the UML metamodel, 5) the Creation Command Java class and 6) the CSS custom style sheet as inputs. 
 In particular, in the Architecture model, the generation program creates:
 \begin{itemize}
