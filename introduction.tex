@@ -27,15 +27,15 @@ Widely used UML profiles, like SysML~\cite{friedenthal2014practical} and MARTE~\
 However, the ability of Papyrus to support non-trivial UML profiles and the effort and learning curve related to developing such profiles are recurring concerns. 
 As reported in~\cite{Wimmer2009:IJWIS}, the manual definition of new UML profiles is typically a tedious, time-consuming and error-prone process.
 
-In this paper, we simplify and automate the process of developing UML profiles for Papyrus. 
+In this paper, we simplify and automate the process of developing distributable Papyrus editors for UML profiles. 
 We propose an approach supported by a prototype Eclipse plugin, where annotated Ecore metamodels are used to capture the abstract and graphical syntax of profiles at a high-level of abstraction, and are then automatically transformed to the Papyrus-specific artefacts for distribution and deployment. 
 In particular, our approach, called Jorvik, produces a fully-fledged UML profile and a distributable Papyrus graphical editor as an Eclipse plugin. 
 
 We evaluate the effectiveness of our approach for the automatic generation of a non-trivial enterprise modelling language (Archimate) and its corresponding Papyrus editor against an equivalent developer-driven UML profile and Papyrus editor. 
-Furthermore, we apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, demonstrating its generality and wide applicability.
+Furthermore, we apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, demonstrating its generality and wide applicability. We also evaluate our approach in a user study where developers are asked to created distributable Papyrus editors for two UML profiles using Papyrus' dedicated infrastructure and Jorvik, in order to compare the efficiency of our proposed approach.
 
 The rest of the paper is organised as follows. 
 Section~\ref{sec:background} motivates the need of the proposed approach. 
-%Section~\ref{sec:approach} describes the proposed approach while in Section~\ref{sec:implementation} the implementation details are given. 
+Section~\ref{sec:approach} describes the proposed approach while in Section~\ref{sec:implementation} the implementation details are given. 
 In Section~\ref{sec:evaluation} we present the evaluation carried out, while in Section~\ref{sec:related} related work is discussed. 
 Finally, Section~\ref{sec:future} concludes the paper and highlights plans for future work.
