@@ -13,8 +13,8 @@ Papyrus offers, among other choices, the mechanism of creating the UML profile u
 Users can create UML profile related elements from the palette provided in the UML Profile Diagram editor.
 The properties of each element (e.g., data types of properties, multiplicity, navigability, etc.) can then be set using the properties view. 
 In a profile, each \textit{Stereotype} needs to extend a UML concept (hereby referred to as \textit{base element} or \textit{meta-element}). 
-Users also need to define which \textit{meta-element} their \textit{Stereotype}s extend. 
-The users can import meta-elements and add appropriate extension links between their \textit{Stereotypes} and the \textit{meta-elements} by using the tool provided in the palette.
+Thus, users need to define which \textit{meta-elements} their \textit{Stereotype}s extend. 
+This is achieved by importing the meta-elements and by adding appropriate extension links between their \textit{Stereotypes} and the \textit{meta-elements} by using the tool provided in the palette.
 The process of creating the profile can be repetitive and labour-intensive, depending on the size of the profile.
 Having created a profile, users can then apply it on a UML model. 
 Users typically create instances of UML meta-elements (e.g. UML::Class) and apply their \textit{Stereotype}s defined in their UML profiles. 
@@ -46,7 +46,7 @@ Although this is an easy-to-use approach, it has to be done manually when a new 
 In addition, it cannot be shared in case the profile needs to be distributed to collaborators. 
 The second option involves the manual definition of a XML-based palette configuration file, which is automatically loaded every time the profile is applied to a diagram. 
 This option however, is discouraged by Papyrus as it does not allow the full use of Papyrus functionality.
-Furthermore, this option is based on a deprecated framework, and its use is not encouraged. \will{@Thanos, please clarify} \thanos{I believe that this is now clear.}
+Furthermore, this option is based on a deprecated framework, and its use is not encouraged. \will{@Thanos, please clarify} \thanos{I believe that the info provided are more than enough. William disagrees as he believe that we should include more technical details. What do you guys think?}
 The third option is to create a UML profile editor, which includes the manual creation of a number of inter-related models and artefacts, including a palette configuration model. 
 Although this option provides a whole solution to create a UML profile editor, in the paper we illustrate that this option is a labour-intensive and error prone process.
 
@@ -63,11 +63,11 @@ Although this option provides a whole solution to create a UML profile editor, i
 The definition of custom shapes for the instantiated \textit{Stereotype}s is another common requirement. 
 In Papyrus, Scalable Vector Graphics (SVG) shapes can be bound to \textit{Stereotype}s during the profile creation process. 
 However, to make these shapes visible, users need to set the visibility of the shape of \textit{each} \textit{Stereotype} to true. 
-Although this is an acceptable trade-off, the users typically need to hide the default shapes by writing custom style rules in a Cascading Style Sheet (CSS), because that by default the SVG shape bound to a \textit{Stereotype} overlaps with the default shape of the base meta-element.
+Although this is an acceptable trade-off, the users typically need to hide the default shapes by writing custom style rules in a Cascading Style Sheet (CSS), as by default the SVG shape bound to a \textit{Stereotype} overlaps with the default shape of the base meta-element.
 The CSS can be written once but need to be loaded each time \textit{manually} on every diagram that is created. 
 
 To create a distributable graphical editor that has diagrams tailored for the profile and to avoid all the aforementioned drawbacks, users need to create a number of inter-related models and files, and to implement extension points in an Eclipse plug-in project. 
-In our previous work \cite{zolotas2018towards} based on Papyrus 2.0, we identified a number of models that need to be created, which is shown in Figure~\ref{fig:neededPapyrusFiles}. 
+\thanos{I believe that the whole discussion about Papyrus 2.0 should be discarded. After reading this, people believe that the contribution of Jorvik is to migrate from 2.0  to 3.0.} In our previous work \cite{zolotas2018towards} based on Papyrus 2.0, we identified a number of models that need to be created, which is shown in Figure~\ref{fig:neededPapyrusFiles}. 
 To create a working UML profile editor in Papyrus, the users typically need to create a Palette Configuration model, an Element Types Configuration model, a Type Configuration model, a Diagram Configuration model, a CSS and Eclipse plug-in related artefact.
 However, in our recent studies we discovered that since Papyrus 3.0, the mechanism for creating UML profile editors had changed, altogether with a number of metamodels. 
 Figure~\ref{fig:neededPapyrusFiles_new} shows all the artefacts needed to be created for having a distributable Papyrus UML profile editor for Papyrus 3.0+.
@@ -90,7 +90,7 @@ In addition, it is also a labour-intensive and error-prone process to migrate ed
 
 UML profile editors created using approaches in Figure~\ref{fig:neededPapyrusFiles} and Figure~\ref{fig:neededPapyrusFiles_new} both have custom palette, with which the users are able to create elements in their DSL (UML meta-elements with \textit{Stereotype}s defined in the UML profile applied automatically to them).
 Detailed discussions about the artefacts needed in order to create a UML profile editor are provided in Section~\ref{sec:implementation}.
-A few hundred lines of code need to be written while tedious Plug-in creation and repetitive model creation tasks should be done. \will{This is not necessarily the case, the claim is too strong}
+A few hundred lines of code need to be written while tedious Plug-in creation and repetitive model creation tasks should be done. \will{This is not necessarily the case, the claim is too strong} \thanos{This is supported by our evaluation on the archimate profile.}
 
 This \textit{labour-intensive}, \textit{repetitive} and \textit{error-prone} process could be automated. 
 In this paper, we present our tool - Jorvik, which uses a single-source input to automatically generate a UML profile and models/files mentioned above for a UML profile editor. 
