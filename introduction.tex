@@ -3,14 +3,14 @@
 
 The Unified Modelling Language (UML)~\cite{UML2015OMG} is the \emph{de facto} standard for object-oriented software and systems modelling. 
 It offers a broad range of abstractions that can be used to express different views of a system, including Class, Use Case, State, Collaboration and Sequence diagrams. 
-Since version 2.0, UML offers a extension and customisation mechanism named \emph{UML Profiling}~\cite{FuentesFernandez2004:UMLME}.
+Since version 2.0, UML offers an extension and customisation mechanism named \emph{UML Profiling}~\cite{FuentesFernandez2004:UMLME}.
 UML profiling enables the users to derive Domain-Specific Languages (DSL) from UML's set of general language concepts.
 An important advantage of this approach to DSL design is that it allows the reuse of existing UML tools and widely available UML expertise.
 The basic premise of profiles is that all domain specific concepts are derived as extensions or refinements of existing UML concepts, called UML \textit{meta-classe}s. 
 These extensions are called \textit{Stereotype}s. 
 A \textit{Stereotype} definition must be consistent with the abstract syntax and semantics of standard UML \textit{meta-classe}s it extends. 
 Consequently, a profile-based model can be created and manipulated by any tool that supports standard UML. 
-Moreover, because the concepts underlying a profile specialisations of existing UML concepts, users with UML knowledge can adapt to the approach more easily.
+Moreover, the concepts underlying profile specialisations of existing UML concepts enables users with UML knowledge to adapt to the approach more easily.
 
 %Using UML Profiles users can add new concepts to the modelling language in the form of \textit{Stereotypes}. 
 %Each Stereotype extends a core UML concept (e.g., Class, Actor, etc.) and includes extra information that 
@@ -28,22 +28,22 @@ However, the ability of Papyrus to support non-trivial UML profiles and the effo
 As reported in~\cite{Wimmer2009:IJWIS}, the manual definition of new UML profiles is typically a tedious, time-consuming and error-prone process.
 
 In this paper, we simplify and automate the process of developing distributable Papyrus editors for UML profiles. 
-We propose an approach supported by a prototype Eclipse plugin, where annotated Ecore metamodels are used to capture the abstract and graphical syntax of profiles at a high-level of abstraction, and are then automatically transformed to the Papyrus-specific artefacts for distribution and deployment. 
-In particular, our approach, called Jorvik, produces a fully-fledged UML profile and a distributable Papyrus graphical editor as an Eclipse plugin. 
+We introduce Jorvik, an approach supported by a prototype Eclipse plugin where annotated Ecore metamodels capture the abstract and graphical syntax of profiles at a high-level of abstraction, and are then automatically transformed to the Papyrus-specific artefacts for distribution and deployment. 
+Jorvik produces a fully-fledged UML profile and a distributable Papyrus graphical editor as an Eclipse plugin. 
 
-We evaluate the effectiveness of our approach for the automatic generation of a non-trivial enterprise modelling language (Archimate) and its corresponding Papyrus editor against an equivalent developer-driven UML profile and Papyrus editor. 
-Furthermore, we apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, demonstrating its generality and wide applicability. We also evaluate our approach in a user study where developers are asked to created distributable Papyrus editors for two UML profiles using Papyrus' dedicated infrastructure and Jorvik, in order to compare the efficiency of our proposed approach.
+We evaluate the effectiveness of Jorvik for the automatic generation of a non-trivial enterprise modelling language (Archimate) and its corresponding Papyrus editor against an equivalent developer-driven UML profile and Papyrus editor. 
+Furthermore, we apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, demonstrating its generality and wide applicability. We also evaluate our approach in a user study where developers are asked to created distributable Papyrus editors for \sg{a fault-tree and a webpage UML profile} using Papyrus' dedicated infrastructure and Jorvik, in order to compare the efficiency of our proposed approach.
 
-This paper is an extended version of the work presented in~\cite{zolotas2018towards}. Compared to~\cite{zolotas2018towards}, in this paper we:
+This paper significantly extends the prototype approach for automated generation of UML Profile Graphical Editors for Papyrus from our conference paper~\cite{zolotas2018towards} in the following ways:
 \begin{enumerate}
-	\item \textit{Performed a major refactoring of the tool to adapt to the new underlying structure of Papyrus 3.0 and above.}
+	\item \textit{We perform a major refactoring of Jorvik to adapt to the new underlying structure of Papyrus 3.0 and above.}
 	Since Papyrus 3.0, its underlying metamodels have changed, and the process for creating a Papyrus editor has changed significantly. 
 	We therefore re-implemented a major part of our work to adapt to the changes.
-	\item \textit{Conducted user experiments to compare our proposed approach with the default Papyrus approach.}
-	Significant time has been spent on studying the efficiency of our approach, comparing to manual approach.
-	\item \textit{Developed a validation script that checks the annotated ECore metamodels given as input to our approach.}
-	\item \textit{Added more styling properties for diagrams created with our approach.}
-	\item \textit{Explored the feasibility of having nested elements in Papyrus graphical editors.} \thanos{@Horacio, not sure how to write this properly. Could you please fix this?}
+	\item \textit{We enhance considerably the experimental evaluation by conducting user experiments to compare Jorvik with the default Papyrus approach.}
+	Significant time has been spent on studying the efficiency of our approach, compared to the manual approach.
+	\item \textit{We develop a validation script that checks the annotated ECore metamodels given as input to our approach.}
+	\item \textit{We support more styling properties for diagrams created with our approach.}
+	\item \textit{We explore the feasibility of having nested elements in Papyrus graphical editors.} \thanos{@Horacio, not sure how to write this properly. Could you please fix this?}
 \end{enumerate}
 The rest of the paper is organised as follows. 
 In Section~\ref{sec:background} we motivate the need of the proposed approach. 
