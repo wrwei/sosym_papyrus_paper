@@ -34,6 +34,14 @@ In particular, our approach, called Jorvik, produces a fully-fledged UML profile
 We evaluate the effectiveness of our approach for the automatic generation of a non-trivial enterprise modelling language (Archimate) and its corresponding Papyrus editor against an equivalent developer-driven UML profile and Papyrus editor. 
 Furthermore, we apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, demonstrating its generality and wide applicability. We also evaluate our approach in a user study where developers are asked to created distributable Papyrus editors for two UML profiles using Papyrus' dedicated infrastructure and Jorvik, in order to compare the efficiency of our proposed approach.
 
+This paper is an extended version of the work presented in~\cite{zolotas2018towards}. Compared to~\cite{zolotas2018towards}, in this paper we also:
+\begin{enumerate}
+	\item{Performed a major refactoring of the tool to support the adapt to the new Papyrus 3.0 structure.}
+	\item{Executed user experiments to compare our proposed approach with the default Papyrus approach.}
+	\item{Developed a validation script that checks the annotated ECore metamodels given as input to our approach.}
+	\item{Added more styling properties for diagrams created with our approach.}
+	\item{Explored the feasibility of having nested elements in Papyrus graphical editors.} \thanos{@Horacio, not sure how to write this properly. Could you please fix this?}
+\end{enumerate}
 The rest of the paper is organised as follows. 
 Section~\ref{sec:background} motivates the need of the proposed approach. 
 Section~\ref{sec:approach} describes the proposed approach while in Section~\ref{sec:implementation} the implementation details are given. 
