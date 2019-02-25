@@ -34,16 +34,21 @@ In particular, our approach, called Jorvik, produces a fully-fledged UML profile
 We evaluate the effectiveness of our approach for the automatic generation of a non-trivial enterprise modelling language (Archimate) and its corresponding Papyrus editor against an equivalent developer-driven UML profile and Papyrus editor. 
 Furthermore, we apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, demonstrating its generality and wide applicability. We also evaluate our approach in a user study where developers are asked to created distributable Papyrus editors for two UML profiles using Papyrus' dedicated infrastructure and Jorvik, in order to compare the efficiency of our proposed approach.
 
-This paper is an extended version of the work presented in~\cite{zolotas2018towards}. Compared to~\cite{zolotas2018towards}, in this paper we also:
+This paper is an extended version of the work presented in~\cite{zolotas2018towards}. Compared to~\cite{zolotas2018towards}, in this paper we:
 \begin{enumerate}
-	\item{Performed a major refactoring of the tool to support the adapt to the new Papyrus 3.0 structure.}
-	\item{Executed user experiments to compare our proposed approach with the default Papyrus approach.}
-	\item{Developed a validation script that checks the annotated ECore metamodels given as input to our approach.}
-	\item{Added more styling properties for diagrams created with our approach.}
-	\item{Explored the feasibility of having nested elements in Papyrus graphical editors.} \thanos{@Horacio, not sure how to write this properly. Could you please fix this?}
+	\item \textit{Performed a major refactoring of the tool to adapt to the new underlying structure of Papyrus 3.0 and above.}
+	Since Papyrus 3.0, its underlying metamodels have changed, and the process for creating a Papyrus editor has changed significantly. 
+	We therefore re-implemented a major part of our work to adapt to the changes.
+	\item \textit{Conducted user experiments to compare our proposed approach with the default Papyrus approach.}
+	Significant time has been spent on studying the efficiency of our approach, comparing to manual approach.
+	\item \textit{Developed a validation script that checks the annotated ECore metamodels given as input to our approach.}
+	\item \textit{Added more styling properties for diagrams created with our approach.}
+	\item \textit{Explored the feasibility of having nested elements in Papyrus graphical editors.} \thanos{@Horacio, not sure how to write this properly. Could you please fix this?}
 \end{enumerate}
 The rest of the paper is organised as follows. 
-Section~\ref{sec:background} motivates the need of the proposed approach. 
-Section~\ref{sec:approach} describes the proposed approach while in Section~\ref{sec:implementation} the implementation details are given. 
-In Section~\ref{sec:evaluation} we present the evaluation carried out, while in Section~\ref{sec:related} related work is discussed. 
-Finally, Section~\ref{sec:future} concludes the paper and highlights plans for future work.
+In Section~\ref{sec:background} we motivate the need of the proposed approach. 
+In Section~\ref{sec:approach} we describe the proposed approach and the process of the proposed approach. 
+In Section~\ref{sec:implementation} we discuss in detail the artefacts needed to create a working Papyrus editor, and the implementation details of automatically generating these artefacts. 
+In Section~\ref{sec:evaluation} we present the evaluation conducted.
+In Section~\ref{sec:related}, we discuss the related works. 
+Finally, in Section~\ref{sec:future} we conclude the paper and highlight the plans for future work.
