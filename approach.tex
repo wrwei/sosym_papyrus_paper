@@ -5,9 +5,9 @@ In order to minimise the labour intensive and repetitive process required for th
 In our approach, users are able to define the abstract syntax and the concrete (graphical) syntax of their DSLs (the UML profile) in the form of an annotated Ecore metamodel.
 The annotations can be used to specify the \textit{Stereotyp}s to be created in the UML profile, and what meta-elements they extend. 
 With the annotations, the users are also able to specify the graphical syntax and related information (e.g. shapes for the \textit{Stereotype}s and the icons for the creation tools in the palette). 
-The annotated Ecore metamodel is then processed by Jorvik and transformed into a UML profile and related Papyrus-specific models/files needed for a Papyrus editor for the generated UML profile, through a series of model management operations like Model Validation, Model-to-Model (M2M) and Model-to-Text (M2T) transformations. The process of our proposed approach is presented in Figure~\ref{fig:approachOverview}. 
+The annotated Ecore metamodel is then processed by Jorvik and transformed into a UML profile and related Papyrus-specific models/files needed for a standalone Papyrus editor. This is done hrough a series of model management operations like model validation, model-to-model (M2M) and model-to-text (M2T) transformations. An overview of our proposed approach is presented in Figure~\ref{fig:approachOverview}. 
 We discuss the steps involved in the process in detail in the remainder of this section, followed by a running example. 
-We discuss technical details and the model transformations involved in the proposed approach are provided in Section~\ref{sec:implementation}.
+Technical details about the different steps of the proposed approach are provided in Section~\ref{sec:implementation}.
 
 \begin{figure}[ht!]
 	\centering
@@ -24,7 +24,7 @@ In order to do this, a number of annotation keywords are defined for the users t
 	\item \textbf{@Diagram} annotations are used to define diagram-specific information like the name and the icon of the diagram. This annotation can be applied to EPackages and should always be applied to the EPackage at the top level.
 	\item \textbf{@Node} annotations are used to indicate the \textit{Stereotype}s that should be instantiated as nodes in the diagrams. 
 	The UML meta-element that this \textit{Stereotype} extends is provided through the \emph{base} property. 
-	The SVG shape to be used on the canvas and the icon of the specific element in the palette are specified through the \emph{shape} and \emph{icon} properties, respectively.
+	The SVG shape to be used on the canvas and the icon of the specific element in the palette are specified through the \emph{shape} and \emph{icon} properties, respectively. 
 	\item \textbf{@Edge} annotations are used to denote \textit{Stereotype}s that should be instantiated as edges in the diagrams. 
 	The UML meta-element extended by this stereotype is provided through the \emph{base} property. The icon of the specific element in the palette is also passed as property along with the desired style of the line. 
 	This annotation can be applied either to an EClass or to an EReference.
@@ -32,11 +32,11 @@ In order to do this, a number of annotation keywords are defined for the users t
 
 In the metamodel, all annotated \textit{EClass}es are automatically transformed in to \textit{Stereotypes}.
 \textit{Stereotype}s are also created from annotated EReferences (more about this below). 
-Depending on the required graphical syntax of the \textit{Stereotype} (i.e., if it should be represented as a \textit{node} or as an \textit{edge} on the diagram), developers need to use the annotation on EClasses/EReferences. 
-A detailed list of all valid annotation properties is provided in the Appendix. 
+Depending on the required graphical syntax of the \textit{Stereotype} (i.e., if it should be represented as a \textit{node} or as an \textit{edge} on the diagram), developers need to use the appropriate annotation on EClasses/EReferences. 
+A detailed list of all valid annotation properties is provided in the Appendix~\ref{appendixA}. 
 
 With the annotated Ecore metamodel in place, the next step is to check the validity of the annotations in order to proceed with the generation process. 
-Therefore, a custom made model validation program written in the Epsilon Validation Language (EVL)~\cite{evlKolovos} (see Figure~\ref{fig:approachOverview}) is in place.
+Therefore, a custom made model validation program written in the Epsilon Validation Language (EVL)~\cite{evlKolovos} (see Figure~\ref{fig:approachOverview}) is used.
 The validation rules (which we describe in detail in Section~\ref{sec:implementation}) check if the annotations provided and their attributes match the expected ones by Jorvik (e.g., each annotated element includes a reference to the UML base element it extends). 
 If the validation fails, feedback is provided to users to fix the problems detected. 
 Otherwise, the annotated Ecore metamodels are consumed by a workflow of M2M and M2T  transformations illustrated in Figure~\ref{fig:transformationWorkflow} and described in detail in Section~\ref{sec:implementation}. 
@@ -51,7 +51,7 @@ In the following section, the proposed approach is explained via a running examp
 
 \subsection{Running Example}
 \label{sec:example}
-In this example we define a DSL - the Simple Development Process Language (SDPL) in an annotated Ecore metamodel and we generate the corresponding UML profile and Papyrus graphical editor-related models/files using Jorvick.
+In this example we define a DSL - the Simple Development Process Language (SDPL) - in an annotated Ecore metamodel and we generate the corresponding UML profile and Papyrus graphical editor using Jorvik.
 We start by defining the abstract syntax of the DSL using  Emfatic\footnote{\url{https://www.eclipse.org/emfatic/}}, a textual notation for Ecore, which is shown in Listing~\ref{lst:annotatedSdplEmfatic} (ignore the annotations at this point). 
 A process defined in SDPL consists of \textit{Steps}, \textit{Tools} and \textit{Persons} participating in it. 
 Each \textit{Person} is familiar with certain tools and can have different \textit{Role}s in steps of a process, while each step refers to the next step that follows using the \textit{next} reference.
@@ -80,21 +80,21 @@ In order to generate the UML profile and the Papyrus graphical editor we need to
 	\item[--] \textbf{Lines 5, 10 \& 15:} The \textit{@Node} annotation is used to define that the three concepts (i.e., Steps, Roles and Tools) should be \textit{Stereotype}s in the UML profile that will be represented as nodes on the diagram. 
 	The \textit{base} parameter is used to define which UML meta-element the \textit{Stereotype} should extend (i.e., \textit{Class}\footnote{Although profiles are meant to accommodate ``natural'' extensions to UML artefacts, sometimes is the case that generic meta-elements are used instead. 
 	For example, in the Archimate for Papyrus tool presented in Section~\ref{sec:efficiencyEvaluation}, the Use Case meta-element is used as base for the \textit{Business Service} \textit{Stereotype}, or Class as the base for the \textit{Business Role} \textit{Stereotype}. 
-	Thus, the selection of the most appropriate base element is left for the user.} in the \textit{Stereotype}s of this example\footnote{\textit{Class} is actually \textit{UML::Class}, we omit the ``UML::'' prefix to reduce the efforts for the user}). The shape on the canvas and the icon in the palette for each \textit{Stereotype} are given using the \textit{shape} and \textit{icon} annotation details.
-	\item[--] \textbf{Line 20 \& 23:} The EReference \textit{familiarWith} and the \textit{Role} EClass are added in the profile as \textit{Stereotype}s that extend the meta-element \textit{Association} of UML (UML::Association). 
+	Thus, the selection of the most appropriate base element is left for the user.} in the \textit{Stereotype}s of this example\footnote{\textit{Class} is actually \textit{UML::Class}, we omit the ``UML::'' prefix to reduce the efforts for the user}). The shape on the canvas and the icon in the palette for each \textit{Stereotype} are given using the \textit{shape} and \textit{icon} annotation details. We also change the font style by setting the bold details to true (see line 10).
+	\item[--] \textbf{Line 19 \& 22} The EReference \textit{familiarWith} and the \textit{Role} EClass are added in the profile as \textit{Stereotype}s that extend the meta-element \textit{Association} of UML (UML::Association). 
 	These \textit{Stereotype}s should be represented as links in the diagrams and thus are annotated with the \textit{@Edge} string.
 	In contrast to the \textit{familiarWith EReference}, the types the 
 	\textit{Roles} edge should be able to connect are not know and need to be 
 	specified as properties of the annotation (i.e., \textit{source=``src''} 
 	and \textit{target=``tar''}). 
 	This denotes that the source/target nodes of this connector are mapped to the values of the
-	EReferences: \textit{src} and \textit{tar} respectively.
+	EReferences: \textit{src} and \textit{tar} respectively. We also set the font size to 15 for the labels of the \textit{familiarWith} edges (see line 19).
 	\item[--] \textbf{NB Line 8:} The \textit{next} EReference is not required to be displayed as an edge on the diagram thus it is not annotated with \emph{@Edge}. 
 	However, it will be a property of the \textit{Step} \textit{Stereotype} in the generated profile, so it can be set in the model (but it will not be displayed on the diagram).
 \end{itemize}
 
 
-The automated M2M and M2T transformations discussed above are then executed on the Ecore file and the produced SDPL Papyrus editor is presented in Figure~\ref{fig:sdplEditor}. 
+The automated M2M and M2T transformations discussed above are then executed on the Ecore file and the produced SDPL Papyrus editor is presented in Figure~\ref{fig:sdplEditor}.  \thanos{The figure should be updated to include the bold label for Tool and the 15 font for familiarWith.}
 
 \begin{figure}[ht!]
 	\centering
@@ -111,7 +111,7 @@ For example, by default, our automatic transformations dictate the diagram, thro
 However, in this example we want to hide the stereotype names and display labels in red font. 
 This can be achieved by manually amending the generated CSS file. 
 However, the CSS file will be automatically overridden if the user regenerates the profile and the editor in the future (e.g., because of a change in the metamodel). 
-To avoid this, the user can use the -- optional -- CSS generation polishing transformation (\#6b in Figure~\ref{fig:transformationWorkflow}) shown in Listing~\ref{lst:cssPolishingExample}. 
+To avoid this, the user can use the -- optional -- CSS generation polishing transformation (\#5b in Figure~\ref{fig:transformationWorkflow}) shown in Listing~\ref{lst:cssPolishingExample}. 
 Every time the profile and editor generation is executed, the polishing transformation will be called and will set the visibility of the stereotypes to false automatically. 
 
 \begin{figure}

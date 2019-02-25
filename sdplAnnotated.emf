@@ -7,7 +7,7 @@ class Step {
 	attr String stepId;
 	ref Step[1] next;
 }
-@Node(base="Class", shape="sh/tool.svg", icon="ic/tool.png")
+@Node(base="Class", shape="sh/tool.svg", icon="ic/tool.png", bold="true")
 class Tool {
 	attr String name;
 	attr int version;
@@ -16,7 +16,7 @@ class Tool {
 class Person {
 	attr String name;
 	attr int age;
-	@Edge(base="Association", icon="ic/line.png")
+	@Edge(base="Association", icon="ic/line.png", fontHeight="15")
 	ref Tool[*] familiarWith;
 }
 @Edge(base="Association", icon="ic/line.png", source="src", target="tar")
