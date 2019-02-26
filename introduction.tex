@@ -5,41 +5,42 @@ The Unified Modelling Language (UML)~\cite{UML2015OMG} is the \emph{de facto} st
 It offers a broad range of abstractions that can be used to express different views of a system, including Class, Use Case, State, Collaboration and Sequence diagrams. 
 Since version 2.0, UML offers an extension and customisation mechanism named \emph{UML Profiling}~\cite{FuentesFernandez2004:UMLME}.
 UML profiling enables the users to derive Domain-Specific Languages (DSL) from UML's set of general language concepts.
-An important advantage of this approach to DSL design is that it allows the reuse of existing UML tools and widely available UML expertise.
-The basic premise of profiles is that all domain specific concepts are derived as extensions or refinements of existing UML concepts, called UML \textit{meta-classe}s. 
+An important advantage of this approach to DSL design is that it allows the reuse of existing UML tools and it supports widely available UML expertise.
+The basic premise of profiles is that all domain specific concepts are derived as extensions or refinements of existing UML concepts (called UML \textit{meta-element}s). 
 These extensions are called \textit{Stereotype}s. 
-A \textit{Stereotype} definition must be consistent with the abstract syntax and semantics of standard UML \textit{meta-classe}s it extends. 
+A \textit{Stereotype} definition must be consistent with the abstract syntax and semantics of standard UML \textit{meta-element}s it extends. 
 Consequently, a profile-based model can be created and manipulated by any tool that supports standard UML. 
 Moreover, the concepts underlying profile specialisations of existing UML concepts enables users with UML knowledge to adapt to the approach more easily.
 
-%Using UML Profiles users can add new concepts to the modelling language in the form of \textit{Stereotypes}. 
-%Each Stereotype extends a core UML concept (e.g., Class, Actor, etc.) and includes extra information that 
-%supports the modelling needs of users of the target domain that is missing from the base concept.
-
 %With profiles, UML offers a way for users to build Domain-Specific Modelling Languages (DSML) by re-using and extending UML concepts. 
-Although domain-specific modelling languages and tools that support them, like Sirius~\cite{viyovic2014sirius} or Eugenia~\cite{kolovos2015eugenia}, are becoming more popular, UML is still widely used in model-based software engineering (MBSE)~\cite{erickson2007theoretical}. 
-As a result, alternative ways to define domain-specific languages using dedicated metamodels and textual/graphical editors are available to the users~\cite{Bergmayr2014:MODELS,Pardillo2010:MODELS}. 
+Although Domain-Specific Modelling Languages and tools that support them, like Sirius~\cite{viyovic2014sirius} or Eugenia~\cite{kolovos2015eugenia}, are becoming more popular, UML is still widely used in model-based software engineering (MBSE)~\cite{erickson2007theoretical}. 
+As a result, alternative ways to define Domain-Specific Languages using dedicated metamodels and textual/graphical editors are available to the users~\cite{Bergmayr2014:MODELS,Pardillo2010:MODELS}. 
 %Those approaches have their benefits and shortcomings which are, however, beyond the scope of this paper.   
 
 Papyrus \cite{lanusse2009papyrus} is a leading open-source UML modelling tool developed under the Eclipse Foundation and driven by the PolarSys Initiative and the Papyrus Industry Consortium, which are spearheaded by large high-technology companies such as Airbus, Thales, Saab and Ericsson. \will{Is this still the case?} \thanos{I was told that this is not going to be the case, but I don't know if they have made any progress. You might need to check online or in the forum.}
-After more than a decade in development, Papyrus is close to developing a critical mass for wider adoption in industry as means of (1) escaping proprietary UML tooling lock-in, (2) leveraging the MBSE-related developments in the Eclipse modelling ecosystem enabling automated management of UML models (e.g. model validation and model-to-model (M2M) and model-to-text (M2T) transformation languages), and (3) enabling multi-paradigm modelling using a combination of UML and EMF-based DSLs. 
+After more than a decade in development, Papyrus is close to developing a critical mass for wider adoption in industry as means of 1) escaping proprietary UML tooling lock-in, 2) leveraging the MBSE-related developments in the Eclipse modelling ecosystem enabling automated management of UML models (e.g. model validation and model-to-model (M2M) and model-to-text (M2T) transformation languages), and 3) enabling multi-paradigm modelling using a combination of UML and EMF-based DSLs. 
 Widely used UML profiles, like SysML~\cite{friedenthal2014practical} and MARTE~\cite{omg2011marte} offer implementations for Papyrus. 
-However, the ability of Papyrus to support non-trivial UML profiles and the effort and learning curve related to developing such profiles are recurring concerns. 
+However, the ability of Papyrus to support non-trivial UML profiles, altogether with the effort and learning curve related to developing such profiles are recurring concerns. 
 As reported in~\cite{Wimmer2009:IJWIS}, the manual definition of new UML profiles is typically a tedious, time-consuming and error-prone process.
 
-In this paper, we simplify and automate the process of developing distributable Papyrus editors for UML profiles. 
-We introduce Jorvik, an approach supported by a prototype Eclipse plugin where annotated Ecore metamodels capture the abstract and graphical syntax of profiles at a high-level of abstraction, and are then automatically transformed to the Papyrus-specific artefacts for distribution and deployment. 
-Jorvik produces a fully-fledged UML profile and a distributable Papyrus graphical editor as an Eclipse plugin. 
+Papyrus also supports the creation of profile-specific graphical editors which enables the users to define their own creation palettes, custom styles and related artefacts based on UML profiles. 
+However, the process of creating profile-specific graphical editors is typically difficult because it requires a high level of modelling expertise and it can also be a repetitive and error-prone process.
 
-We evaluate the effectiveness of Jorvik for the automatic generation of a non-trivial enterprise modelling language (Archimate) and its corresponding Papyrus editor against an equivalent developer-driven UML profile and Papyrus editor. 
-Furthermore, we apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, demonstrating its generality and wide applicability. We also evaluate our approach in a user study where developers are asked to created distributable Papyrus editors for \sg{a fault-tree and a webpage UML profile}\SG{Make case studies explicit} using Papyrus' dedicated infrastructure and Jorvik, in order to compare the efficiency of our proposed approach.
+In this paper, we simplify and automate the process of developing distributable UML profile-specific Papyrus editors. 
+We present \textit{Jorvik}, an approach supported by an Eclipse Plug-in, which enables the use of annotated Ecore metamodels to capture the abstract and graphical syntax of UML profiles at a high-level of abstraction, and are then automatically transformed to UML profiles, and artefacts that contribute to distributable Papyrus graphical editors based on the UML profiles. 
+
+
+We evaluate the completeness and efficiency of Jorvik for the automatic generation of a non-trivial enterprise modelling language (Archimate) and its corresponding Papyrus editor against an equivalent developer-driven UML profile and its Papyrus editor. 
+We then apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, to demonstrate its generality and wide applicability. 
+Furthermore, we evaluate the productivity boost of our approach in a user study where developers are asked to created two UML profiles and their Papyrus graphical editors manually and with Jorvik.
+We report the findings in our study and we report the efficiency of Jorvik based on the results. 
 
 This paper significantly extends the prototype approach for automated generation of UML Profile Graphical Editors for Papyrus from our conference paper~\cite{zolotas2018towards} in the following ways:
 \begin{enumerate}
-	\item \textit{We perform a major refactoring of Jorvik to adapt to the new underlying structure of Papyrus 3.0 and above.}
+	\item \textit{We perform a major refactoring of Jorvik to adapt to the new underlying structure of Papyrus 3.0 and above.} --
 	Since Papyrus 3.0, its underlying metamodels have changed, and the process for creating a Papyrus editor has changed significantly. 
-	We therefore re-implemented a major part of our work to adapt to the changes.
-	\item \textit{We enhance considerably the experimental evaluation by conducting user experiments to compare Jorvik with the default Papyrus approach.}
+	We therefore re-implemented 70\% of our work to adapt to the changes.
+	\item \textit{We enhance considerably the experimental evaluation by conducting user experiments to compare Jorvik with the default Papyrus approach.} --
 	Significant time has been spent on studying the efficiency of our approach, compared to the manual approach.
 	\item \textit{We develop a validation script that checks the annotated ECore metamodels given as input to our approach.}
 	\item \textit{We support more styling properties for diagrams created with our approach.}
