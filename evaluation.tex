@@ -24,30 +24,37 @@ However, our generated editors do not offer some special features that the Archi
 For example, Archimate for Papyrus offers a third drawer in the palette for some diagrams that is called ``Common'' and includes two tools (i.e., ``Grouping'' and ``Comment''). 
 Another feature that is not supported by our default transformations is the fact that in Archimate for Papyrus, users are able to have the elements represented either by their shapes or by a coloured rectangle depending on the CSS class applied to them. 
 In order to be able to implement such missing features, we need to write the extra polishing transformations. 
-For brevity, we will not go into details on the content of the polishing transformations for this specific example. \will{need to review the numbers}
+For brevity, we will not go into details on the content of the polishing transformations for this specific example. 
 
-\begin{table}[t]
-	\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
+\captionsetup{justification=centering}
+\begin{landscape}
+	\topskip0pt
+%	\vspace*{\fill}
+\begin{table}[htb!]
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{M{2cm}|c|M{2cm}|c|M{2cm}|}
-		\cline{2-5}
-		& \multicolumn{3}{c}{\textbf{Jorvik}} & \textbf{Archimate for Papyrus}\\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{File}} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Total Hand-written}\\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{ECore}} & 436 & 0 & 436 & 0 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Profile}} & 0 & 0 & 0 & 1867 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Palette Configuration}} & 0 & 24 & 24 & 1305 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Element Types Configuration}} & 0 & 11 & 11 & 237 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Types Configuration}} & 0 & 10 & 10 & 788 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Diagram Configuration}} & 0 & 0 & 0 & 58 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{CSS}} & 0 & 195 & 195 & 553 \\ \hline
+	\begin{tabular}{M{1.5cm}|M{1.5cm}|M{2cm}|c|M{1.5cm}|M{2cm}|c|M{2cm}|}
+		\cline{2-8}
+		& \multicolumn{3}{c|}{\textbf{Jorvik (pre Papyrus 3.0)}} & \multicolumn{3}{c|}{\textbf{Jorvik (post Papyrus 3.0)}} & \textbf{Archimate for Papyrus (Pre Papyrus 3.0)}\\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{File}} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Total Hand-written}\\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{ECore}} & 436 & 0 & 436 & 436 & 0 & 436 & 0 \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Profile}} & 0 & 0 & 0 & 0 & 0 & 0 & 1867 (1089) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Element Types Configuration}} & 0 & 11 & 11 & 0 & 0 & 0 & 237 (61) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Palette Configuration}} & 0 & 50 & 50 & 0 & 50 & 50 & 1305 (323) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{CSS}} & 0 & 195 & 195 & 0 & 195 & 195 & 537 \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Creation Command}} & \cellcolor{Gray} & \cellcolor{Gray} & \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Architecture Model}} & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Types Configuration}} & 0 & 10 & 10 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 788 (327) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Diagram Configuration}} & 0 & 0 & 0 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 58 (28) \\ \hline
 		%\multicolumn{1}{|M{2cm}|}{\textbf{plugin.xml}} & 0 & & & 82 \\ \hline
 		%\multicolumn{1}{|M{2cm}|}{\textbf{MANIFEST.MF}} & 0 & & & \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Total}}  & \textbf{436} &\textbf{240} & \textbf{676} & \textbf{4608} \\ \hline
-		\cline{1-5}
+		\multicolumn{1}{|M{2cm}|}{\textbf{Total}}  & \textbf{436} &\textbf{256} & \textbf{692} & \textbf{436} & \textbf{245} & \textbf{681} & \textbf{4792 (1828)} \\ \hline
+		\cline{1-8}
 	\end{tabular}
+	\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
 	\label{tab:evaluation}
 \end{table}
+\end{landscape}
 
 Table~\ref{tab:evaluation}, summarises the lines of code we have to write manually to generate each file needed by Papyrus to create the 5 basic diagrams (column ``Jorvik'' / ``Handwritten'') and the number of lines of the polishing transformations that were needed to produce the enhanced editor (column ``Jorvik'' / ``Handwritten (Polishing)''). 
 The totals are given in column ``Jorvik'' / ``Total''. 
