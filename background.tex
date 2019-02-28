@@ -13,7 +13,7 @@ Papyrus offers, among other choices, the mechanism of creating UML profiles usin
 Users can uses the palette provided in the UML Profile Diagram editor to
 create all elements required to form a UML profile.
 The properties of each element (e.g., data types of properties, multiplicity navigability, etc.) can then be set using the properties view. 
-In a profile, each \textit{Stereotype} needs to extend a UML concept (hereby referred to as \textit{base element} or \textit{meta-element}\SG{Why not just meta-element?}). 
+In a profile, each \textit{Stereotype} needs to extend a UML concept (hereby referred to as \textit{meta-element}). 
 Thus, users need to define which \textit{meta-elements} their \textit{Stereotype}s extend. 
 This is achieved by importing the meta-elements and by adding appropriate extension links between their \textit{Stereotypes} and the \textit{meta-elements} by using the tool provided in the palette.
 The process of creating a UML profile can be repetitive and labour-intensive, depending on the size of the profile.
@@ -25,7 +25,7 @@ In this sense, the users are creating instances of the elements they define in t
 One of the limitations of UML Profiles in Papyrus is that links between stereotypes can be instantiated as edges in a diagram only if they extend a \textit{Connector} meta-element (e.g., UML::Association).  
 For example, if ``Stereotype A'' refers to ``Stereotype B'' via an ``A\_to\_B'' reference, then in order to be able to draw this connection as an edge on the diagram, ``A\_to\_B'' should be created as a separate \textit{Stereotype}. 
 These connector \textit{Stereotype}s do not hold any information about the \textit{Stereotype}s that they can connect, so users need to define such restrictions by manually writing OCL constraints to validate at least two things: 1) if the source and target nodes are of the correct type and 2) if the connector is in the correct direction (e.g. for ``A\_to\_B'', the edge should lead from \textit{Stereotype} A to \textit{Stereotype} B). 
-These constraints can be rather long and need to be manually written and customised for \textit{each} edge \textit{Stereotype}. This can also be a labour-intensive and error-prone process.\SG{Will it help if we show an example OCL constraint for the given case?}
+These constraints can be rather long and need to be manually written and customised for \textit{each} edge \textit{Stereotype}. This, as illustrated in Section~\ref{sec:constraints}, can also be a labour-intensive and error-prone process.
 
 \subsection{Distributable Custom Graphical Editor}
 With the UML profile created, users can apply it to UML diagrams. 
@@ -42,7 +42,8 @@ In addition, the users typically need to remember the meta-element that each \te
 
 % Although the aforementioned manual creation and use of the profile sometimes covers all the needs of the stakeholders and includes trade-offs they are willing to take, it is usually the case that stakeholders require the definition of custom shapes for the stereotypes and/or a custom palette of stereotypes. The later is important if one thinks that in smaller profiles, users actually need to navigate through tenths of elements available in the default palette, to pick the one that should be used and apply the stereotype. 
 To address this recurring concern, Papyrus offers at least three possible options for creating a custom palette which allows users to create UML elements and apply selected \textit{Stereotype}s on them in a single step. 
-\sg{In the first option, for a Papyrus editor, the users can customise the palette using the palette customisation facility provided by Papyrus, the users are able to create a palette with custom creation tools in it and select what \textit{Stereotype}s should be instantiated for the tools.}\SG{Needs rewording.} 
+Papyrus provides the facility to customise the palette for an open editor. 
+In the first option, the users can make use of the customisation facility to create their own palettes, and then specify what \textit{Stereotype}s should be instantiated for the creation tools in the palette.
 Although this is an easy-to-use approach, it must be done manually every time when a new diagram is created.
 In addition, it cannot be shared in case the profile needs to be distributed to collaborators. 
 %The first option involves customisation through a user interface where users add elements in the palette for their stereotypes. 
@@ -104,7 +105,7 @@ Developers typically need to create new Palette Configuration and Element Types 
 
 UML profile editors created using approaches in Figure~\ref{fig:neededPapyrusFiles} and Figure~\ref{fig:neededPapyrusFiles_new} both have custom palette, with which the users are able to create elements in their DSL (UML meta-elements with \textit{Stereotype}s defined in the UML profile applied automatically to them).
 Detailed discussions about the artefacts needed in order to create a UML profile editor are provided in Section~\ref{sec:implementation}.
-A few hundred lines of code need to be written while tedious Plug-in creation and repetitive model creation tasks should be done. \will{This is not necessarily the case, the claim is too strong} \thanos{This is supported by our evaluation on the archimate profile.}
+A few hundred lines of code need to be written while tedious Plug-in creation and repetitive model creation tasks should be done. \will{To reference to evaluation} 
 
 This \textit{labour-intensive}, \textit{repetitive} and \textit{error-prone} process could be automated. 
 In this paper, we present our tool - Jorvik, which uses a single-source input to automatically generate a UML profile and models/files mentioned above for a UML profile editor for Papyrus. 

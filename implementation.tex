@@ -110,7 +110,7 @@ Therefore, constraints are needed to check (at least) two aspects:
 
 \subsubsection{End Types}
 Listing \ref{lst:endTypes} shows the OCL code for the \emph{End Types} constraint. 
-Line 1 accesses the types \thanos{the "types" here is not clear. Is it UML:Class or Person/Tool. What about line 2?} that \emph{familiarWith} connects. 
+Line 1 accesses the types (instances of UML::Class that have \textit{Stereotype}s defined in the profile applied to them) that \emph{familiarWith} connects. 
 Lines 3 and 4 check if the types that \emph{familiarWith} connects are of type that either has \textit{Stereotype} \emph{Person} or \emph{Tool}. 
 In this way, if a \emph{familiarWith} association connects two types that are not \emph{Person} or \emph{Tool}, the constraint fails.
 
@@ -155,7 +155,7 @@ This transformation is responsible for creating an Element Types Configuration m
 %Since our previous work \cite{zolotas2018towards}, the \textit{ElementTypesConfiguration} metamodel for Papyrus has changed. 
 %As a result, we have to re-implement this transformation. 
 For each \textit{Stereotype}, two \textit{SpecializationTypeConfiguration}s are created, one links the \textit{Stereotype} to its UML meta-element, another links the \textit{Stereotype} to the concrete syntax of its UML meta-element.
-For example, a \textit{Stereotype} that extends UML::Class needs to specialise the UML::Class \textit{MetamodelTypeConfiguration}; and it needs to specialise the Class Shape \textit{SpecializationTypeConfiguration} defined in the UMLDI \thanos{What is this? A reference is needed otherwise we need to explain. Or just discard this detail.} Element Types Configuration model. 
+For example, a \textit{Stereotype} that extends UML::Class needs to specialise the UML::Class \textit{MetamodelTypeConfiguration} defined in the UML Element Types Configuration model; and it needs to specialise the Class Shape \textit{SpecializationTypeConfiguration} defined in the UML Diagram Element Types Configuration model\footnote{Both models reside in the Papyrus Plug-in \textit{org.eclipse.papyrus.uml.service.types}}. 
 In addition to \textit{SpecializationTypeConfiguration}s, for each \textit{Stereotype} an \textit{ApplyStereotypeAdviceConfiguration} needs to be created, which associates the \textit{SpecializationTypeConfiguration} to the actual \textit{Stereotype} in the UML profile.
 
 %The transformed Element Types Configuration model is a crucial part to Papyrus graphical editor creation, it is used in conjunction with other models/artefacts and it drives the creation of model elements in the editor.
@@ -271,7 +271,9 @@ After the ETL engine goes through all the elements in $ct$, the sub-collections 
 
 
 
-\subsection{Polishing Transformations (\#2b - \#5b)} \thanos{Any particular reason why the Architecture model doesn't support polishing transformations?}
+\subsection{Polishing Transformations (\#2b - \#5b)} 
+\thanos{Any particular reason why the Architecture model doesn't support polishing transformations?}
+\will{Architecture model is simple enough, therefore does not need one}
 \label{sec:transformationPatches}
 For transformations \#2- \#5, users are able to define polishing transformations that complement those included in our implementation. 
 After each built-in transformation is executed, the workflow looks to find a transformation with the same file name next to the Ecore metamodel. 
