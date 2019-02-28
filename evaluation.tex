@@ -12,18 +12,16 @@ This way, the approach is tested to check if it can successfully generate profil
 
 Last, we conducted an experiment in which we asked software engineers to build Papyrus editors for a set of metamodels, both using Jorvik and creating all the required models/artefacts manually.
 
-\subsection{The Archimate Profile}
+\subsection{Efficiency}
 \label{sec:efficiencyEvaluation}
 The Archimate for Papyrus tool offers five kinds of diagrams (i.e., Application, Business, Implementation and Migration, Motivation and Technology diagrams). 
 Each of the diagrams uses different stereotypes from the Archimate profile. 
-
-As shown in Figure~\ref{fig:approachOverview}, our approach starts by implementing the annotated Ecore metamodel for the profile/editor we would like to generate. 
-In this scenario we need to create the 5 Ecore metamodels and annotate the EClasses/EReferences that need to appear as nodes or edges in the diagrams. 
+In this scenario we need to create the 5 Ecore metamodels and annotate the elements that need to appear as nodes/edges in the diagrams. 
 The profiles for each type of Archimate diagram and the editors are then generated. 
 At this point, five fully functional editors are generated that can be used to create each of the five types of diagrams that the Archimate for Papyrus tool also supports. 
 
 However, our generated editors do not offer some special features that the Archimate for Papyrus tool offers. 
-For example, the latter offers a third drawer in the palette for some diagrams that is called ``Common'' and includes two tools (i.e., ``Grouping'' and ``Comment''). 
+For example, Archimate for Papyrus offers a third drawer in the palette for some diagrams that is called ``Common'' and includes two tools (i.e., ``Grouping'' and ``Comment''). 
 Another feature that is not supported by our default transformations is the fact that in Archimate for Papyrus, users are able to have the elements represented either by their shapes or by a coloured rectangle depending on the CSS class applied to them. 
 In order to be able to implement such missing features, we need to write the extra polishing transformations. 
 For brevity, we will not go into details on the content of the polishing transformations for this specific example. \will{need to review the numbers}
@@ -68,7 +66,7 @@ In addition, the line decoration shapes of stereotypes that extend the aggregati
 Our default and polishing transformations are not able to generate those features automatically; these should be implemented manually. 
 For that reason, we \textit{excluded} these lines of code needed by Archimate for Papyrus to implement these features from the data provided in Table~\ref{tab:evaluation} to have a fair comparison. 
 
-\subsection{Other Metamodels}
+\subsection{Completeness}
 \label{sec:completenessEvaluation}
 In addition to the generation of the Archimate profile/editors, we tested the  proposed approach with nine more Ecore metamodels from different domains. The names of the metamodels (including Archimate) and their size (in terms of types) are given in Table~\ref{tab:metamodels}. 
 Next to the size, in parenthesis, the number of types that should be transformed so they can be instantiated as nodes/edges is also provided.
@@ -77,7 +75,7 @@ Next to the size, in parenthesis, the number of types that should be transformed
 	\caption{The names and sizes of the ten metamodels against which the approach was evaluated to test completeness}
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{|c|M{2cm}|c|M{2cm}|}
+	\begin{tabular}{|c|M{3cm}|c|M{3cm}|}
 		\cline{1-4}
 		\textbf{Name}  & \textbf{\#Types (\#Nodes/\#Edges)} & \textbf{Name}  & \textbf{\#Types (\#Nodes/\#Edges)}\\ \hline
 		\textbf{Professor} & 5 (4/5)  & \textbf{Ant Scripts} & 11 (6/4) \\ \hline

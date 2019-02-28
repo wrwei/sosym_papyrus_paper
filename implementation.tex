@@ -60,7 +60,7 @@ The implementation of the rules in EVL can be found in the paper's webpage\footn
 \subsection{EMF to UML Profile Generation (\#2)}
 \label{sec:profileGeneration}
 The EMF to UML Profile Generation executes a model-to-model transformation written in ETL. 
-The source model of this transformation is the annotated Ecore \thanos{Sometimes we refer to this as ECore, sometimes as Ecore. Make sure we are consistent in the final version.} metamodel (e.g.,  Listing~\ref{lst:annotatedSdplEmfatic}) and the target model is a UML profile model.
+The source model of this transformation is the annotated Ecore metamodel (e.g.,  Listing~\ref{lst:annotatedSdplEmfatic}) and the target model is a UML profile model.
 This transformation consists of two main rules, one that creates a \textit{Stereotype} for each EClass element of the metamodel and a second that creates a \textit{Stereotype} for each EReference annotated as @Edge.
 
 \begin{itemize}
@@ -180,7 +180,7 @@ Each node on a diagram has a set of compartments where the attributes, the shape
 Initially, for all nodes that will appear on the diagram, we create a CSS rule to hide all their compartments and another rule to enable the compartment that holds the shape. 
 The latter rule also hides the default shape inherited from the meta-element that the stereotype extends. 
 Then, for each stereotype that appears as a node, a CSS rule is generated to place the SVG figure in the shape compartment. 
-For elements of type \textit{Stereotype}, the connection of the SVG figure to the stereotypes is achieved by assigning the path of the SVG file to the \textit{svgFile} property available in CSS. \thanos{I don't understand this sentence (``For elements ... CSS").}
+For elements of type \textit{Stereotype}, the assignment of the SVG shapes to the \textit{Stereotype}s is achieved by assigning the path of the SVG file to the \textit{svgFile} property available in CSS. 
 Finally, we generate the CSS rules for each edge, e.g., if a \emph{lineStyle} parameter is set, then the \textit{style} property for that stereotype is set to the value of the lineStyle parameter (e.g., ``solid'', ``dashed'', etc.).
 
 \subsection{Creation Command Generation (\#6)}
@@ -272,8 +272,6 @@ After the ETL engine goes through all the elements in $ct$, the sub-collections 
 
 
 \subsection{Polishing Transformations (\#2b - \#5b)} 
-\thanos{Any particular reason why the Architecture model doesn't support polishing transformations?}
-\will{Architecture model is simple enough, therefore does not need one}
 \label{sec:transformationPatches}
 For transformations \#2- \#5, users are able to define polishing transformations that complement those included in our implementation. 
 After each built-in transformation is executed, the workflow looks to find a transformation with the same file name next to the Ecore metamodel. 
