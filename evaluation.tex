@@ -2,61 +2,34 @@
 \label{sec:evaluation}
 
 In this section we evaluate Jorvik in three different ways. 
-Firstly, we apply it to generate a Papyrus editor for the non-trivial Archimate UML profile~\cite{iacob2009archimate,haren2012archimate}. 
-The Adocus Archimate for Papyrus\footnote{\url{https://github.com/Adocus/ArchiMate-for-Papyrus}} is an open-source tool that includes a profile for Archimate and the appropriate editors for Papyrus. 
-This way, we can compare the proportion of the tool that Jorvik is able to generate automatically, check the number of polishing transformations that the user needs to write to complete the missing parts and finally, identify the aspects of the editor that our approach is not able to generate.
+In the first evaluation, we apply Jorvik to generate a Papyrus editor for the non-trivial Archimate UML profile~\cite{iacob2009archimate,haren2012archimate}. 
+We use the Adocus Archimate for Papyrus\footnote{\url{https://github.com/Adocus/ArchiMate-for-Papyrus}} (an open-source tool that includes a profile for Archimate and the appropriate editors for Papyrus) for reference. 
+We compare the proportion of the tool that Jorvik is able to generate automatically, check the number of polishing transformations that the user needs to write to complete the missing parts and finally, identify the aspects of the editor that our approach is not able to generate.
 As a result we can to measure the \textit{efficiency} of Jorvik in generating profiles/editors against an existing relatively large profile/editor. 
 
-Secondly, we assess the completeness of our approach by applying it on a number of metamodels collected as part of the work presented in~\cite{williams2013metamodels}. 
-This way, the approach is tested to check if it can successfully generate profiles and editors for a wide variety of scenarios.
+In the second evaluation, we assess the completeness of Jorvik by applying it to a number of metamodels collected as part of the work presented in~\cite{williams2013metamodels}. 
+This way, Jorvik is tested to check if it can successfully generate profiles and editors for a wide variety of scenarios.
 
-Last, we conducted an experiment in which we asked software engineers to build Papyrus editors for a set of metamodels, both using Jorvik and creating all the required models/artefacts manually.
+In the third evaluation, we conduct a user experiment in which we asked software engineers to build Papyrus editors for a two metamodels. 
+We first ask the engineers to create the profiles and editors manually, and then ask them to create the same profiles and editors using Jorvick. 
+We measure the time and report problems encountered during the experiment and we compare the results.
 
 \subsection{Efficiency}
 \label{sec:efficiencyEvaluation}
 The Archimate for Papyrus tool offers five kinds of diagrams (i.e., Application, Business, Implementation and Migration, Motivation and Technology diagrams). 
 Each of the diagrams uses different stereotypes from the Archimate profile. 
-In this scenario we need to create the 5 Ecore metamodels and annotate the elements that need to appear as nodes/edges in the diagrams. 
-The profiles for each type of Archimate diagram and the editors are then generated. 
+In this scenario, we create five Ecore metamodels and annotate the elements that need to appear as nodes/edges in the diagrams. 
+We then generate the editors for each kind of the Archimate diagram.
 At this point, five fully functional editors are generated that can be used to create each of the five types of diagrams that the Archimate for Papyrus tool also supports. 
 
 However, our generated editors do not offer some special features that the Archimate for Papyrus tool offers. 
-For example, Archimate for Papyrus offers a third drawer in the palette for some diagrams that is called ``Common'' and includes two tools (i.e., ``Grouping'' and ``Comment''). 
+For example, Archimate for Papyrus offers a third drawer in the palette for some diagrams that is called ``Common'' and includes two tools (named ``Grouping'' and ``Comment''). 
 Another feature that is not supported by our default transformations is the fact that in Archimate for Papyrus, users are able to have the elements represented either by their shapes or by a coloured rectangle depending on the CSS class applied to them. 
+We also find out that Archimate for Papyrus also organises the creation of the \textit{Junction} (which is a node that acts as a junction for edges) node in the relations drawer in the palette. 
 In order to be able to implement such missing features, we need to write the extra polishing transformations. 
-For brevity, we will not go into details on the content of the polishing transformations for this specific example. 
+We do not go into details on the content of the polishing transformations for this specific example\footnote{The generated Plug-ins for Archimate and the polishing transformations are available from \url{https://github.com/wrwei/Jorvik}}.
 
-\captionsetup{justification=centering}
-\begin{landscape}
-	\topskip0pt
-%	\vspace*{\fill}
-\begin{table}[htb!]
-	\centering
-	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{M{1.5cm}|M{1.5cm}|M{2cm}|c|M{1.5cm}|M{2cm}|c|M{2cm}|}
-		\cline{2-8}
-		& \multicolumn{3}{c|}{\textbf{Jorvik (pre Papyrus 3.0)}} & \multicolumn{3}{c|}{\textbf{Jorvik (post Papyrus 3.0)}} & \textbf{Archimate for Papyrus (Pre Papyrus 3.0)}\\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{File}} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Total Hand-written}\\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{ECore}} & 436 & 0 & 436 & 436 & 0 & 436 & 0 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Profile}} & 0 & 0 & 0 & 0 & 0 & 0 & 1867 (1089) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Element Types Configuration}} & 0 & 11 & 11 & 0 & 0 & 0 & 237 (61) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Palette Configuration}} & 0 & 50 & 50 & 0 & 50 & 50 & 1305 (323) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{CSS}} & 0 & 195 & 195 & 0 & 195 & 195 & 537 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Creation Command}} & \cellcolor{Gray} & \cellcolor{Gray} & \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Architecture Model}} & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Types Configuration}} & 0 & 10 & 10 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 788 (327) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Diagram Configuration}} & 0 & 0 & 0 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 58 (28) \\ \hline
-		%\multicolumn{1}{|M{2cm}|}{\textbf{plugin.xml}} & 0 & & & 82 \\ \hline
-		%\multicolumn{1}{|M{2cm}|}{\textbf{MANIFEST.MF}} & 0 & & & \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Total}}  & \textbf{436} &\textbf{256} & \textbf{692} & \textbf{436} & \textbf{245} & \textbf{681} & \textbf{4792 (1828)} \\ \hline
-		\cline{1-8}
-	\end{tabular}
-	\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
-	\label{tab:evaluation}
-\end{table}
-\end{landscape}
-
-Table~\ref{tab:evaluation}, summarises the lines of code we have to write manually to generate each file needed by Papyrus to create the 5 basic diagrams (column ``Jorvik'' / ``Handwritten'') and the number of lines of the polishing transformations that were needed to produce the enhanced editor (column ``Jorvik'' / ``Handwritten (Polishing)''). 
+Table~\ref{tab:evaluation} summarises the lines of code we have to write manually to generate each file needed by Papyrus to create the 5 basic diagrams (column ``Jorvik'' / ``Handwritten'') and the number of lines of the polishing transformations that were needed to produce the enhanced editor (column ``Jorvik'' / ``Handwritten (Polishing)''). 
 The totals are given in column ``Jorvik'' / ``Total''. 
 For easier comparison, the total lines of code the authors of the Archimate for Papyrus had to write manually are provided in column ``Archimate for Papyrus'' / ``Total Handwritten''\footnote{The produced plugins generated with Jorvik for the Archimate profile can be downloaded from \url{https://github.com/wrwei/Jorvik}}.
 
@@ -73,12 +46,43 @@ In addition, the line decoration shapes of stereotypes that extend the aggregati
 Our default and polishing transformations are not able to generate those features automatically; these should be implemented manually. 
 For that reason, we \textit{excluded} these lines of code needed by Archimate for Papyrus to implement these features from the data provided in Table~\ref{tab:evaluation} to have a fair comparison. 
 
+\captionsetup{justification=centering}
+\begin{landscape}
+	\topskip0pt
+%	\vspace*{\fill}
+\begin{table}[htb!]
+	\centering
+	\setlength{\tabcolsep}{3.5pt} 
+	\begin{tabular}{M{1.5cm}|M{1.5cm}|M{2cm}|c|M{1.5cm}|M{2cm}|c|M{2cm}|}
+		\cline{2-8}
+		& \multicolumn{3}{c|}{\textbf{Jorvik (pre Papyrus 3.0)}} & \multicolumn{3}{c|}{\textbf{Jorvik (post Papyrus 3.0)}} & \textbf{Archimate for Papyrus (Pre Papyrus 3.0)}\\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{File}} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Total Hand-written}\\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{ECore}} & 436 (668) & 0 & 436 (668) & 436 (668) & 0 & 436 (668) & 0 \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Profile}} & 0 & 0 & 0 & 0 & 0 & 0 & 1867 (1089) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Element Types Configuration}} & 0 & 11 & 11 & 0 & 0 & 0 & 237 (61) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Palette Configuration}} & 0 & 50 & 50 & 0 & 50 & 50 & 1305 (323) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{CSS}} & 0 & 195 & 195 & 0 & 195 & 195 & 537 \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Creation Command}} & \cellcolor{Gray} & \cellcolor{Gray} & \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Architecture Model}} & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Types Configuration}} & 0 & 10 & 10 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 788 (327) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Diagram Configuration}} & 0 & 0 & 0 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 58 (28) \\ \hline
+		%\multicolumn{1}{|M{2cm}|}{\textbf{plugin.xml}} & 0 & & & 82 \\ \hline
+		%\multicolumn{1}{|M{2cm}|}{\textbf{MANIFEST.MF}} & 0 & & & \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Total}}  & \textbf{436} &\textbf{266} & \textbf{702} & \textbf{436} & \textbf{245} & \textbf{681} & \textbf{4792 (1828)} \\ \hline
+		\cline{1-8}
+	\end{tabular}
+	\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
+	\label{tab:evaluation}
+\end{table}
+\end{landscape}
+
+
 \subsection{Completeness}
 \label{sec:completenessEvaluation}
 In addition to the generation of the Archimate profile/editors, we tested the  proposed approach with nine more Ecore metamodels from different domains. The names of the metamodels (including Archimate) and their size (in terms of types) are given in Table~\ref{tab:metamodels}. 
 Next to the size, in parenthesis, the number of types that should be transformed so they can be instantiated as nodes/edges is also provided.
 
-\begin{table}[t]
+\begin{table}[htb!]
 	\caption{The names and sizes of the ten metamodels against which the approach was evaluated to test completeness}
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 

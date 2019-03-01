@@ -2,7 +2,7 @@
 *.bbl
 *.blg
 *.log
-paper.pdf
+
 *.synctex.gz
 
 \.DS_Store
