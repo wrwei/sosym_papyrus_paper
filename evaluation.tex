@@ -29,24 +29,25 @@ We also find out that Archimate for Papyrus also organises the creation of the \
 In order to be able to implement such missing features, we need to write the extra polishing transformations. 
 We do not go into details on the content of the polishing transformations for this specific example\footnote{The generated Plug-ins for Archimate and the polishing transformations are available from \url{https://github.com/wrwei/Jorvik}}.
 
-In our previous work \cite{zolotas2018towards}
+In our previous work \cite{zolotas2018towards}, we compared our approach with Archimate for Papyrus. 
+However, as we mentioned in Section~\ref{sec:background}, Papyrus changed its underlying metamodels and the mechanism for creating UML specific editors. 
+Thus, we generated all the Archimate editors using Jorvik, which are compatible to Papyrus 3.0+ (Archimate for Papyrus does not support Papyrus 3.0+). 
 
-Table~\ref{tab:evaluation} summarises the lines of code we have to write manually to generate each file needed by Papyrus to create the 5 basic diagrams (column ``Jorvik'' / ``Handwritten'') and the number of lines of the polishing transformations that were needed to produce the enhanced editor (column ``Jorvik'' / ``Handwritten (Polishing)''). 
-The totals are given in column ``Jorvik'' / ``Total''. 
-For easier comparison, the total lines of code the authors of the Archimate for Papyrus had to write manually are provided in column ``Archimate for Papyrus'' / ``Total Handwritten''\footnote{The produced plugins generated with Jorvik for the Archimate profile can be downloaded from \url{https://github.com/wrwei/Jorvik}}.
+Table~\ref{tab:evaluation} summarises the efficiency of Jorvik in terms of lines of code written, both for Jorvik pre-Papyrus 3.0 version and for Jorvik post-Papyrus 3.0 version\footnote{Cells in gray are artefacts not needed for implementation. E.g. Creation Command and Architecture Model are concepts in Papyrus version 3.0+, and therefore are not applicable to Jorvik pre-Papyrus 3.0 version and Arhicmate for Papyrus}.
+The numbers are shown in the format of \textit{Lines of Code (Number of Object)}, for we count both the lines of code and (equivalent) number of objects needed to be manually created.
 
-As one can see from the numbers, our approach requires about 90\% less handwritten code to produce the basic diagrams and about 85\% less code to 
+For Jorvick pre-Papyrus 3.0 (columns under \textit{Jorvick (pre-Papyrus 3.0)}), we need to manually create five annotated Ecore metamodels, which involves writing 436 lines of code (668 objects). 
+For polish transformations, we need to write 11 lines for Element Types Configuration, 50 lines for Palette Configuration, 195 lines for CSS and 10 lines for Types Configuration.
+
+For Jorvick post-Papyrus 3.0 (columns under \textit{Jorvick (post-Papyrus 3.0)}), we need the same Ecore metamodels, thus the numbers do not change. 
+For polish transformations, we need to write 50 lines for the Palette Configuration and 195 lines for CSS. 
+
+As it can be observed from the numbers, our approach requires about 90\% less handwritten code to produce the basic diagrams and about 85\% less code to 
 produce the polished editor that matches the original Archimate for Papyrus editor. 
-Our approach offers an editor that matches the original Archimate for Papyrus tool but also atop that the ETL transformation that allows the transformation of the created UML models back to EMF. 
-The generation of OCL constraints is also an extra feature that our approach offers. 
+Jorvik offers editors that match the original Archimate for Papyrus tool.
+In addition, Jorvik automatically produces an ETL model-to-model transformation, which supports the transformation from Archimate models in UML to their counter parts in EMF.
+Jorvik also generates a set of OCL constraints for all edges in Archimate, which is also an extra feature that Jorvik offers.
 In this scenario, however, the generation of constraints could not be assessed as the tool that we are comparing with (i.e., Archimate for Papyrus) allows any edge to connect any two types of nodes. We leave this evaluation as part of our future work.
-
-\subsubsection{Threats to Validity}
-There were a few minor features of the original Archimate for Papyrus tool that our approach could not support. 
-Most of them are related to custom menu entries and wizards. For those to be created developer needs to extend the ``plugin.xml'' file. 
-In addition, the line decoration shapes of stereotypes that extend the aggregation base element (i.e., diamond) can only be applied dynamically by running Java code that will update the property each time the stereotype is applied. 
-Our default and polishing transformations are not able to generate those features automatically; these should be implemented manually. 
-For that reason, we \textit{excluded} these lines of code needed by Archimate for Papyrus to implement these features from the data provided in Table~\ref{tab:evaluation} to have a fair comparison. 
 
 \captionsetup{justification=centering}
 \begin{landscape}
@@ -55,22 +56,22 @@ For that reason, we \textit{excluded} these lines of code needed by Archimate fo
 \begin{table}[htb!]
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{M{1.5cm}|M{1.5cm}|M{2cm}|c|M{1.5cm}|M{2cm}|c|M{2cm}|}
+	\begin{tabular}{M{1.5cm}|M{2cm}|M{2cm}|c|M{2cm}|M{2cm}|c|M{2cm}|}
 		\cline{2-8}
-		& \multicolumn{3}{c|}{\textbf{Jorvik (pre Papyrus 3.0)}} & \multicolumn{3}{c|}{\textbf{Jorvik (post Papyrus 3.0)}} & \textbf{Archimate for Papyrus (Pre Papyrus 3.0)}\\ \hline
+		& \multicolumn{3}{c|}{\textbf{Jorvik (pre-Papyrus 3.0)} LoC (Obj)} & \multicolumn{3}{c|}{\textbf{Jorvik (post-Papyrus 3.0)}  LoC (Obj)} & \textbf{Archimate for Papyrus (Pre Papyrus 3.0)}\\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{File}} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Total Hand-written}\\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{ECore}} & 436 (668) & 0 & 436 (668) & 436 (668) & 0 & 436 (668) & 0 \\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{Profile}} & 0 & 0 & 0 & 0 & 0 & 0 & 1867 (1089) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Element Types Configuration}} & 0 & 11 & 11 & 0 & 0 & 0 & 237 (61) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Palette Configuration}} & 0 & 50 & 50 & 0 & 50 & 50 & 1305 (323) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{CSS}} & 0 & 195 & 195 & 0 & 195 & 195 & 537 \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Element Types Configuration}} & 0 & 11 (0) & 11 (0) & 0 & 0 & 0 & 237 (61) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Palette Configuration}} & 0 & 50 (0)& 50 (0)& 0 & 50 (0) & 50 (0) & 1305 (323) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{CSS}} & 0 & 195 (0)& 195 (0)& 0 & 195 (0)& 195 (0)& 537 (0)\\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{Creation Command}} & \cellcolor{Gray} & \cellcolor{Gray} & \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{Architecture Model}} & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Types Configuration}} & 0 & 10 & 10 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 788 (327) \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Types Configuration}} & 0 & 10 (0)& 10 (0)& \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 788 (327) \\ \hline
 		\multicolumn{1}{|M{2cm}|}{\textbf{Diagram Configuration}} & 0 & 0 & 0 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 58 (28) \\ \hline
 		%\multicolumn{1}{|M{2cm}|}{\textbf{plugin.xml}} & 0 & & & 82 \\ \hline
 		%\multicolumn{1}{|M{2cm}|}{\textbf{MANIFEST.MF}} & 0 & & & \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Total}}  & \textbf{436} &\textbf{266} & \textbf{702} & \textbf{436} & \textbf{245} & \textbf{681} & \textbf{4792 (1828)} \\ \hline
+		\multicolumn{1}{|M{2cm}|}{\textbf{Total}}  & \textbf{436 (668)} &\textbf{266 (0)} & \textbf{702 (668)} & \textbf{436 (668)} & \textbf{245 (0)} & \textbf{681 (668)} & \textbf{4792 (1828)} \\ \hline
 		\cline{1-8}
 	\end{tabular}
 	\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
@@ -78,14 +79,20 @@ For that reason, we \textit{excluded} these lines of code needed by Archimate fo
 \end{table}
 \end{landscape}
 
+\subsubsection{Threats to Validity}
+There were a few minor features of the original Archimate for Papyrus tool that our approach could not support. 
+Most of them are related to custom menu entries and wizards. For those to be created developer needs to extend the ``plugin.xml'' file. 
+In addition, the line decoration shapes of stereotypes that extend the aggregation base element (i.e., diamond) can only be applied dynamically by running Java code that will update the property each time the stereotype is applied. 
+Our default and polishing transformations are not able to generate those features automatically; these should be implemented manually. 
+For that reason, we \textit{excluded} these lines of code needed by Archimate for Papyrus to implement these features from the data provided in Table~\ref{tab:evaluation} for a fair comparison. 
 
 \subsection{Completeness}
 \label{sec:completenessEvaluation}
-In addition to the generation of the Archimate profile/editors, we tested the  proposed approach with nine more Ecore metamodels from different domains. The names of the metamodels (including Archimate) and their size (in terms of types) are given in Table~\ref{tab:metamodels}. 
+In addition to the generation of the Archimate profile/editors, we tested the Jorvik with nine more Ecore metamodels from different domains. 
+The names of the metamodels (including Archimate) and their size (in terms of types) are given in Table~\ref{tab:metamodels}. 
 Next to the size, in parenthesis, the number of types that should be transformed so they can be instantiated as nodes/edges is also provided.
 
-\begin{table}[htb!]
-	\caption{The names and sizes of the ten metamodels against which the approach was evaluated to test completeness}
+\begin{table}
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
 	\begin{tabular}{|c|M{3cm}|c|M{3cm}|}
@@ -99,8 +106,7 @@ Next to the size, in parenthesis, the number of types that should be transformed
 		\cline{1-4}
 	\end{tabular}
 	\label{tab:metamodels}
-	
-	\vspace*{-3mm}
+	\caption{The names and sizes of the ten metamodels against which the approach was evaluated to test completeness}
 \end{table}
 
 As illustrated in Table~\ref{tab:metamodels}, the metamodels varied in size, from small profiles (having 5 stereotypes) to large profiles (up to 57 
@@ -110,74 +116,115 @@ desired artifacts for a wide spectrum of domains.
 The time needed for the generation varied from miliseconds up to a few seconds. 
 In the future, we plan to assess further the scalability of our approach using larger metamodels.
 
-\subsection{Experiment}
+\subsection{User Experiment}
 We have argued that using Jorvik provides significant gains in productivity when building custom editors for Papyrus.
-The experiment was designed to ascertain how significant the gains can be. The time taken to build a custom editor was recorded for both the Jorvik and the non-automated approach by novice and intermediate UML and Profiles users. The results suggest that regardless of the user expertise, the gains in productivity can be as high as 10 fold.
+We design a user experiment to substantiate such claim, and ascertain how significant the productivity gain can be.
+As discussed in Section~\ref{sec:implementation}, there are 7 major steps to be taken in order to create a UML profile as well as its supporting editor. 
+In this experiment, we have two processes: the manual process and the automatic process.
+For the manual process we design 7 (+1) tasks (each with its own deadline) for the participants to complete towards manually creating a working UML profile-specifc editor.
+For the automatic process we design 1 task for the participants to complete to automatically generate a working UML profile-specific editor using Jorvik.
+We ask two participants to take part in the experiment, an work on two metamodels we choose. 
+We record the time taken for the participants to complete the experiment and we compare efficiency of the manual process with the automatic process.
 
-\subsubsection{Method}
-\todo{Are we using Sina as participant or not?}
-Three participants completed all conditions of this study: two where novice and one intermediate users.
-Participants are all computer science graduates with Masters Degree in CS too.
-All participants were naive to the purpose of the experiment.
+\subsubsection{Experiment Set-Up}
+For the purpose of this experiment, we have chosen a participant with relatively more experience in modelling, and a candidate with less experience in modelling. 
+For the experiment, both participants have an Eclipse IDE installed on their computers, with Eclipse Epsilon 1.6 Interim version\footnote{\url{https://www.eclipse.org/epsilon/}} and Eclipse Papyrus 4.0.0\footnote{\url{https://www.eclipse.org/papyrus/download.html}} installed.
+For the purpose of this experiment, we ask the participants to work on two profiles, the Website profile\footnote{\url{https://github.com/wrwei/Jorvik/tree/master/org.papyrus.website}} and the Fault Tree profile\footnote{\url{https://github.com/wrwei/Jorvik/tree/master/org.papyrus.faulttree}}.
+We also provide the SVG shapes and icons for these two profiles for the participants to use.
 
-\subsection{Materials}
-All participants used a computer with the Eclipse IDE available with the Papyrus and Jorvik plugins installed.
-The computer has internet access.
-Two questionnaires where used. One, before the experiment, so participants could self asses their expertise in UML, UML profiles and Papyrus.
-The second one, after the experiment, to record how participants perceived the difficulty of completing each of the tasks.
-The second questionnaire uses a 10-point Likert response scale to measure their confidence for completing each of the tasks.
-Questionnairs are available in Appendix\,\ref{app:quest}
-
-\subsection{Procedure}
-Participants run the experiments individually.
-We identified eight main tasks required to build a custom editor for a Papyrus profile in the non-automated approach.
-For the Jorvik approach two main tasks are required.
-Each task was given a total allotted time for completion. Further, this time was divided into two sections: basic and essential.
-In the basic section participants are expected to complete the task only using their knowledge and any information available on-line or elsewhere.
-In the essential section, essential information\footnote{The essential information is provided as a set of step-by-step instructions.} on how to complete the task is given to the participants.
-
-Participants are asked to complete each of the tasks individually and the total time to complete the task is recorded.
-When a participant expresses that he/she has completed the task the timer is paused and an assessment of their progress is made.
-If the assets they have developed will not be sufficient to have a functional editor they are asked to continue working and the timer is resumed.
-After the basic time is up, if the participant has not completed the task, the timer is paused and the essential information (in the form of instructions written in paper\todo{paper or digital?})
-is provided.
-The timer is resumed and participants are allowed to continue working.
-
-Since each task depends on the previous being completed, at the beginning of each task, the participants are given a partial solution that contains complete and correct assets for all the previous tasks.
-The experiment was carried out in a single day in two sessions.
-Tasks 1-4 are scheduled in the morning and tasks 4-8 in the afternoon with a 1 hour break for lunch.
-
-\begin{table}
-    \caption{Tasks and times for the non-automated approach}
-    \centering
-    \setlength{\tabcolsep}{3.5pt} 
-    \begin{tabular}{|c|c|c|c|}
-        Task & Total Time (m) & Basic Time (m) & Essential Time (m) \\ 
-        UML Profile & 60 & 40 & 20 \\
-        Element Types Configuration model & 60 & 40 & 20 \\
-        Palette Configuration model & 60 & 40 & 20 \\
-        Cascading Style Sheet & 30 & 20 & 10 \\
-    \end{tabular}
+\begin{table}[ht!]
+	\centering
+	\setlength{\tabcolsep}{3.5pt} 
+	\begin{tabular}{|c|c|c|c|}
+		Task & Total (m) & Default (m) & Essential (m) \\ 
+		1. UML Profile & 60 & 40 & 20 \\
+		2. Element Types Configuration Model & 60 & 40 & 20 \\
+		3. Palette Configuration Model & 30 & 20 & 10 \\
+		4. Cascading Style Sheet & 30 & 20 & 10 \\
+		5. Creation Command & 30 & 20 & 10 \\
+		6. Architecture Model & 40 & 30 & 10 \\
+		7. Plug-in Configuration & 20 & 12 & 8 \\
+		8. OCL Constraints & 60 & 40 & 20 \\
+	\end{tabular}
+	\label{tab:manual}
+	\caption{Tasks and times for the manual process.}
 \end{table}
 
-\begin{table}
-    \caption{Tasks and times for the Jorvik approach}
-    \centering
-    \setlength{\tabcolsep}{3.5pt} 
-    \begin{tabular}{|c|c|c|c|}
-        Task & Total Time (m) & Basic Time (m) & Essential Time (m) \\ 
-        Profile Metamodel & 60 & 40 & 20 \\
-        Run Jorvik & 60 & 40 & 20 \\
-    \end{tabular}
+Before the experiment is conducted, a pre-experiment questionnaire is handed to the participants, so that they can assess their expertise in UML, UML profiles and Papyrus.
+The experiment begins with the manual process.
+In this process, we devise 7(+1) steps for the participants to take.
+For each step, there is a set deadline, the participants are asked to try to complete the step within the deadline.
+In each step, the participants are asked to complete a minimal task first (e.g. for UML profile, create a \textit{Stereotype} for Node and a \textit{Stereotype} for Edge)\footnote{Detailed descriptions of the steps can be found at\url{https://github.com/wrwei/Jorvik/tree/master/User\%20Experiment}}, and to continue if there is still time left, or give us an estimate of how long it will take to finish the whole step if the deadline is missed.
+At the beginning of each step, we provide a piece of \textit{default} knowledge, which covers ground knowledge for the step to be completed.
+The participants are also free to search for any information over the Internet which may assist them in their tasks.
+At a certain point for each step, we assess if the participants are able to complete the step within the time frame, and we provide a piece of \textit{essential} knowledge, which contains key information (that is not accessible from the Internet) for the participants to complete the step.
+The participants start with the Website profile, and then the Fault Tree profile.
+
+The overview of the tasks is provided in Table~\ref{tab:manual}, the detailed task descriptions are as follows:
+\begin{enumerate}
+	\item UML Profile - An image of a UML profile is provided to the participants, they are required to create the profile within 60 minutes.
+	The \textit{Default} information is provided at the beginning. 
+	40 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
+	\item Element Types Configuration Model - The participants are asked to create an Element Types Configuration model for the editor within 60 minutes. 
+	The \textit{Default} information is provided at the beginning. 
+	40 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
+	\item Palette Configuration Model - The participants are asked to create a Palette Configuration model for the editor within 30 minutes.
+	The \textit{Default} information is provided at the beginning. 
+	20 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
+	\item Custom Style - The participants are asked to create a CSS file to customise the styles of the editor within 30 minutes.
+	The \textit{Default} information is provided at the beginning. 
+	20 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
+	\item Creation Command - The participants are asked to create a Java class to initialise the Papyrus diagram within 30 minutes.
+	The \textit{Default} information is provided at the beginning. 
+	20 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
+	\item Architecture Model - The participants are asked to create an Architecture model for the editor within 40 minutes.
+	The \textit{Default} information is provided at the beginning. 
+	30 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
+	\item Plug-in Configuration - The participants are asked to configure their Plug-ins in order to make use of all the models/artefacts to form a working editor, within 20 minutes.
+	The \textit{Default} information is provided at the beginning. 
+	12 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
+	\item OCL constraints (optional) - In this optional task, the participants are asked to create OCL constraints mentioned in Section~\ref{sec:constraints} for all connector \textit{Stereotype}s, within 60 minutes. 
+	We do not expect this task to be taken by participants, as it typically required experienced OCL experts 2 weeks to complete the constraint templates described in Section~\ref{sec:constraints}.
+	For the record, no participants agreed to take this optional task.
+\end{enumerate}
+
+For each step, when participants express that they have completed the step, we stop the timer and assess the solutions. 
+If the solutions are not correct, we tell the participants that they need more work and resume the timer.
+Since each step depends on the previous being completed, at the beginning of each step, the participants are given a partial solution that contains complete and correct assets for all the previous tasks.
+
+
+After the participants complete the manual process, a post-experiment questionnaire is handed to the participants, in which they evaluate the difficulties of each task and if enough time is provided for each task.
+The participants repeat the manual process for both profiles.
+
+\begin{table}[ht!]
+	\centering
+	\setlength{\tabcolsep}{3.5pt} 
+	\begin{tabular}{|c|c|c|c|}
+		Task & Total (m) & Default (m) & Essential (m) \\ 
+		1. Ecore Metamodel + Generation & 50 & 30 & 20 \\
+	\end{tabular}
+	\label{tab:automatic}
+	\caption{Tasks and times for the automatic process.}
 \end{table}
+
+
+The experiment then proceeds to the automatic process (overview in Table~\ref{tab:automatic}), where they need to complete one task:
+\begin{enumerate}
+	\item Annotated Ecore Metamodel and Generation - The participants are provided with the same image of the profiles, they are asked to create an annotated Ecore metamodel for the profile, and generate the UML profile and the editor, within 50 minutes.
+	The \textit{Default} information is provided at the beginning. 
+	30 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
+\end{enumerate}
+
+We record the time taken for the participants to complete the manual process and the automatic process, and discuss the time efficiency provided by Jorvik.
+
 
 \input{resultsTable.tex}
 
-Total allotted time for completion is based on timing the tasks while done by an expert on Papyrus and creating custom editors for profiles.
-The time given to the participants was double the time taken by the expert.
-The reason for this choice was to allow non-experts enough time and also limit the total duration of the experiment to prevent participant exhaustion.
-The basic/essential times ratio was picked to be 2:1 arbitrarily, but with the aim to give participants the opportunity to complete the task once the essential information was provided.
-This is assuming the participants did some progress during the basic window and only needed the essential information to finalize key details.
+%Total allotted time for completion is based on timing the tasks while done by an expert on Papyrus and creating custom editors for profiles.
+%The time given to the participants was double the time taken by the expert.
+%The reason for this choice was to allow non-experts enough time and also limit the total duration of the experiment to prevent participant exhaustion.
+%The basic/essential times ratio was picked to be 2:1 arbitrarily, but with the aim to give participants the opportunity to complete the task once the essential information was provided.
+%This is assuming the participants did some progress during the basic window and only needed the essential information to finalize key details.
 
 \subsubsection{Results}
 
