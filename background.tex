@@ -95,16 +95,14 @@ To create a working UML profile editor in Papyrus, the users typically need to c
 Figure~\ref{fig:neededPapyrusFiles_new} shows all the artefacts needed to be created for having a distributable Papyrus UML profile editor for Papyrus 3.0+\footnote{Metamodels for Element Types Configuration, Palette Configuration have been changed since our previous work (rendered in blue). 
 The Architecture model and the Java Creation Command class are new concepts introduced in Papyrus 3.0 since our previous work (rendered in green).}.
 
-Through our experiment (see Section~\ref{sec:evaluation}), we found out that it is almost impossible to create these models without any working examples. \will{mention this in the evaluation}
+Through our experiment (see Section~\ref{sec:evaluation}), we found out that it is almost impossible to create these models without any working examples.
 The documentation of Papyrus provide limited useful insight in this matter.
 In addition, it is also a labour-intensive and error-prone process to migrate editors created based on Papyrus 2.0 to Papyrus 3.0+. 
 Developers typically need to create new Palette Configuration and Element Types Configuration models, as well as the new concepts such as the Architecture model.
 
-
-
-UML profile editors created using approaches in Figure~\ref{fig:neededPapyrusFiles} and Figure~\ref{fig:neededPapyrusFiles_new} both have custom palette, with which the users are able to create elements in their DSL (UML meta-elements with \textit{Stereotype}s defined in the UML profile applied automatically to them).
 Detailed discussions about the artefacts needed in order to create a UML profile editor are provided in Section~\ref{sec:implementation}.
-A few hundred lines of code need to be written while tedious Plug-in creation and repetitive model creation tasks should be done. \will{To reference to evaluation} 
+A few hundred lines of code need to be written while tedious Plug-in creation and repetitive model creation tasks should be done. 
+This is typically backed by our studies in the evaluation, which is discussed in Section~\ref{sec:evaluation}.
 
 This \textit{labour-intensive}, \textit{repetitive} and \textit{error-prone} process could be automated. 
 In this paper, we present our tool - Jorvik, which uses a single-source input to automatically generate a UML profile and models/files mentioned above for a UML profile editor for Papyrus. 
