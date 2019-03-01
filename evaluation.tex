@@ -146,15 +146,15 @@ We also provide the SVG shapes and icons for these two profiles for the particip
 		7. Plug-in Configuration & 20 & 12 & 8 \\
 		8. OCL Constraints & 60 & 40 & 20 \\
 	\end{tabular}
-	\label{tab:manual}
 	\caption{Tasks and times for the manual process.}
+	\label{tab:manual}
 \end{table}
 
 Before the experiment is conducted, a pre-experiment questionnaire is handed to the participants, so that they can assess their expertise in UML, UML profiles and Papyrus.
 The experiment begins with the manual process.
 In this process, we devise 7(+1) steps for the participants to take.
 For each step, there is a set deadline, the participants are asked to try to complete the step within the deadline.
-In each step, the participants are asked to complete a minimal task first (e.g. for UML profile, create a \textit{Stereotype} for Node and a \textit{Stereotype} for Edge)\footnote{Detailed descriptions of the steps can be found at\url{https://github.com/wrwei/Jorvik/tree/master/User\%20Experiment}}, and to continue if there is still time left, or give us an estimate of how long it will take to finish the whole step if the deadline is missed.
+In each step, the participants are asked to complete a minimal task first (e.g. for UML profile, create a \textit{Stereotype} for Node and a \textit{Stereotype} for Edge)\footnote{Detailed descriptions of the steps can be found at \url{https://github.com/wrwei/Jorvik/tree/master/User\%20Experiment}}, and to continue if there is still time left, or give us an estimate of how long it will take to finish the whole step if the deadline is missed.
 At the beginning of each step, we provide a piece of \textit{default} knowledge, which covers ground knowledge for the step to be completed.
 The participants are also free to search for any information over the Internet which may assist them in their tasks.
 At a certain point for each step, we assess if the participants are able to complete the step within the time frame, and we provide a piece of \textit{essential} knowledge, which contains key information (that is not accessible from the Internet) for the participants to complete the step.
@@ -192,7 +192,6 @@ For each step, when participants express that they have completed the step, we s
 If the solutions are not correct, we tell the participants that they need more work and resume the timer.
 Since each step depends on the previous being completed, at the beginning of each step, the participants are given a partial solution that contains complete and correct assets for all the previous tasks.
 
-
 After the participants complete the manual process, a post-experiment questionnaire is handed to the participants, in which they evaluate the difficulties of each task and if enough time is provided for each task.
 The participants repeat the manual process for both profiles.
 
@@ -214,23 +213,79 @@ The experiment then proceeds to the automatic process (overview in Table~\ref{ta
 	The \textit{Default} information is provided at the beginning. 
 	30 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
 \end{enumerate}
-
-We record the time taken for the participants to complete the manual process and the automatic process, and discuss the time efficiency provided by Jorvik.
-
+We record the time taken for the participants to complete the manual process and the automatic process.
 
 \input{resultsTable.tex}
 
-%Total allotted time for completion is based on timing the tasks while done by an expert on Papyrus and creating custom editors for profiles.
-%The time given to the participants was double the time taken by the expert.
-%The reason for this choice was to allow non-experts enough time and also limit the total duration of the experiment to prevent participant exhaustion.
-%The basic/essential times ratio was picked to be 2:1 arbitrarily, but with the aim to give participants the opportunity to complete the task once the essential information was provided.
-%This is assuming the participants did some progress during the basic window and only needed the essential information to finalize key details.
-
 \subsubsection{Results}
+Table~\ref{tab:experiment} shows the times obtained from the user experiment.
+For the experiment, participant \#1 is a female PhD student who has a high level of expertise in modelling, and has used Papyrus before.
+Participant \#2 is a male PhD student who has an intermediate level of expertise in modelling, and has used Papyrus on a limited number of occasions.
+
+Below is the summary for Participant \#1 for the manual process for the Website profile:
+\begin{enumerate}
+	\item She was able to finish the UML profile creation in 25 minutes without the essential information. 
+	\item She finished the Element Types Configuration in 56 minutes with the help of the essential information. \textcircled{1} she claimed that she found a solution online.\footnote{Which is the forum thread where the authors obtained the correct way of creatin Element Types Configurations: \url{https://www.eclipse.org/forums/index.php/t/1096471/}}.
+	\item She could not figure out how to complete the Palette Configuration model, we provided her with the essential information, which helped her finish the model in 26 minutes (for the minimal task). \textcircled{3}She claims that she would need 20 more minutes to finish the model.
+	\item She finished a partial solution for the CSS in 15 minutes.
+	\item She could not figure out how to create a creation command, therefore essential information is provided, and she finished the step in 25 minutes in total (\textcircled{5}She copied the solution).
+	\item She could not figure out how to create an Architecture model, even with the essential information provided she still missed the deadline.
+	\item She was not able to configure the editor Plug-in to successfully run the editor, even with the essential information. \textcircled{8}She claims that she would need 30+ minutes to finish the configuration.
+\end{enumerate}
+In total Participant \#1 spent 208 minutes 30 seconds on the manual process for the Website profile.
+
+Below is the summary for Participant \#2 for the manual process for the Fault Tree Profile:
+
+\begin{enumerate}
+	\item She was able to finish the UML profile creation in 15 minutes without the essential information. 
+	\item She finished the Element Types Configuration in 38 minutes without the help of the essential information.
+	\item She finished the Palette configuration model in 25 minutes without the help of the essential information.
+	\item She finished a complete solution for the CSS in 16 minutes.
+	\item She finished the creation command java class in 16 minutes.
+	\item She finished the architecture model in 25 minutes.
+	\item She was able to configure the editor Plug-in to successfully run the editor in 10 minutes.
+\end{enumerate}
+In total Participant \#2 spent 140 minutes on the manual process for the Fault Tree profile.
+
+Below is the summary for Participant \#2 for the manual process for the Website profile:
+\begin{enumerate}
+	\item He was able to finish the UML profile creation in 40 minutes without the essential information. 
+	\item He could not finish the Element Types Configuration model, even with the help of the essential knowledge. 
+	\item He could not figure out how to complete the Palette Configuration model, even with the essential knowledge. 
+	\item He finished a partial solution for the CSS in 30 minutes.
+	\item He could not figure out how to create a creation command, therefore essential information is provided, and he finished the step in 30 minutes in total.
+	\item He could not figure out how to create an Architecture model, even with the essential information provided he still missed the deadline. \textcircled{6}He would need 60+ minutes to finish the model.
+	\item He was able to configure the editor Plug-in to successfully run the editor in 19 minutes.
+\end{enumerate}
+In total Participant \#1 spent 249 minutes seconds on the manual process for the Website profile.
+
+Below is the summary for Participant \#2 for the manual process for the Fault Tree Profile:
+
+\begin{enumerate}
+	\item He was able to finish the UML profile creation in 24 minutes without the essential information. 
+	\item He finished the minimal task for the Element Types Configuration in 58 minutes with the help of the essential information. \textcircled{2}He would need 40+ minutes to complete the whole model.
+	\item He finished the Palette configuration model in 22 minutes with the help of essential however the solution was not correct (\textcircled{4}).
+	\item He finished a complete solution for the CSS in 19 minutes.
+	\item He finished the creation command java class in 25 minutes.
+	\item \textcircled{7}He finished the architecture model in 32 minutes with the help of the essential knowledge. However, the solution was incorrect.
+	\item She was able to configure the editor Plug-in to successfully run the editor in 10 minutes.
+\end{enumerate}
+In total Participant \#2 spent 206 minutes on the manual process for the Fault Tree profile.
 
 
+For the automatic process, participant \#1 was able to finish the Website Ecore metamodel in 32 minutes.
+She was able to finish the Fault Tree Ecore metamodel in 15 minutes.
+Participant \#2 was able to finish the Website Ecore metamodel in 37 minutes.
+He was able to finish the Fault Tree Ecore metamodel in 38 minutes.
 
-\subsubsection{Discussion}
-Weaknesses/Threats!
+\subsubsection{Analysis}
+Comparing the manual process with the automatic process, we can conclude that using Jorvik is able to increase the productivity by at least 10 times. 
+We draw this conclusion based on the data presented in Table~\ref{tab:experiment} (especially when participants claim that they would need additional time to finish the complete solution for some steps), and also based on the fact that both participants chose not to complete the optional Step 8 (the OCL constraints), which may take significant time, even for experience OCL programmers.
 
-%The implementation of our approach was driven initially by examining the Archimate for Papyrus tool. Although we believe that Archimate for Papyrus offers a complete UML profile solution, there might be other editors that offer other functionality which our approach cannot offer. As a result, the efficiency gain reported might not be that substantial when comparing with other editors. \dk{This can be a showstopper as we're evaluating against the main example we used to develop the tool. I don't think there's a reason to alarm the reviewers.}
+We are also able to draw the conclusion that it is rather difficult to derive the models/artefacts needed for a working UML profile-specific editor. 
+This is based on the experiment results that both participants got the majority of their models/artefacts wrong for the Website profile, which was the first profile + editor they worked on.
+Although we provided the \textit{Essential} information, which is not publicly available on the Internet, the participants still could not get the models/artefacts right because of the inter-related nature of the models.
+This is the direct evidence that creating a UML profile-specific editor in Papyrus is a labour-intensive and error-prone process.
+
+\subsubsection{Threats to Validty}
+
