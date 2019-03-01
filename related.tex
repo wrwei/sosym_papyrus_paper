@@ -1,7 +1,7 @@
 \section{Related Work} 
 \label{sec:related}
 
-\subsection{UML Profiles.}
+\subsection{UML Profiles}
 Building on the powerful concepts and semantics of UML, and its wide adoption in modelling artefacts of object oriented software and systems, UML profiles enable the development of DSLs by extending (and constraining) elements from the UML metamodel~\cite{FuentesFernandez2004:UMLME}. 
 More specifically, UML profiles make use of extension mechanisms (e.g., stereotypes, tagged definitions and constraints) through which engineers can 
 specialise generic UML elements and define DSLs that conform to the concepts and nature of specific application domains~\cite{Selic2007:ISORC}. 
@@ -25,12 +25,12 @@ following ad-hoc processes or based on guidelines for designing well-structured
 UML profiles~\cite{FuentesFernandez2004:UMLME,Selic2007:ISORC},
 they required substantial designer effort. Also, the learning 
 curve for new designers interested in exploring whether UML profiles suit their 
-business needs is steep.
-In contrast, Jorvik automates the process of generating UML profiles using a single annotated ECore metamodel and reduces significantly the developer's effort for specifying, designing and validating UML Papyrus profiles (cf. Section~\ref{sec:evaluation}).
+business needs is steep.\thanos{Simos: maybe a reference is needed here.}
+In contrast, Jorvik automates the process of generating UML profiles using a single annotated ECore\thanos{Will: make sure that we use a consistent word for Ecore. Somewhere we use Ecore somewhere ECore} metamodel and reduces significantly the developer's effort for specifying, designing and validating UML Papyrus profiles (cf. Section~\ref{sec:evaluation}).
 
 %A manual definition of a UML profile typically is a tedious, time-consuming 
 %and error-prone process
-\subsection{Automatic Generation of UML Profiles.}
+\subsection{Automatic Generation of UML Profiles}
 Relevant to Jorvik is research introducing methodologies for the automatic 
 generation of UML profiles from an Ecore-based metamodel~\cite{Kraas17}. 
 The work in~\cite{Lagarde2008:FASE} proposes a partially automated approach for 
@@ -38,7 +38,7 @@ generating UML profiles using a set of specific design patterns. However, this
 approach requires the manual definition of an initial UML profile skeleton, 
 which is typically a tedious and error-prone task~\cite{Wimmer2009:IJWIS}. 
 The methodology introduced in~\cite{Giachetti2008:ER,Giachetti2009:CAISE} 
-facilitates the derivation of a UML profile using a simpler as input. 
+facilitates the derivation of a UML profile using a simpler as input.\thanos{Simos: do you mean "a simpler input" or you forgot the word after simpler that denotes the file type?}
 The methodology requires the manual definition of an intermediate metamodel 
 that captures the abstract syntax to be integrated into a UML profile, and 
 automates the comparison of this intermediate metamodel against the UML 
@@ -47,7 +47,7 @@ as the transformation of the intermediate metamodel into a corresponding
 functioning UML profile. 
 Similarly,~\cite{Kraas17} introduces an approach for the automatic derivation of a UML profile and a corresponding set of OCL expressions
 for stereotype attributes using annotated MOF-based metamodels.
-Another interesting research work is JUMP~\cite{Bergmayr2014:MODELS} that support the automatic generate profiles from annotated Java libraries~\cite{Bergmayr2014:MODELS}.
+Another relevant research work is JUMP~\cite{Bergmayr2014:MODELS} that support the automatic generate profiles from annotated Java libraries~\cite{Bergmayr2014:MODELS}.
 Despite the potential of these approaches, they usually involve
 non-trivial human-driven tasks, e.g., a UML profile 
 skeleton~\cite{Lagarde2008:FASE} or an intermediate 
@@ -57,7 +57,7 @@ Section~\ref{sec:transformationPatches}).
 %supports the customisation of UML profiles including the generation of OCL constraints, as well as the generation of the corresponding Papyrus plugin, through the definition of optional polishing transformations (cf. Section~\ref{sec:transformationPatches}).
 
 
-\subsection{From Ecore to UML profiles and back.}
+\subsection{From Ecore to UML profiles and back}
 Jorvik also subsumes research that focuses on bridging the gap between 
 MOF-based metamodels (e.g., Ecore) and UML profiles.
 % and illustrating how derived models can be used interchangeably. 
