@@ -2,9 +2,9 @@
 \label{sec:implementation}
 In this section, we discuss the technical implementation of Jorvik which underpins the process of our approach discussed in the previous section. 
 
-Figure~\ref{fig:transformationWorkflow} shows the transformations workflow. 
-Each transformation is identified by a number (\#2 -- \#9 in Figure~\ref{fig:transformationWorkflow}) for easier reference. \thanos{\#8 is not a transformation}
-In addition to the transformations, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is executed to verify the correctness of the annotations and provide useful feedback to the users if there is anything wrong. 
+Figure~\ref{fig:transformationWorkflow} shows workflow of Jorvik. 
+Each step in the workflow is identified by a number (\#2 -- \#9 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
+In addition to the main steps, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is executed to verify the correctness of the annotations and provide useful feedback to the users if there is anything wrong. 
 Moreover, supporting files needed for the creation of the Papyrus plugin are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
 As the transformations consist of about 1000 lines of code we will describe them omitting low level technical details\footnote{Full implementations and instructions are available at \url{https://github.com/wrwei/Jorvik}}. 
 
@@ -15,7 +15,6 @@ As the transformations consist of about 1000 lines of code we will describe them
 	\label{fig:transformationWorkflow}
 %	\vspace*{-3mm}
 \end{figure}
-\thanos{typo in Fig. 4 step 9: Gneration}
 
 \subsection{Pre-transformation Validation (\#1)}
 To check the correctness of the annotated Ecore metamodel, a model validation program is firstly executed against the metamodel.
@@ -182,7 +181,7 @@ Initially, for all nodes that will appear on the diagram, we create a CSS rule t
 The latter rule also hides the default shape inherited from the meta-element that the stereotype extends. 
 Then, for each stereotype that appears as a node, a CSS rule is generated to place the SVG figure in the shape compartment. 
 For elements of type \textit{Stereotype}, the assignment of the SVG shapes to the stereotypes is achieved by assigning the path of the SVG file to the \textit{svgFile} property available in CSS. 
-Finally, we generate the CSS rules for each edge, e.g., if a \emph{lineStyle} parameter is set, then the \textit{style}\thanos{is this style and not lineStyle?} property for that stereotype is set to the value of the lineStyle parameter (e.g., ``solid'', ``dashed'', etc.).
+Finally, we generate the CSS rules for each edge, e.g., if a \emph{lineStyle} parameter is set, then the \textit{lineStyle} property for that stereotype is set to the value of the lineStyle parameter (e.g., ``solid'', ``dashed'', etc.).
 
 \subsection{Creation Command Generation (\#6)}
 \label{sec:creationCommand}
