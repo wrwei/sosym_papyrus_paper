@@ -118,7 +118,7 @@ In the future, we plan to assess further the scalability of our approach using l
 We have argued that Jorvik provides significant gains in productivity when building custom UML Profile editors for Papyrus.
 We design a user experiment to substantiate such claim, and ascertain how significant the productivity gain can be.
 As discussed in Section~\ref{sec:implementation}, there are eight major steps to be taken in order to create a UML profile as well as its supporting editor. 
-In this experiment, we compare the time needed to develop an editor using the Papyrus infrastructure (referred to as \textit{Papyrus approach from now on}) with the time need to develop the same editor using Jorvik.
+In this experiment, we compare the time needed to develop an editor using Papyrus infrastructure (hereby referred to as \textit{Papyrus approach}) with the time needed to develop the same editor using Jorvik.
 For the Papyrus approach we design eight tasks, each with its own deadline (see Table~\ref{tab:manual}) for the participants to complete towards manually creating a UML profile and a working UML editor for the profile.
 For Jorvik, we designed one task for the participants to complete to automatically generate a UML profile and a working UML editor for that profile.
 We ask two participants to take part in the experiment and work on two profiles we choose. 
@@ -133,16 +133,17 @@ Before the experiment is conducted, a pre-experiment questionnaire is handed to 
 In addition, a 20-30 minutes introduction to UML profiles and Papyrus is given to them while an example of a custom UML profile Papyrus editor is being presented to them. 
 
 For each of the eight steps, there is a set deadline; the participants are asked to try to complete the step within the deadline.
-The tasks and the deadlines are derived from our own experience in developing a working UML profile specific Papyrus editor. 
+The tasks and the deadlines are derived from our own experience in developing a working, distributable UML profile and its Papyrus editor. 
 Initially we spent 3 months on creating an example editor, due to the lack of documentation, and the lack of tool support when referencing model elements among the models required for the editor.
 After we found out how to create an editor, we recorded the amount of time required for us to perform the eight steps to derive the deadlines. 
 We then normalise the deadlines through a pilot study with a volunteer from our research group (we also make adjustments to our experiment set-up in the pilot study based on what we learnt from it). 
 
 In each step, the participants are asked to complete a minimal task first (e.g. for UML profile, create a \textit{Stereotype} that is displayed as a node and a \textit{Stereotype} that is displayed as an edge)\footnote{Detailed descriptions of the tasks can be found at \url{https://github.com/wrwei/Jorvik/tree/master/User\%20Experiment}}. 
-They are asked to continue with the rest if there is still time left, while, if the deadline is missed but they were close to the correct solution, they are asked to give an estimate of how long they believe it would take them to finish the whole step.
+They are asked to continue with the rest if there is still time left. 
+If the participants miss the deadline but they are close to the correct solution, they are asked to give an estimate of how long they believe it would take them to finish the whole step.
 At the beginning of each step, we provide a piece of \textit{Default} knowledge, which covers ground knowledge for the step to be completed. 
 Participants are also allowed to search for any information over the Internet which may assist them in their tasks at any point during the experiment.
-At a certain point for each step, we assess if the participants are able to complete the step within the time frame, and we provide a piece of \textit{Essential} knowledge, which contains key information (parts of which are not easily accessible from the Internet) for the participants to complete the step.
+At a certain point for each step, we assess if the participants are able to complete the step within the time frame, and we provide a piece of \textit{Essential} knowledge, which contains key information (which is not easily accessible from the Internet) for the participants to complete the step.
 
 \begin{table}[ht!]
 	\centering
@@ -215,30 +216,32 @@ The experiment then proceeds to the use of Jorvik, where the participants need t
 Table~\ref{tab:experiment} shows the times obtained from the user experiment.
 Participant \#1 is a female PhD student who has a high level of expertise in modelling, and has used Papyrus before.
 Participant \#2 is a male PhD student who has an intermediate level of expertise in modelling, and has used Papyrus on a limited number of occasions. 
-Both of the participants have no experience in creating a distributable editor for UML profiles.
+Both of the participants have no experience in creating a distributable editor for Papyrus.
 
 In the table, the \textit{Task} column specifies the name of the steps. 
 The \textit{Time Given} column specifies the time we give the participants for each step, the format \textit{X (Y)} means that we provide the \textit{Default} knowledge at the beginning and we time for X minutes, then provide the \textit{Essential} and we time for Y minutes, then we stop the participants.
 The \textit{Participant Time} column records the time taken for the participants to complete the Website profile (\textit{Web}) and the Fault Tree profile (\textit{FTA}). 
 The \textit{Correctness} column records if the participants are able to provide correct solutions. 
 The participants are distinguished using the \textit{Participant} column.
-We record any comments/remarks made by the participants in the \textit{Remarks} column.
+We record any comments/remarks made by the participants in the \textit{Remarks} column (se discuss the remarks made by the participants later in this section).
+Note: the time it takes for Jorvik to generate Papyrus editors based on Ecore metamodels is negligible, therefore is not included in the results.
+
 
 Below is an example of how the table should be read (the summary of the experiment for Participant \#1 for the Papyrus approach for the Website profile):
 \begin{enumerate}
-	\item She was able to finish the UML profile creation in 25 minutes without the essential information. 
-	\item She finished the Element Types Configuration in 56 minutes with the help of the essential information. 
+	\item She was able to finish the UML profile creation in 25 minutes without the \textit{Essential} knowledge. 
+	\item She finished the Element Types Configuration in 56 minutes with the help of the \textit{Essential} knowledge. 
 	
 %	\textit{Remark \textcircled{1}:} She claimed that she found a solution online.\footnote{Which is the forum thread where the authors obtained the correct way of creatin Element Types Configurations: \url{https://www.eclipse.org/forums/index.php/t/1096471/}}.
-	\item She could not figure out how to complete the Palette Configuration model, we provided her with the essential information, which helped her finish the model in 26 minutes (for the minimal task). 
+	\item She finished the tasks in Step 3 in 26 minutes with the help of the \textit{Essential} knowledge.
 	
 %	\textit{Remark \textcircled{3}:} She claims that she would need 20 more minutes to finish the model.
 	\item She finished a partial solution for the CSS in 15 minutes.
-	\item She could not figure out how to create a creation command, therefore essential information is provided, and she finished the step in 25 minutes in total.
+	\item She could not figure out how to create a creation command, therefore \textit{Essential} knowledge is provided, and she finished the step in 25 minutes in total.
 	
 %	\textit{Remark \textcircled{5}:} She copied the actual solution for the essential information given.
-	\item She could not figure out how to create an Architecture model, even with the essential information provided and missed the deadline.
-	\item She was not able to configure the editor P lug-in to successfully run the editor, even with the essential information. 
+	\item She could not figure out how to create an Architecture model, even with the \textit{Essential} knowledge provided and missed the deadline.
+	\item She was not able to configure the editor Plug-in to successfully run the editor, even with the \textit{Essential} knowledge. 
 	
 %	\textit{Remark \textcircled{8}: } She claims that she would need 30+ minutes more to finish the configuration.
 \end{enumerate}
@@ -292,9 +295,8 @@ Below is an example of how the table should be read (the summary of the experime
 %\end{enumerate}
 %In total Participant \#2 spent 206 minutes using the Papyrus approach for the Fault Tree profile.
 
-
-We also receive/observe some interesting remarks during the experiment.
-Below is a list of the description of the remarks in the table:
+We also receive/observe some remarks during the experiment.
+Below is a list of the description of the remarks in the table, which should be read together with the experiment results:
 \begin{itemize}
 	\item Remark \textcircled{1}: In the Website experiment, in Step 2, Participant 1 claimed that she found a solution online\footnote{Which is the forum thread where the authors obtained the correct way of creatin Element Types Configurations: \url{https://www.eclipse.org/forums/index.php/t/1096471/}.} that made the task significantly easier. 
 	She also claims that without the solution there is no way she could have finished the task, even with the \textit{Essential} knowledge.
@@ -312,7 +314,7 @@ Below is a list of the description of the remarks in the table:
 	\item Remark \textcircled{8}: In the Website experiment, in step 7, Participant 1 could not configure the Plug-in to a working order, she claimed that she would need more than 20 minutes to inspect other models to find out what went wrong.
 \end{itemize}
 
-Using Jorvik, participant \#1 was able to generate the correct Papyrus editor for the Website profile in 32 minutes. She was also able to create the correct editor for the Fault Tree profile in 15 minutes.
+For the results obtained using Jorvik, participant \#1 was able to generate the correct Papyrus editor for the Website profile in 32 minutes. She was also able to create the correct editor for the Fault Tree profile in 15 minutes.
 Participant \#2 needed 37 minutes and 38 minutes for the creation of a correct Papyrus editor for the Website and the Fault Tree profiles, respectively, using Jorvik.
 
 
@@ -352,11 +354,16 @@ However, the level of expertise in Ecore does not affect the results of our eval
 
 \subsubsection{Threats to Validity}
 For the experiment we could not find experts that specialise in creating UML profiles and their supporting editors for Papyrus. 
-This is typically due to the fact that this feature of Papyrus is not widely promoted and used.
+This is typically due to the fact that this feature of Papyrus is not widely promoted and adopted.
 However, we have manually created the Website profile and its editor and recorded the time it took us to finish the whole solution. 
+We derived the deadlines for each step in the Papyrus approach based on the our own times and normalised the deadlines based on a pilot experiment taken by a volunteer researcher.
 
-\textbf{[TODO: Other threats: 1) People were asked to execute tasks in a waterfall way. Normally, when we do this proceess, we go back and forth between the artefacts, make changes, test, fix, go back, make changes in antoher model etc. etc. ]}
+In the Papyrus experiment, we take a waterfall approach.
+We derived the eight steps in the Papyrus experiment based on our experience, each step depends on previous steps. 
+For example, Step 2 (Element Types Configuration Model) depends on the whole solution of Step 1 (the UML profile), Step 3 (Palette Configuration Model) depends on Step 2. 
+There is one exception that Step 5 (Creation Command) depends on Step 7 (Plug-in Configuration) as the Creation Command Java class relies on the definition of URI mappings, required in the plug-in. 
+However, this does not affect the experiment results.
 
 
 
-[\textbf{TODO: General remark: 1) Pilot study is not referred anywhere. It should be referred in the experiment setup to highlight that the experiment was refined. 2) The results of the questionnaire are not presented and discussed. I also noticed tha the questionnaires appendix is missing.}]
+[\textbf{TODO: General remark: 1) The results of the questionnaire are not presented and discussed. I also noticed tha the questionnaires appendix is missing.}]
