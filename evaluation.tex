@@ -155,6 +155,7 @@ At a certain point for each step, we assess if the participants are able to comp
 \begin{table}
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
+	\caption{Tasks and times for the Papyrus approach.}
 	\begin{tabular}{|c|c|c|c|}
 		\cline{1-4}
 		\textbf{Task} & Total (m) & Default (m) & Essential (m) \\ \hline
@@ -167,7 +168,6 @@ At a certain point for each step, we assess if the participants are able to comp
 		7. Plug-in Configuration & 20 & 12 & 8 \\ \hline
 		8. OCL Constraints & 60 & 40 & 20 \\ \hline
 	\end{tabular}
-	\caption{Tasks and times for the Papyrus approach.}
 	\label{tab:manual}
 \end{table}
 
@@ -196,12 +196,12 @@ After participants have completed the manual process, a post-experiment question
 \begin{table}[ht!]
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
+	\caption{Task and time for the Jorvik approach.}
 	\begin{tabular}{|c|c|c|c|}
 		\cline{1-4}
 		\textbf{Task} & Total (m) & Default (m) & Essential (m) \\ 
 		1. Ecore Metamodel and Generation & 50 & 30 & 20 \\ \hline
 	\end{tabular}
-	\caption{Tasks and times for the automatic process.}
 	\label{tab:automatic}
 \end{table}
 
@@ -212,10 +212,12 @@ The experiment then proceeds to the use of Jorvik, where the participants need t
 	The \textit{Default} information is provided at the beginning. 
 	30 minutes in the task, we assess the participants' status and provide the \textit{Essential} information.
 \end{enumerate}
+\SG{perhaps add a couple of sentences to explain what a partially-correct solution is from Table 7?}
 
 \input{resultsTable.tex}
 
 \subsubsection{Results}
+\SG{Caption in Table 7 is wrong. Reference is missing}
 Table~\ref{tab:experiment} shows the times obtained from the user experiment.
 Participant \#1 is a female PhD student who has a high level of expertise in modelling, and has used Papyrus before.
 Participant \#2 is a male PhD student who has an intermediate level of expertise in modelling, and has used Papyrus on a limited number of occasions. 
@@ -223,7 +225,7 @@ Both of the participants have no experience in creating distributable editors fo
 
 In the table, the \textit{Task} column specifies the name of the steps. 
 The \textit{Time Given} column specifies the time we gave the participants for each step having the \textit{Default} knowledge only and in parenthesis the time we gave to them having the \textit{Essential} knowledge information.
-The \textit{Time Taken} column records the time taken for the participants to complete the Website profile (\textit{Web}) and the Fault Tree profile (\textit{FTA}). Times with an \textit{asterisk (*)} denote that the participant asked and was given the essential information\footnote{In some tasks participants knew how to complete the task with no more information given to them, but they hit the deafult knowledge deadline. In such cases we were assessing the solution and if it was indeed towards the correct direction they were allowed to use the time remaining to complete the task without giving the essential information.}
+The \textit{Time Taken} column records the time taken for the participants to complete the Website profile (\textit{Web}) and the Fault Tree profile (\textit{FTA}). Times with an \textit{asterisk (*)} denote that the participant asked and was given the essential information.\footnote{In some tasks participants knew how to complete the task with no more information given to them, but they hit the deafult knowledge deadline. In such cases we were assessing the solution and if it was indeed towards the correct direction they were allowed to use the time remaining to complete the task without giving the essential information.}
 The \textit{Correctness} column records if the participants are able to provide correct solutions. 
 The participants are distinguished using the \textit{Participant} column.
 We record any comments/remarks made by the participants in the \textit{Remarks} column (se discuss the remarks made by the participants later in this section).
@@ -298,7 +300,8 @@ Below is an example of how the table should be read (the summary of the experime
 %\end{enumerate}
 %In total Participant \#2 spent 206 minutes using the Papyrus approach for the Fault Tree profile.
 
-We also receive/observe some remarks during the experiment.
+\sg{We also receive/observe some remarks during the experiment.}
+\SG{Reword to clarify whether these are our observations or claims given by the participants? or both?}
 Below is a list of the description of the remarks in the table, which should be read together with the experiment results:
 \begin{itemize}
 	\item Remark \textcircled{1}: In the Website experiment, in Step 2, Participant \#1 claimed that she found a solution online\footnote{Which is the forum thread where the authors obtained the correct way of creatin Element Types Configurations: \url{https://www.eclipse.org/forums/index.php/t/1096471/}.} that made the task significantly easier. 
@@ -316,7 +319,11 @@ Below is a list of the description of the remarks in the table, which should be 
 	This is typically due to the fact that there are somewhat confusing model elements in the Architecture metamodel by Papyrus.
 	\item Remark \textcircled{8}: In the Website experiment, in step 7, Participant  \#1 could not configure the plug-in to a working order, she claimed that she would need more than 20 minutes to inspect other models to find out what went wrong.
 \end{itemize}
-
+	\SG{
+	If remarks are are insights from observing the participants while doing the experiments then we should call them observations
+	if they are insights/claims given by the participants then we should name them differently
+	in any case we should clarify what these remarks are
+	just to help the reader understand where these remarks have been derived from}
 For the results obtained using Jorvik, participant \#1 was able to generate the correct Papyrus editor for the Website profile in 32 minutes. She was also able to create the correct editor for the Fault Tree profile in 15 minutes.
 Participant \#2 needed 37 minutes and 38 minutes for the creation of a correct Papyrus editor for the Website and the Fault Tree profiles, respectively, using Jorvik.
 
@@ -327,12 +334,14 @@ From the pre-experiment questionnaires\footnote{Available at \url{https://github
 
 By analysing the responses to the post-experiment questionnaires\footnote{Available at \url{https://github.com/wrwei/Jorvik/blob/master/User_Experiment/Post_Experiment_Self_Assessment_Responses.pdf}} for the Papyrus approach,
 both participants felt that the time assigned to the tasks, most of the times, were not enough for the first round of the experiment (the Website experiment). However, they felt the time was enough for the second round of the experiment (the Fault Tree experiment). This is because participants were able to refer to their Website solution in the second round. Both participants mentioned it was difficult to find the documentation needed to finish the steps (\textit{NB}: this applies only to responses after the first experiment as they mostly referred to the editor produced in that one when executing the second).
+\SG{These two paragraphs give the impression that the lack of documentation is the primary reason for Jorvik's better results vs Papyrus. Perhaps, reward a bit these paragraphs?}
 
-For all the steps in the Papyrus approach, except the one in which participants had to create the UML profile, they declared that they had low to moderate confidence that they will be able to complete the task before receiving the essential information. This is can be explained from the lack of experience in developing UML profile editors with Papyrus before. For the same steps (i.e., 2-7) one participant mentioned that felt completely lost before receiving the \textit{Essential} information. However, both of them declared to have moderate to high confidence after receiving the \textit{Essential} information, except for step 2, where both were still confused by the concept of Element Types Configuration. This confirms our findings as this task is the one that participants performed worse (see Table~\ref{tab:experiment}). 
+For all the steps in the Papyrus approach, except the one in which participants had to create the UML profile, they declared that they had low to moderate confidence that they will be able to complete the task before receiving the essential information. This is can be explained from the lack of experience in developing UML profile editors with Papyrus before. For the same steps (i.e., 2-7), one participant highlighted 
+that felt completely lost before receiving the \textit{Essential} information. However, both of them declared to have moderate to high confidence after receiving the \textit{Essential} information, except for step 2, where both were still confused by the concept of Element Types Configuration. This confirms our findings as this task is the one that participants performed worse (see Table~\ref{tab:experiment}). 
 	
 To summarise, from the responses received, step 2 (Element Types Configuration), step 3 (Palette Configuration), Step 5 (Creation Command) and step 6 (Architecture Model) were identified as typical obstacles for the participants in completing the whole experiments. 
 
-Regarding the Jorvik experiment questionnaires, one of the participants identied themself as knowledgable of EMF and had created EMF metamodels in the past while has also used annotations. The second participant had no EMF experience in the past and had never created an EMF metamodel. Finally, both mentioned that the time give was enough and that they felt more confident after receiving the essential information.
+Regarding the questionnaires from the Jorvik experiment, one of the participants described themself as knowledgable of EMF, had created EMF metamodels in the past, and had also used annotations. The second participant had no EMF experience in the past and had never created an EMF metamodel. Finally, both mentioned that the time give was enough and that they felt more confident after receiving the essential information.
 
 By analysing the results provided in Table~\ref{tab:experiment}, comparing the Papyrus approach with Jorvik, we can conclude that using Jorvik users are able to increase the productivity by at least 10 times (especially when participants claim that they would need additional time to finish the complete solution for some steps). This is also due to the fact that both participants chose not to complete the optional Step 8 (the OCL constraints), which may take significant time, even for experienced OCL programmers.
 
@@ -359,7 +368,7 @@ However, for both levels of expertise in Ecore, the experiment suggests that the
 \subsubsection{Threats to Validity}
 For the experiment we used participants that do not specialise in creating UML profiles and their supporting editors for Papyrus. The time taken if our participants were Papyrus experts might be lower.
 %This is typically due to the fact that this feature of Papyrus is not widely promoted and adopted.
-However, As we have spent significant time working with this feature Papyrus and with Jorvik, we have run the experiment ourselves for both the profiles and we monitored the same time benefits (about 10 times faster using Jorvik). 
+However, as we have spent significant time working with Papyrus and Jorvik, we have run the experiment ourselves for both the profiles and we monitored the same time benefits (about 10 times faster using Jorvik). 
 %In fact we recorded the time it took us to finish the whole solution and derived the deadlines for each step in the Papyrus approach based on the our own times and normalised the deadlines based on a pilot experiment taken by a volunteer researcher. [Thanos: we mention this already above]
 
 In the Papyrus experiment, we take a waterfall approach.
