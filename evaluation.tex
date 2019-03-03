@@ -10,7 +10,7 @@ As a result we can measure the \textit{efficiency} of Jorvik in generating profi
 In the second evaluation, we assess the \textit{completeness} of Jorvik by applying it to a number of metamodels collected as part of the work presented in~\cite{williams2013metamodels}. 
 This way, Jorvik is tested to check if it can successfully generate profiles and editors for a wide variety of scenarios.
 
-In the third evaluation, we conduct a \textit{user experiment} in which we asked software engineers to build Papyrus editors for two UML Profiles. 
+In the third evaluation, we conduct a \textit{user experiment} in which we asked software engineers to build Papyrus editors for two UML Profiles.\SG{which profiles?} 
 We first ask the engineers to create the profiles and editors manually, and then ask them to create the same profiles and editors using Jorvik. 
 We measure the time, report problems encountered during the experiment for both approaches and we compare the results.
 
@@ -40,6 +40,7 @@ For Jorvik pre-Papyrus 3.0 (columns under \textit{Jorvik (pre-Papyrus 3.0)}), we
 For polishing transformations, we need to write 11 lines of code in the transfornation script for Element Types Configuration, 50 lines for Palette Configuration, 195 lines for CSS and 10 lines for Types Configuration.
 For Jorvik post-Papyrus 3.0 (columns under \textit{Jorvik (post-Papyrus 3.0)}), we need the same Ecore metamodels (i.e., five), thus the numbers do not change. 
 For polishing transformations, we need to write 50 lines for the Palette Configuration and 195 lines for CSS. 
+\SG{make a note about the gray cells in caption of Table 3}.
 
 As it can be observed from the numbers, our approach requires about 90\% less handwritten code to produce the basic diagrams and about 85\% less code to 
 produce the polished editor that matches the original Archimate for Papyrus editor. 
@@ -105,7 +106,7 @@ In the future, we plan to assess further the scalability of our approach using l
 \begin{table}[htb!]
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{|c|M{3cm}|c|M{3cm}|}
+	\caption{The names and sizes of the ten metamodels against which the approach was evaluated to test completeness}	\begin{tabular}{|c|M{3cm}|c|M{3cm}|}
 		\cline{1-4}
 		\textbf{Name}  & \textbf{\#Types (\#Nodes/\#Edges)} & \textbf{Name}  & \textbf{\#Types (\#Nodes/\#Edges)}\\ \hline
 		\textbf{Professor} & 5 (4/5)  & \textbf{Ant Scripts} & 11 (6/4) \\ \hline
@@ -115,15 +116,15 @@ In the future, we plan to assess further the scalability of our approach using l
 		\textbf{Bugzilla} & 9 (7/6) & \textbf{Archimate} & 57 (44/11) \\ \hline
 		\cline{1-4}
 	\end{tabular}
-	\caption{The names and sizes of the ten metamodels against which the approach was evaluated to test completeness}
+
 	\label{tab:metamodels}
 \end{table}
 
 
 \subsection{User Experiment}
 We have argued that Jorvik provides significant gains in productivity when building custom UML Profile editors for Papyrus.
-We design a user experiment to substantiate such claim, and ascertain how significant the productivity gain can be.
-As discussed in Section~\ref{sec:implementation}, there are eight major steps to be taken in order to create a UML profile as well as its supporting editor. 
+We design a user experiment to substantiate our claim and quantify the productivity improvement. %how significant the productivity gain can be.
+As discussed in Section~\ref{sec:implementation}, there are eight\SG{8 or 9 according to Figure~\ref{fig:transformationWorkflow}} major steps to be taken in order to create a UML profile as well as its supporting editor. 
 In this experiment, we compare the time needed to develop an editor using Papyrus infrastructure (hereby referred to as \textit{Papyrus approach}) with the time needed to develop the same editor using Jorvik.
 For the Papyrus approach we design eight tasks, each with its own deadline (see Table~\ref{tab:manual}) for the participants to complete towards manually creating a UML profile and a working UML editor for the profile.
 For Jorvik, we designed one task for the participants to complete to automatically generate a UML profile and a working UML editor for that profile.
