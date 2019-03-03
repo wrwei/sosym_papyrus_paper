@@ -294,3 +294,16 @@ Table~\ref{tab:polishingTransformationsNames} shows the names that each polishin
 	\end{tabular}
 	\label{tab:polishingTransformationsNames}
 \end{table}
+
+\subsection{Adding support for nested relations}
+In EMF, a reference between to classes can be flagged as a containment relation, which is consistent with the \emph{containment} definition of UML associations (with exception of the deletion cascade mechanism).
+These type of relations, when presented visually, can benefit from showing the contained elements shapes inside the shape of the container, as opposed to the line/arrow presentation.
+For example, if a \texttt{package} is represented with an empty rectangle, classes contained in the package would appear inside this rectangle.
+
+Ideally, a custom profile editor should allow this containment relations to use the visual containment representation too.
+Papyrus does allow to provide custom shapes for elements, so we explored the feasibility of supporting visual containments too.
+Sadly, the current structure of the visual editor does not allow this functionality.
+Currently, the \emph{shape} concept at the editor level provides separate graphical sections for the custom shape and the contained elements.
+Further, these two sections are presented visually one after the other.
+Hence, with the current Papyrus implementation it is not possible to have nested elements inside a custom shape.
+
