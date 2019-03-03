@@ -3,7 +3,7 @@
 In this section we present \textit{Jorvik}, an automatic generation tool for Papyrus UML profiles and their respective graphical editors.
 %Using Jorvik, we minimise the labour intensive and repetitive tasks required in the manual creation process.
 Through Jorvik, developers can define the abstract syntax and the concrete (graphical) syntax of their DSLs (i.e., the UML profile) in the form of an \textit{annotated Ecore metamodel}.
-The annotations can be used to specify the stereotypes to be created in the UML profile, and what meta-elements they extend. 
+The annotations can be used to specify the stereotypes to be created in the UML profile and what meta-elements they extend. 
 With the annotations, the developers can also specify the graphical syntax and related information (e.g., shapes for the stereotypes and the icons for the creation tools in the palette). 
 The annotated Ecore metamodel is then processed by Jorvik and transformed into a UML profile and related Papyrus models/artefacts needed for a distributable Papyrus editor. This is done through a series of model management operations like model validation, model-to-model (M2M) and model-to-text (M2T) transformations. An overview of our proposed approach is presented in Figure~\ref{fig:approachOverview}. 
 We discuss the steps involved in the process in detail in the remainder of this section, followed by a running example. 
@@ -43,7 +43,7 @@ The transformations are written in the Epsilon Transformation Language (ETL)~\ci
 In principle, any other model validation, M2M and M2T language could be used (e.g., ATL~\cite{jouault2006atl}). 
 The transformations produce the UML profile with the appropriate OCL constraints and all the configuration models and files needed by Papyrus. 
 In addition, an M2M transformation is also generated that can be used later by developers to transform the UML models that conform to the generated UML profile, back to EMF models that conform to the Ecore metamodel used as source. 
-This way, model management programs already developed to run against model conforming to the EMF metamodel can be re-used.
+The benefit of adopting this process is that model management programs already developed to run against model conforming to the EMF metamodel can be re-used.
 
 Jorvik offers the option of \textit{polishing transformations}, where developers are able to write their own (optional) transformations to fine-tune the generated artefacts produced by the built-in transformations. 
 In the following section, the proposed approach is explained via a running example.
@@ -136,7 +136,7 @@ The EGL template in Listing~\ref{lst:cssPolishingExample} generates a CSS rule i
 It stores all the elements in the Ecore metamodel that are annotated as @Node (line 6) in a collection and iterates though them in lines 7-10. 
 For each of the node stereotypes, it generates the static text ``[appliedStereotypes~='' followed by the name of each stereotype and a comma. 
 At the end it prints the curly brackets (lines 10 and 12) and the text ``fontColor:red;'' in line 11. 
-The resulted output that is amended automatically in the original CSS file by the polishing transformation is the one shown in Listing~\ref{lst:cssPolishingOutput}.
+The resulted output that is amended automatically in the original CSS file by the polishing transformation is shown in Listing~\ref{lst:cssPolishingOutput}.
 
 \begin{figure}[ht!]
 	\vspace*{-5mm}

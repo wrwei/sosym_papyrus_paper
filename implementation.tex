@@ -2,6 +2,7 @@
 \label{sec:implementation}
 In this section, we discuss the technical implementation of Jorvik which underpins the process of our approach discussed in the previous section. 
 
+
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=1\textwidth]{diagrams/transformationWorkflow.pdf}
@@ -62,7 +63,7 @@ Table~\ref{tab:evlRules} enumerates all the rules included in the pre-transforma
 \label{sec:profileGeneration}
 The EMF to UML Profile Generation executes a model-to-model transformation written in ETL. 
 The source model of this transformation is the annotated Ecore metamodel (e.g.,  Listing~\ref{lst:annotatedSdplEmfatic}) and the target model is a UML profile model.
-This transformation consists of two main rules, one that creates astereotype for each EClass element of the metamodel and a second that creates a \textit{Stereotype} for each EReference annotated as @Edge.
+This transformation consists of two main rules, one that creates a Stereotype for each EClass element of the metamodel and a second that creates a \textit{Stereotype} for each EReference annotated as @Edge.
 
 \begin{itemize}
 	\item[--] \textbf{rule eclass2stereotype:} This transformation rule transforms each EClass element in the annotated Ecore metamodel to an element of type stereotype in the target UML model. 
@@ -175,9 +176,9 @@ In this way, when an element is created in the diagram using the palette, behind
 
 \subsection{CSS File Generation (\#5)}
 \label{sec:cssGeneration}
-As stated above, in Papyrus, the look and feel of diagram elements can be customised using CSS. 
+As stated above, the look and feel of diagram elements in Papyrus can be customised using CSS. 
 In this transformation we generate the CSS style rules that define the appearance of nodes and edges in diagrams. 
-Each node on a diagram has a set of compartments where the attributes, the shape, etc. appear. 
+Each node on a diagram has a set of compartments where the attributes, shapes, etc. appear. 
 Initially, for all nodes that will appear on the diagram, we create a CSS rule to hide all their compartments and another rule to enable the compartment that holds the shape. 
 The latter rule also hides the default shape inherited from the meta-element that the stereotype extends. 
 Then, for each stereotype that appears as a node, a CSS rule is generated to place the SVG figure in the shape compartment. 
@@ -274,6 +275,7 @@ After the ETL engine goes through all the elements in $ct$, the sub-collections 
 \subsection{Polishing Transformations (\#2b - \#5b)} 
 \label{sec:transformationPatches}
 
+\SG{Tables should have the same format, see Table 2 vs 3}
 \begin{table}[h]
 	\caption{Polishing Transformations File Names}
 	\centering
