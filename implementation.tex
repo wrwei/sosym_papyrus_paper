@@ -11,11 +11,10 @@ In this section, we discuss the technical implementation of Jorvik which underpi
 \end{figure}
 
 Figure~\ref{fig:transformationWorkflow} shows workflow of Jorvik. 
-Each step in the workflow is identified by a number (\#2 -- \#9 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
-In addition to the main steps, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is executed to verify the correctness of the annotations and provide useful feedback to the users if there is anything wrong. 
-Moreover, supporting files needed for the creation of the Papyrus plugin are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
+Each step in the workflow is identified by a number (\#1 -- \#9 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
+Before generating all the artefacts, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is executed to verify the correctness of the annotations, and provide useful feedback to the users if there is anything wrong. 
+Moreover, supporting files needed for the creation of the Papyrus Plug-in are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
 As the transformations consist of about 1000 lines of code we will describe them omitting low level technical details\footnote{Full implementations and instructions are available at \url{https://github.com/wrwei/Jorvik}}. 
-
 
 
 \subsection{Pre-transformation Validation (\#1)}
@@ -56,7 +55,7 @@ breaklines=6true]{evlRulesBold.evl}
 \end{table}
 
 Table~\ref{tab:evlRules} enumerates all the rules included in the pre-transformation validation step along with their descriptions and the conditions that are checked. 
-The implementation of the rules in EVL can be found in the paper's webpage\footnote{\url{https://github.com/wrwei/Jorvik}}. 
+%The implementation of the rules in EVL can be found in the Jorvikwebpage\footnote{\url{https://github.com/wrwei/Jorvik}}. 
 
 
 \subsection{EMF to UML Profile Generation (\#2)}
@@ -98,7 +97,7 @@ To illustrate the OCL constraints, we provide a partial view of the SDPL UML pro
 	\label{fig:sample_profile}
 \end{figure}
 
-In Figure \ref{fig:sample_profile}, there are three stereotypes. ``Person" and ``Tool" extend meta-element UML::Class, and they correspond to classes ``Person" and ``Tool" in the metamodel shown in Listing \ref{lst:annotatedSdplEmfatic}. 
+In Figure \ref{fig:sample_profile}, there are three \textit{Stereotype}s. ``Person" and ``Tool" extend meta-element UML::Class, and they correspond to classes ``Person" and ``Tool" in the metamodel shown in Listing \ref{lst:annotatedSdplEmfatic}. 
 Stereotype ``familiarWith", which extends meta-element UML::Association, corresponds to the reference``familiarWith" in the ``Person" class in Listing \ref{lst:annotatedSdplEmfatic}.
 
 In Figure~\ref{fig:sdplEditor}, the ``familiarWith" association is used to connect ``Person Alice" with ``Tool StarUML". 
@@ -151,7 +150,7 @@ The constraint templates for stereotypes that extend other UML relationships nee
 
 \subsection{Element Types  Configuration Transformation(\#3)}
 \label{sec:elementTypes}
-Apart from the UML profile, Papyrus graphical editors require an Element Types Configuration model, which associates the stereotypes defined in the UML profile with their abstract syntax (the meta-elements in UML they extend) and their concrete syntax (the graphical notations of the meta-elements in UML they extend). 
+Apart from the UML profile, Papyrus graphical editors require an Element Types Configuration model, which associates the \textit{Stereotype}s defined in the UML profile with their abstract syntax (the meta-elements in UML they extend) and their concrete syntax (the graphical notations of the meta-elements in UML they extend). 
 
 This transformation is responsible for creating an Element Types Configuration model (of extension .elementtypesconfiguration) that contains type specialisation information for the stereotypes in the UML profile. 
 %Since our previous work \cite{zolotas2018towards}, the \textit{ElementTypesConfiguration} metamodel for Papyrus has changed. 
@@ -167,12 +166,12 @@ In addition to \textit{SpecializationTypeConfiguration}s, for each \textit{Stere
 This transformation is responsible for creating a Palette Configuration model (of extension .paletteconfiguration) that configures the contents of the custom palette for the diagram in Papyrus. 
 The model conforms to the \textit{PaletteConfiguration} metamodel that ships with Papyrus.
 %which also changed since our previous work. 
-The transformation creates a new \textit{PaletteConfiguration} element and adds two new \textit{DrawerConfiguration} elements that represent the two different tool compartments in our palette (i.e., one for the tools that create nodes and one for those creating edges). 
+The transformation creates a new \textit{PaletteConfiguration} element and adds two new \textit{DrawerConfiguration} elements that represent two different tool compartments in our palette (i.e., one for the tools that create nodes and one for those creating edges). 
 For each element in the Ecore metamodel annotated as @Node/@Edge a new \textit{ToolConfiguration} element is created and added to the nodes/edges drawer respectively. 
 The kind of \textit{ToolConfiguration} are decided based on the @Node/@Edge annotation. For nodes, the kind is \textit{CreationTool} while for edges, the kind is \textit{ConnectionTool}.
 An \textit{IconDescriptor} element is also created and added to the \textit{ToolConfiguration} pointing to the path of the icon for that tool (this is the path passed as argument to the \textit{icon} property of the @Node/@Edge annotation).
 Finally, each \textit{ToolConfiguration}, needs to refer to the element types they conform to, which are defined in the Element Types Configuration model transformed in Step \#3. 
-In this way, when an element is created in the diagram using the palette, behind the scene, Papyrus is able to locate the \textit{Stereotype} element and infer the UML syntax it specialises.
+In this way, when an element is created in the diagram using the palette, behind the scene, Papyrus is able to locate the \textit{Stereotype} element and determine the UML syntax it specialises.
 
 \subsection{CSS File Generation (\#5)}
 \label{sec:cssGeneration}
@@ -241,12 +240,6 @@ These files are necessary for Papyrus to construct the UML profile model\footnot
 
 \subsection{UML to EMF Transformation Generation (\#9)}
 \label{sec:uml2emf}
-This M2T transformation generates the ETL file that can be used to transform the UML models created in Papyrus and conform to the UML Profile generated by our approach, back to EMF models that conform to the source Ecore metamodel given as input to the approach. 
-One rule is generated for each of the stereotypes that transforms them back to the appropriate type of the Ecore metamodel. 
-Each stereotype has the same attributes and references as the original EClass, therefore, this EGL script also generates the statements in each rule that populate the attributes and the references of the newly created instance of each EClass with the equivalent values of the UML model. 
-An example of an auto-generated rule is shown in Listing~\ref{lst:etlGeneratedRule}. 
-This rule transforms elements stereotyped as ``Person'' in the UML model to elements of type ``Person'' in an EMF model which conforms to the Ecore metamodel presented in Listing~\ref{lst:annotatedSdplEmfatic}.
-
 \lstinputlisting[
 caption={Example of an auto-generated ETL rule that transforms \\elements stereotyped as ``Person'' in the UML model to elements of \\type ``Person'' in an EMF model.},
 label={lst:etlGeneratedRule},
@@ -257,6 +250,13 @@ numbers=left,
 numbersep=5pt, 
 numberstyle=\tiny, 
 breaklines=true]{etlExample.etl}
+
+This M2T transformation generates the ETL file that can be used to transform the UML models created in Papyrus and conform to the UML Profile generated by our approach, back to EMF models that conform to the source Ecore metamodel given as input to the approach. 
+One rule is generated for each of the stereotypes that transforms them back to the appropriate type of the Ecore metamodel. 
+Each stereotype has the same attributes and references as the original EClass, therefore, this EGL script also generates the statements in each rule that populate the attributes and the references of the newly created instance of each EClass with the equivalent values of the UML model. 
+An example of an auto-generated rule is shown in Listing~\ref{lst:etlGeneratedRule}. 
+This rule transforms elements stereotyped as ``Person'' in the UML model to elements of type ``Person'' in an EMF model which conforms to the Ecore metamodel presented in Listing~\ref{lst:annotatedSdplEmfatic}.
+
 
 %Epsilon Transformation Language (ETL) \cite{} is a hybrid model-to-model transformation languages which provides both a declarative rule-based execution scheme and imperative features for handling complex transformation scenarios. In Listing~\ref{lst:etlGeneratedRule}, rule \emph{PersonUML2PersonEMF} is responsible to transform a \emph{Person} in the UML model to a \emph{Person} in the EMF model. 
 
@@ -270,6 +270,9 @@ In our example (line 6 in Listing \ref{lst:etlGeneratedRule}), the expression ``
 necessary (if the source elements have not been transformed, as shown in the transformation trace) and put the transformed elements into sub-collections 
 (denoted by $sc$). 
 After the ETL engine goes through all the elements in $ct$, the sub-collections $sc$s are returned (flattened to a single collection if more than one) and are added to ``t.familiarWith''.
+
+\subsection{Polishing Transformations (\#2b - \#5b)} 
+\label{sec:transformationPatches}
 
 \begin{table}[h]
 	\caption{Polishing Transformations File Names}
@@ -287,8 +290,6 @@ After the ETL engine goes through all the elements in $ct$, the sub-collections 
 	\label{tab:polishingTransformationsNames}
 \end{table}
 
-\subsection{Polishing Transformations (\#2b - \#5b)} 
-\label{sec:transformationPatches}
 For transformations \#2- \#5, users are able to define polishing transformations that complement those included in our implementation. 
 After each built-in transformation is executed, the workflow looks to find a transformation with the same file name next to the Ecore metamodel. 
 If a file with the same name exists, it is executed against the Ecore metamodel and targets the already created output model of the original transformation. 
