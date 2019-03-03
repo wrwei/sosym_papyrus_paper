@@ -3,7 +3,7 @@
 
 In this section we outline the process for defining a UML profile and the supporting graphical model editing facilities for the UML profile in Papyrus. 
 This process typically involves the manual creation of a number of inter-related models and configuration files.
-We highlight labour-intensive and error prone activities involved in the process that motivate the need of automatic generation of these artefacts.
+We motivate the need of automatic generation of these artefacts by highlighting the labour-intensive and error prone activities involved in the UML profile generation process.
 
 \subsection{UML Profile}
 A UML Profile in Papyrus is an EMF model that conforms to the UML Ecore metamodel. 
@@ -25,7 +25,7 @@ In this sense, the users are creating instances of the elements they define in t
 One of the limitations of UML profiles in Papyrus is that links between stereotypes can be instantiated as edges in a diagram only if they extend a \textit{Connector} meta-element (e.g., UML::Association).  
 For example, if ``Stereotype A'' refers to ``Stereotype B'' via an ``A\_to\_B'' reference, then in order to be able to draw this connection as an edge on the diagram, ``A\_to\_B'' should be created as a separate stereotype. 
 These connector stereotypes do not hold any information about the stereotypes that they can connect, so users need to define such restrictions by manually writing OCL constraints to validate at least two things: 1) if the source and target nodes are of the correct type and 2) if the connector is in the correct direction (e.g., for ``A\_to\_B'', the edge should lead from ``Stereotype A'' to ``Stereotype B''. 
-These constraints can be rather long and need to be manually written and customised for \textit{each} edge stereotype. This, as illustrated in Section~\ref{sec:constraints}, can also be a labour-intensive and error-prone process.
+These constraints can be rather long and need to be manually written and customised for \textit{each} edge stereotype. As illustrated in Section~\ref{sec:constraints}, this can also be a labour-intensive and error-prone process.
 
 \subsection{Distributable Custom Graphical Editor}
 With the UML profile created, users can apply it to UML diagrams. 
@@ -82,7 +82,9 @@ The CSS can be written once but need to be loaded each time \textit{manually} on
 \end{figure}
 
 To create a distributable graphical editor that has diagrams tailored for the profile and to avoid all the aforementioned drawbacks, users need to create a number of inter-related models and files, and to implement extension points in an Eclipse plug-in project. 
-Typically, the users need to create:
+Figure~\ref{fig:neededPapyrusFiles_new} shows all the artefacts needed to be created for having a distributable Papyrus UML profile editor for Papyrus 3.0+\footnote{Metamodels for Element Types Configuration, Palette Configuration have been changed since our previous work (rendered in blue). 
+	The Architecture model and the Java Creation Command class are new concepts introduced in Papyrus 3.0 since our previous work (rendered in green).}.
+These artefacts include:
 \begin{itemize}
 	\item An Element Types Configuration model;
 	\item A Palette Configuration model;
@@ -92,8 +94,6 @@ Typically, the users need to create:
 	\item Plug-in related files for extensions and dependencies.
 \end{itemize}
 
-Figure~\ref{fig:neededPapyrusFiles_new} shows all the artefacts needed to be created for having a distributable Papyrus UML profile editor for Papyrus 3.0+\footnote{Metamodels for Element Types Configuration, Palette Configuration have been changed since our previous work (rendered in blue). 
-The Architecture model and the Java Creation Command class are new concepts introduced in Papyrus 3.0 since our previous work (rendered in green).}.
 
 Through our experiment (see Section~\ref{sec:evaluation}), we found out that it is difficult, if not impossible, to create these models without any working examples, taking also into account that the documentation of Papyrus provides limited useful insight in this matter.
 %In addition, it is also a labour-intensive and error-prone process to migrate editors created based on Papyrus 2.0 to Papyrus 3.0+. 
