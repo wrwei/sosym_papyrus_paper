@@ -2,19 +2,21 @@
 \label{sec:implementation}
 In this section, we discuss the technical implementation of Jorvik which underpins the process of our approach discussed in the previous section. 
 
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=1\textwidth]{diagrams/transformationWorkflow.pdf}
+	\caption[]{An overview of the transformation workflow}
+	\label{fig:transformationWorkflow}
+	%	\vspace*{-3mm}
+\end{figure}
+
 Figure~\ref{fig:transformationWorkflow} shows workflow of Jorvik. 
 Each step in the workflow is identified by a number (\#2 -- \#9 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
 In addition to the main steps, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is executed to verify the correctness of the annotations and provide useful feedback to the users if there is anything wrong. 
 Moreover, supporting files needed for the creation of the Papyrus plugin are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
 As the transformations consist of about 1000 lines of code we will describe them omitting low level technical details\footnote{Full implementations and instructions are available at \url{https://github.com/wrwei/Jorvik}}. 
 
-\begin{figure}[ht!]
-	\centering
-	\includegraphics[width=1\textwidth]{diagrams/transformationWorkflow.pdf}
-	\caption[]{An overview of the transformation workflow}
-	\label{fig:transformationWorkflow}
-%	\vspace*{-3mm}
-\end{figure}
+
 
 \subsection{Pre-transformation Validation (\#1)}
 To check the correctness of the annotated Ecore metamodel, a model validation program is firstly executed against the metamodel.
@@ -269,16 +271,6 @@ necessary (if the source elements have not been transformed, as shown in the tra
 (denoted by $sc$). 
 After the ETL engine goes through all the elements in $ct$, the sub-collections $sc$s are returned (flattened to a single collection if more than one) and are added to ``t.familiarWith''.
 
-
-
-\subsection{Polishing Transformations (\#2b - \#5b)} 
-\label{sec:transformationPatches}
-For transformations \#2- \#5, users are able to define polishing transformations that complement those included in our implementation. 
-After each built-in transformation is executed, the workflow looks to find a transformation with the same file name next to the Ecore metamodel. 
-If a file with the same name exists, it is executed against the Ecore metamodel and targets the already created output model of the original transformation. 
-The execution of the polishing transformation is set \textit{not} to overwrite the target model but to refine it instead.
-Table~\ref{tab:polishingTransformationsNames} shows the names that each polishing transformation is expected to have.
-
 \begin{table}[h]
 	\caption{Polishing Transformations File Names}
 	\centering
@@ -295,15 +287,23 @@ Table~\ref{tab:polishingTransformationsNames} shows the names that each polishin
 	\label{tab:polishingTransformationsNames}
 \end{table}
 
+\subsection{Polishing Transformations (\#2b - \#5b)} 
+\label{sec:transformationPatches}
+For transformations \#2- \#5, users are able to define polishing transformations that complement those included in our implementation. 
+After each built-in transformation is executed, the workflow looks to find a transformation with the same file name next to the Ecore metamodel. 
+If a file with the same name exists, it is executed against the Ecore metamodel and targets the already created output model of the original transformation. 
+The execution of the polishing transformation is set \textit{not} to overwrite the target model but to refine it instead.
+Table~\ref{tab:polishingTransformationsNames} shows the names that each polishing transformation is expected to have.
+
 \subsection{Adding support for nested relations}
-In EMF, a reference between to classes can be flagged as a containment relation, which is consistent with the \emph{containment} definition of UML associations (with exception of the deletion cascade mechanism).
-These type of relations, when presented visually, can benefit from showing the contained elements shapes inside the shape of the container, as opposed to the line/arrow presentation.
+In EMF, a reference between two classes can be flagged as a containment relation, which is consistent with the \emph{containment} definition of UML associations (with exception of the deletion cascade mechanism).
+These types of relations, when presented visually, can benefit from showing the contained elements shapes inside the shape of the container, as opposed to the line/arrow presentation.
 For example, if a \texttt{package} is represented with an empty rectangle, classes contained in the package would appear inside this rectangle.
 
-Ideally, a custom profile editor should allow this containment relations to use the visual containment representation too.
+Ideally, a custom profile editor should allow this containment relations to be represented as visual containment too.
 Papyrus does allow to provide custom shapes for elements, so we explored the feasibility of supporting visual containments too.
-Sadly, the current structure of the visual editor does not allow this functionality.
+However, the current structure of the visual editor does not allow this functionality.
 Currently, the \emph{shape} concept at the editor level provides separate graphical sections for the custom shape and the contained elements.
-Further, these two sections are presented visually one after the other.
+These two sections are presented visually one after the other.
 Hence, with the current Papyrus implementation it is not possible to have nested elements inside a custom shape.
 
