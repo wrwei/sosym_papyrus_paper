@@ -10,7 +10,7 @@ As a result we can measure the \textit{efficiency} of Jorvik in generating profi
 In the second evaluation, we assess the \textit{completeness} of Jorvik by applying it to a number of metamodels collected as part of the work presented in~\cite{williams2013metamodels}. 
 This way, Jorvik is tested to check if it can successfully generate profiles and editors for a wide variety of scenarios.
 
-In the third evaluation, we conduct a \textit{user experiment} in which we asked software engineers to build Papyrus editors for two UML Profiles. 
+In the third evaluation, we conduct a \textit{user experiment} in which we asked software engineers to build Papyrus editors for two UML Profiles.
 We first ask the engineers to create the profiles and editors manually, and then ask them to create the same profiles and editors using Jorvik. 
 We measure the time, report problems encountered during the experiment for both approaches and we compare the results.
 
@@ -38,7 +38,6 @@ Table~\ref{tab:evaluation} summarises the efficiency of Jorvik, both for Jorvik 
 
 For Jorvik pre-Papyrus 3.0 (columns under \textit{Jorvik (pre-Papyrus 3.0)}), we need to manually create five annotated Ecore metamodels, which involves writing 436 lines of code (668 model elements). 
 For polishing transformations, we need to write 11 lines of code in the transfornation script for Element Types Configuration, 50 lines for Palette Configuration, 195 lines for CSS and 10 lines for Types Configuration.
-
 For Jorvik post-Papyrus 3.0 (columns under \textit{Jorvik (post-Papyrus 3.0)}), we need the same Ecore metamodels (i.e., five), thus the numbers do not change. 
 For polishing transformations, we need to write 50 lines for the Palette Configuration and 195 lines for CSS. 
 
@@ -47,36 +46,6 @@ produce the polished editor that matches the original Archimate for Papyrus edit
 %The produced by Jorvik editors match those included in the original Archimate for Papyrus tool.
 Our approach creates the five diagram editors which offer the same functionality and features as the original Archimate for Papyrus tool but also atop that the ETL transformation and the OCL constraints.
 
-\captionsetup{justification=centering}
-\begin{landscape}
-	\topskip0pt
-%	\vspace*{\fill}
-\begin{table}[htb!]
-	\centering
-	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{M{1.5cm}|M{1.8cm}|M{1.8cm}|M{1.8cm}|M{1.8cm}|M{1.8cm}|M{1.8cm}|M{3cm}|}
-		\cline{2-8}
-		& \multicolumn{3}{M{5.4cm}|}{\textbf{Jorvik (pre-Papyrus 3.0)} LoC~(Number of Model Elements)} & \multicolumn{3}{M{5.1cm}|}{\textbf{Jorvik (post-Papyrus 3.0)}  LoC~(Number of Model Elements)} & \textbf{Archimate for Papyrus (Pre Papyrus 3.0)}\\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{File}} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Total Hand-written}\\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Ecore}} & 436 (668) & 0 & 436 (668) & 436 (668) & 0 & 436 (668) & 0 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Profile}} & 0 & 0 & 0 & 0 & 0 & 0 & 1867 (1089) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Element Types Configuration}} & 0 & 11 & 11 & 0 & 0 & 0 & 237 (61) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Palette Configuration}} & 0 & 50 & 50 & 0 & 50  & 50  & 1305 (323) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{CSS}} & 0 & 195 & 195 & 0 & 195 & 195 & 537 \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Creation Command}} & \cellcolor{Gray} & \cellcolor{Gray} & \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Architecture Model}} & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Types Configuration}} & 0 & 10 & 10 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 788 (327) \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Diagram Configuration}} & 0 & 0 & 0 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 58 (28) \\ \hline
-		%\multicolumn{1}{|M{2cm}|}{\textbf{plugin.xml}} & 0 & & & 82 \\ \hline
-		%\multicolumn{1}{|M{2cm}|}{\textbf{MANIFEST.MF}} & 0 & & & \\ \hline
-		\multicolumn{1}{|M{2cm}|}{\textbf{Total}}  & \textbf{436 (668)} &\textbf{266} & \textbf{702 (668)} & \textbf{436 (668)} & \textbf{245} & \textbf{681 (668)} & \textbf{4792 (1828)} \\ \hline
-		\cline{1-8}
-	\end{tabular}
-	\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
-	\label{tab:evaluation}
-\end{table}
-\end{landscape}
-
 \subsubsection{Threats to Validity}
 There were a few minor features of the original Archimate for Papyrus tool that our approach could not support. 
 Most of them are related to custom menu entries and wizards. For those to be created developer needs to extend the ``plugin.xml'' file. 
@@ -84,16 +53,59 @@ In addition, the line decoration shapes of stereotypes that extend the aggregati
 Our default and polishing transformations are not able to generate those features automatically; these should be implemented manually. 
 For that reason, we \textit{excluded} these lines of code needed by Archimate for Papyrus to implement these features from the data provided in Table~\ref{tab:evaluation} for a fair comparison. 
 
+
+\captionsetup{justification=centering}
+\begin{landscape}
+	\topskip0pt
+	%	\vspace*{\fill}
+	\begin{table}
+		\centering
+		\setlength{\tabcolsep}{3.5pt} 
+		\begin{tabular}{M{1.5cm}|M{1.8cm}|M{1.8cm}|M{1.8cm}|M{1.8cm}|M{1.8cm}|M{1.8cm}|M{3cm}|}
+			\cline{2-8}
+			& \multicolumn{3}{M{5.4cm}|}{\textbf{Jorvik (pre-Papyrus 3.0)} LoC~(Number of Model Elements)} & \multicolumn{3}{M{5.1cm}|}{\textbf{Jorvik (post-Papyrus 3.0)}  LoC~(Number of Model Elements)} & \textbf{Archimate for Papyrus (Pre Papyrus 3.0)}\\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{File}} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Hand-written} & \textbf{Hand-written (Polishing)} & \textbf{Total} & \textbf{Total Hand-written}\\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Ecore}} & 436 (668) & 0 & 436 (668) & 436 (668) & 0 & 436 (668) & 0 \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Profile}} & 0 & 0 & 0 & 0 & 0 & 0 & 1867 (1089) \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Element Types Configuration}} & 0 & 11 & 11 & 0 & 0 & 0 & 237 (61) \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Palette Configuration}} & 0 & 50 & 50 & 0 & 50  & 50  & 1305 (323) \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{CSS}} & 0 & 195 & 195 & 0 & 195 & 195 & 537 \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Creation Command}} & \cellcolor{Gray} & \cellcolor{Gray} & \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Architecture Model}} & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 0 & 0 & 0 & \cellcolor{Gray}  \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Types Configuration}} & 0 & 10 & 10 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 788 (327) \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Diagram Configuration}} & 0 & 0 & 0 & \cellcolor{Gray} & \cellcolor{Gray}& \cellcolor{Gray} & 58 (28) \\ \hline
+			%\multicolumn{1}{|M{2cm}|}{\textbf{plugin.xml}} & 0 & & & 82 \\ \hline
+			%\multicolumn{1}{|M{2cm}|}{\textbf{MANIFEST.MF}} & 0 & & & \\ \hline
+			\multicolumn{1}{|M{2cm}|}{\textbf{Total}}  & \textbf{436 (668)} &\textbf{266} & \textbf{702 (668)} & \textbf{436 (668)} & \textbf{245} & \textbf{681 (668)} & \textbf{4792 (1828)} \\ \hline
+			\cline{1-8}
+		\end{tabular}
+		\caption{Lines of manually written code of each file for creating a Papyrus UML profile and editor for ArchiMate.}
+		\label{tab:evaluation}
+	\end{table}
+\end{landscape}
+
+
+
+
+
+
 \subsection{Completeness}
 \label{sec:completenessEvaluation}
 In addition to the generation of the Archimate profile/editors, we tested Jorvik with nine more Ecore metamodels from different domains. 
 The names of the metamodels (including Archimate) and their size (in terms of types) are given in Table~\ref{tab:metamodels}. 
 Next to the size, in parenthesis, the number of types that should be transformed so they can be instantiated as nodes/edges is also provided.
 
-\begin{table}[ht!]
+As illustrated in Table~\ref{tab:metamodels}, the metamodels varied in size, from small profiles (having 5 stereotypes) to large profiles (up to 57 
+stereotypes). 
+The approach was able to produce the profiles and the editors for \textit{all} the metamodels, demonstrating that it can be used to generate the 
+desired artifacts for a wide spectrum of domains. 
+The time needed for the generation varied from miliseconds up to a few seconds. 
+In the future, we plan to assess further the scalability of our approach using larger metamodels.
+
+\begin{table}[htb!]
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{|c|M{3cm}|c|M{3cm}|}
+	\caption{The names and sizes of the ten metamodels against which the approach was evaluated to test completeness}	\begin{tabular}{|c|M{3cm}|c|M{3cm}|}
 		\cline{1-4}
 		\textbf{Name}  & \textbf{\#Types (\#Nodes/\#Edges)} & \textbf{Name}  & \textbf{\#Types (\#Nodes/\#Edges)}\\ \hline
 		\textbf{Professor} & 5 (4/5)  & \textbf{Ant Scripts} & 11 (6/4) \\ \hline
@@ -103,20 +115,14 @@ Next to the size, in parenthesis, the number of types that should be transformed
 		\textbf{Bugzilla} & 9 (7/6) & \textbf{Archimate} & 57 (44/11) \\ \hline
 		\cline{1-4}
 	\end{tabular}
-	\caption{The names and sizes of the ten metamodels against which the approach was evaluated to test completeness}
+
 	\label{tab:metamodels}
 \end{table}
 
-As illustrated in Table~\ref{tab:metamodels}, the metamodels varied in size, from small profiles (having 5 stereotypes) to large profiles (up to 57 
-stereotypes). 
-The approach was able to produce the profiles and the editors for \textit{all} the metamodels, demonstrating that it can be used to generate the 
-desired artifacts for a wide spectrum of domains. 
-The time needed for the generation varied from miliseconds up to a few seconds. 
-In the future, we plan to assess further the scalability of our approach using larger metamodels.
 
 \subsection{User Experiment}
 We have argued that Jorvik provides significant gains in productivity when building custom UML Profile editors for Papyrus.
-We design a user experiment to substantiate such claim, and ascertain how significant the productivity gain can be.
+We design a user experiment to substantiate our claim and quantify the productivity improvement. %how significant the productivity gain can be.
 As discussed in Section~\ref{sec:implementation}, there are eight major steps to be taken in order to create a UML profile as well as its supporting editor. 
 In this experiment, we compare the time needed to develop an editor using Papyrus infrastructure (hereby referred to as \textit{Papyrus approach}) with the time needed to develop the same editor using Jorvik.
 For the Papyrus approach we design eight tasks, each with its own deadline (see Table~\ref{tab:manual}) for the participants to complete towards manually creating a UML profile and a working UML editor for the profile.
@@ -129,7 +135,7 @@ For the purpose of this experiment, we have chosen a participant with relatively
 Both participants have an Eclipse IDE installed on their computers, with Eclipse Epsilon 1.6 Interim version\footnote{\url{https://www.eclipse.org/epsilon/}} and Eclipse Papyrus 4.0.0\footnote{\url{https://www.eclipse.org/papyrus/download.html}} installed.
 We asked the participants to perform the eight tasks involved in the Papyrus apporach firstly on one profile (the Website profile\footnote{\url{https://github.com/wrwei/Jorvik/tree/master/org.papyrus.website}}) and then repeat the experiment for a second profile (the Fault Tree profile\footnote{\url{https://github.com/wrwei/Jorvik/tree/master/org.papyrus.faulttree}}) following again the Papyrus apporach. 
 The SVG shapes and icons for both the case were provided to the participants. 
-Before the experiment is conducted, a pre-experiment questionnaire is handed to the participants, to assess their expertise in UML, UML profiles and Papyrus. \thanos{Refer}
+Before the experiment is conducted, a pre-experiment questionnaire is handed to the participants, to assess their expertise in UML, UML profiles and Papyrus\footnote{The questions can be viewed in \url{https://github.com/wrwei/Jorvik/wiki/Pre-Experiment-Self-Assessment-Questionnaire}}. 
 In addition, a 20-30 minutes introduction to UML profiles and Papyrus is given to them while an example of a custom UML profile Papyrus editor is being presented to them. 
 
 For each of the eight steps, there is a set deadline; the participants are asked to try to complete the step within the deadline.
@@ -138,28 +144,29 @@ Initially we spent 3 months on creating an example editor, due to the lack of do
 After we found out how to create an editor, we recorded the amount of time required for us to perform the eight steps to derive the deadlines. 
 We then normalise the deadlines through a pilot study with a volunteer from our research group (we also make adjustments to our experiment set-up in the pilot study based on what we learnt from it). 
 
-In each step, the participants are asked to complete a minimal task first (e.g., for UML profile, create a stereotype that is displayed as a node and a stereotype that is displayed as an edge)\footnote{Detailed descriptions of the tasks can be found at \url{https://github.com/wrwei/Jorvik/tree/master/User\%20Experiment}}. 
+In each step, the participants are asked to complete a minimal task first (e.g., for UML profile, create a stereotype that is displayed as a node and a stereotype that is displayed as an edge)\footnote{Detailed descriptions of the tasks can be found at \url{https://github.com/wrwei/Jorvik/tree/master/User_Experiment}}. 
 They are asked to continue with the rest if there is still time left. 
 If the participants miss the deadline but they are working towards the correct solution, they are asked to give an estimate of how long they believe it would take them to finish the whole step.
 At the beginning of each step, we provide a piece of \textit{Default} knowledge, which covers ground knowledge for the step to be completed. 
 Participants are also allowed to search for any information over the Internet which may assist them in their tasks at any point during the experiment.
 At a certain point for each step, we assess if the participants are able to complete the step within the time frame, and we provide a piece of \textit{Essential} knowledge, which contains key information (which is not easily accessible from the Internet) for the participants to complete the step.
 
-\begin{table}[ht!]
+\begin{table}
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{|c|c|c|c|}
-		Task & Total (m) & Default (m) & Essential (m) \\ 
-		1. UML Profile & 60 & 40 & 20 \\
-		2. Element Types Configuration Model & 60 & 40 & 20 \\
-		3. Palette Configuration Model & 30 & 20 & 10 \\
-		4. Cascading Style Sheet & 30 & 20 & 10 \\
-		5. Creation Command & 30 & 20 & 10 \\
-		6. Architecture Model & 40 & 30 & 10 \\
-		7. Plug-in Configuration & 20 & 12 & 8 \\
-		8. OCL Constraints & 60 & 40 & 20 \\
-	\end{tabular}
 	\caption{Tasks and times for the Papyrus approach.}
+	\begin{tabular}{|c|c|c|c|}
+		\cline{1-4}
+		\textbf{Task} & Total (m) & Default (m) & Essential (m) \\ \hline
+		1. UML Profile & 60 & 40 & 20 \\ \hline
+		2. Element Types Configuration Model & 60 & 40 & 20 \\ \hline
+		3. Palette Configuration Model & 30 & 20 & 10 \\ \hline
+		4. Cascading Style Sheet & 30 & 20 & 10 \\ \hline
+		5. Creation Command & 30 & 20 & 10 \\ \hline
+		6. Architecture Model & 40 & 30 & 10 \\ \hline
+		7. Plug-in Configuration & 20 & 12 & 8 \\ \hline
+		8. OCL Constraints & 60 & 40 & 20 \\ \hline
+	\end{tabular}
 	\label{tab:manual}
 \end{table}
 
@@ -180,19 +187,21 @@ The overview of the tasks, the total time given and the time dealines for execut
 \end{enumerate}
 
 For each step, when participants express that they have completed the step, we stop the timer and assess the solutions. 
-If the solutions are not correct, we tell the participants that they need more work and resume the timer.
+If the solutions are not correct, we tell the participants that they need more work and resume the timer. 
+
 Since each step depends on the previous being completed, at the beginning of each step, the participants are given a solution that contains complete and correct assets for all the previous tasks.
 
-After participants have completed the manual process, a post-experiment questionnaire is handed to them, in which they evaluate the difficulties of each task and if enough time was provided for each task.
+After participants have completed the manual process, a post-experiment questionnaire is handed to them, in which they evaluate the difficulties of each task and if enough time was provided for each task\footnote{The questions can be viewed in \url{https://github.com/wrwei/Jorvik/wiki/Post-Experiment-Self-Assessment-Questionnaire}}.
 
 \begin{table}[ht!]
 	\centering
 	\setlength{\tabcolsep}{3.5pt} 
+	\caption{Task and time for the Jorvik approach.}
 	\begin{tabular}{|c|c|c|c|}
-		Task & Total (m) & Default (m) & Essential (m) \\ 
-		1. Ecore Metamodel and Generation & 50 & 30 & 20 \\
+		\cline{1-4}
+		\textbf{Task} & Total (m) & Default (m) & Essential (m) \\ 
+		1. Ecore Metamodel and Generation & 50 & 30 & 20 \\ \hline
 	\end{tabular}
-	\caption{Tasks and times for the automatic process.}
 	\label{tab:automatic}
 \end{table}
 
@@ -214,8 +223,8 @@ Both of the participants have no experience in creating distributable editors fo
 
 In the table, the \textit{Task} column specifies the name of the steps. 
 The \textit{Time Given} column specifies the time we gave the participants for each step having the \textit{Default} knowledge only and in parenthesis the time we gave to them having the \textit{Essential} knowledge information.
-The \textit{Time Taken} column records the time taken for the participants to complete the Website profile (\textit{Web}) and the Fault Tree profile (\textit{FTA}). Times with an \textit{asterisk (*)} denote that the participant asked and was given the essential information\footnote{In some tasks participants knew how to complete the task with no more information given to them, but they hit the deafult knowledge deadline. In such cases we were assessing the solution and if it was indeed towards the correct direction they were allowed to use the time remaining to complete the task without giving the essential information.}
-The \textit{Correctness} column records if the participants are able to provide correct solutions. 
+The \textit{Time Taken} column records the time taken for the participants to complete the Website profile (\textit{Web}) and the Fault Tree profile (\textit{FTA}). Times with an \textit{asterisk (*)} denote that the participant asked and was given the essential information.\footnote{In some tasks participants knew how to complete the task with no more information given to them, but they hit the deafult knowledge deadline. In such cases we were assessing the solution and if it was indeed towards the correct direction they were allowed to use the time remaining to complete the task without giving the essential information.}
+The \textit{Correctness} column records if the participants are able to provide correct, partial correct (e.g. participants miss some style properties in the CSS file) and incorrect solutions. 
 The participants are distinguished using the \textit{Participant} column.
 We record any comments/remarks made by the participants in the \textit{Remarks} column (se discuss the remarks made by the participants later in this section).
 %Note: the time it takes for Jorvik to generate Papyrus editors based on Ecore metamodels is negligible, therefore is not included in the results.
@@ -289,7 +298,7 @@ Below is an example of how the table should be read (the summary of the experime
 %\end{enumerate}
 %In total Participant \#2 spent 206 minutes using the Papyrus approach for the Fault Tree profile.
 
-We also receive/observe some remarks during the experiment.
+We also note some remarks made by the participants during the experiment.
 Below is a list of the description of the remarks in the table, which should be read together with the experiment results:
 \begin{itemize}
 	\item Remark \textcircled{1}: In the Website experiment, in Step 2, Participant \#1 claimed that she found a solution online\footnote{Which is the forum thread where the authors obtained the correct way of creatin Element Types Configurations: \url{https://www.eclipse.org/forums/index.php/t/1096471/}.} that made the task significantly easier. 
@@ -307,23 +316,25 @@ Below is a list of the description of the remarks in the table, which should be 
 	This is typically due to the fact that there are somewhat confusing model elements in the Architecture metamodel by Papyrus.
 	\item Remark \textcircled{8}: In the Website experiment, in step 7, Participant  \#1 could not configure the plug-in to a working order, she claimed that she would need more than 20 minutes to inspect other models to find out what went wrong.
 \end{itemize}
-
 For the results obtained using Jorvik, participant \#1 was able to generate the correct Papyrus editor for the Website profile in 32 minutes. She was also able to create the correct editor for the Fault Tree profile in 15 minutes.
 Participant \#2 needed 37 minutes and 38 minutes for the creation of a correct Papyrus editor for the Website and the Fault Tree profiles, respectively, using Jorvik.
 
 
 \subsubsection{Analysis} 
-We begin our analysis with the responses from the participants for the pre-experiment questionnaires.
-Both participants in the questionnaire express that they have intermediate knowledge of UML. 
-Prior to the experiment, both have not created a UML profile in the past.
-Both have not experience with Papyrus, and therefore have not created UML profiles using Papyrus.
-We expect this would be the case as Papyrus UML profile is not the most used function of Papyrus. \thanos{Decide if you will keep the questionnaires thingy in the paper or not. If not, remove this. If yes, write for the post experiment and for Jorvik.}
+We begin our analysis with usefull insights from the responses to the pre and post-experiment questionnaires.
+From the pre-experiment questionnaires\footnote{Available at \url{https://github.com/wrwei/Jorvik/blob/master/User_Experiment/Pre-Experiment_Self_Assessment_Responses.pdf}}, we found out that both participants had intermediate knowledge of UML but have not created a UML profile in the past using any tool (including Papyrus).
 
-We then move on to the analysis of the responses to the post-experiment questionnaires. \will{Maybe Horacio can provide some insights?}
+By analysing the responses to the post-experiment questionnaires\footnote{Available at \url{https://github.com/wrwei/Jorvik/blob/master/User_Experiment/Post_Experiment_Self_Assessment_Responses.pdf}} for the Papyrus approach,
+both participants felt that the time assigned to the tasks, most of the times, were not enough for the first round of the experiment (the Website experiment). However, they felt the time was enough for the second round of the experiment (the Fault Tree experiment). This is because participants were able to refer to their Website solution in the second round. Both participants mentioned it was difficult to find the documentation needed to finish the steps (\textit{NB}: this applies only to responses after the first experiment as they mostly referred to the editor produced in that one when executing the second).
 
+For all the steps in the Papyrus approach, except the one in which participants had to create the UML profile, they declared that they had low to moderate confidence that they will be able to complete the task before receiving the essential information. This is can be explained from the lack of experience in developing UML profile editors with Papyrus before. For the same steps (i.e., 2-7), one participant highlighted 
+that felt completely lost before receiving the \textit{Essential} information. However, both of them declared to have moderate to high confidence after receiving the \textit{Essential} information, except for step 2, where both were still confused by the concept of Element Types Configuration. This confirms our findings as this task is the one that participants performed worse (see Table~\ref{tab:experiment}). 
+	
+To summarise, from the responses received, step 2 (Element Types Configuration), step 3 (Palette Configuration), Step 5 (Creation Command) and step 6 (Architecture Model) were identified as typical obstacles for the participants in completing the whole experiments. 
 
-Comparing the Papyrus approach with Jorvik, we can conclude that using Jorvik users are able to increase the productivity by at least 10 times. 
-We draw this conclusion based on the data presented in Table~\ref{tab:experiment} (especially when participants claim that they would need additional time to finish the complete solution for some steps), and also based on the fact that both participants chose not to complete the optional Step 8 (the OCL constraints), which may take significant time, even for experience OCL programmers.
+Regarding the questionnaires from the Jorvik experiment, one of the participants described themself as knowledgable of EMF, had created EMF metamodels in the past, and had also used annotations. The second participant had no EMF experience in the past and had never created an EMF metamodel. Finally, both mentioned that the time give was enough and that they felt more confident after receiving the essential information.
+
+By analysing the results provided in Table~\ref{tab:experiment}, comparing the Papyrus approach with Jorvik, we can conclude that using Jorvik users are able to increase the productivity by at least 10 times (especially when participants claim that they would need additional time to finish the complete solution for some steps). This is also due to the fact that both participants chose not to complete the optional Step 8 (the OCL constraints), which may take significant time, even for experienced OCL programmers.
 
 We are also able to draw the conclusion that it is rather difficult to derive the models/artefacts needed for a working UML profile-specific editor. 
 This is based on the experiment results that both participants got the majority of their models/artefacts wrong for the Website profile, which was the first profile and editor they worked on.
@@ -331,7 +342,7 @@ Although we provided the \textit{Essential} information, parts of which, to the 
 For example, both participants find it difficult to comprehend the purpose of the Element Types Configuration, they actually find that it is the most challenging part of the experiment.
 The candidates also find it difficult to link creation tools in the Palette Configuration model to elements in the Element Types Configuration. 
 They also find it hard to understand the rationale behind referencing to Element Types Configuration.
-Finally, both participants claimed that it is rather difficult to create the Architecture model, as there are concepts defined in it which meanings are not orthogonal to their experience.
+Finally, both participants claimed that it is rather difficult to create the Architecture model, as there are concepts defined in it which purposes are not orthogonal to their experience.
 %This provides evidence that creating a distributable UML profile editor in Papyrus is a labour-intensive and error-prone process.
 In addition, due to the inter-connected nature among the models/artefacts, participants find it difficult to debug their solutions, as there are many places where things may go wrong.
 In contrast, Jorvik provides feedback based on the validation rules applied to the annotated Ecore metamodel, which helped participants in debugging.
@@ -348,13 +359,14 @@ However, for both levels of expertise in Ecore, the experiment suggests that the
 \subsubsection{Threats to Validity}
 For the experiment we used participants that do not specialise in creating UML profiles and their supporting editors for Papyrus. The time taken if our participants were Papyrus experts might be lower.
 %This is typically due to the fact that this feature of Papyrus is not widely promoted and adopted.
-However, As we have spent significant time working with this feature Papyrus and with Jorvik, we have run the experiment ourselves for both the profiles and we monitored the same time benefits (about 10 times faster using Jorvik). 
+However, as we have spent significant time working with Papyrus and Jorvik, we have run the experiment ourselves for both the profiles and we monitored the same time benefits (about 10 times faster using Jorvik). 
 %In fact we recorded the time it took us to finish the whole solution and derived the deadlines for each step in the Papyrus approach based on the our own times and normalised the deadlines based on a pilot experiment taken by a volunteer researcher. [Thanos: we mention this already above]
 
 In the Papyrus experiment, we take a waterfall approach.
-We derived the eight steps in the Papyrus experiment based on our experience, each step depends on previous steps. 
-For example, Step 2 (Element Types Configuration Model) depends on the whole solution of Step 1 (the UML profile), Step 3 (Palette Configuration Model) depends on Step 2. 
-There is one exception that Step 5 (Creation Command) depends on Step 7 (Plug-in Configuration) as the Creation Command Java class relies on the definition of URI mappings, required in the plug-in. 
-However, this does not affect the experiment results. \thanos{You need to say here why this might be a problem: I noted previously that this is not how developers usually work as they go back and forth, see exeptions, make fixes, etc.}
+We derived the eight steps in the Papyrus experiment based on our own experience, each step depends on previous steps. 
+For example, step 2 (Element Types Configuration Model) depends on the whole solution of step 1 (the UML profile), step 3 (Palette Configuration Model) depends on step 2. 
+There is one exception that step 5 (Creation Command) depends on step 7 (Plug-in Configuration) as the Creation Command Java class relies on the definition of URI mappings, required in the plug-in. 
+However, this does not affect the experiment results, as when participants work on step 7, we notify them that they need to also alter their solution in step 5.
 
-[\textbf{TODO: General remark: 1) The results of the questionnaire are not presented and discussed. I also noticed tha the questionnaires appendix is missing.}]
+Finally, participants require the whole solution of the editor in order to test the correctness of the models/artefacts produced in each step. Both participants found that it is difficult to test the models they develop, because it requires the whole solution in order to test a single model. We do not considered this as a flaw in our experiment as it is a replicate of our own experience.
+In addition, to mitigate this issue, we performed manual review of the models/artefacts when it was requested to inspect their correctness.

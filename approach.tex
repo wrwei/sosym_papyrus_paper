@@ -1,20 +1,19 @@
 \section{Proposed Approach}
 \label{sec:approach}
 In this section we present \textit{Jorvik}, an automatic generation tool for Papyrus UML profiles and their respective graphical editors.
-Using Jorvik, we minimise the labour intensive and repetitive tasks required in the manual creation process.
+%Using Jorvik, we minimise the labour intensive and repetitive tasks required in the manual creation process.
 Through Jorvik, developers can define the abstract syntax and the concrete (graphical) syntax of their DSLs (i.e., the UML profile) in the form of an \textit{annotated Ecore metamodel}.
-The annotations can be used to specify the stereotypes to be created in the UML profile, and what meta-elements they extend. 
+The annotations can be used to specify the stereotypes to be created in the UML profile and what meta-elements they extend. 
 With the annotations, the developers can also specify the graphical syntax and related information (e.g., shapes for the stereotypes and the icons for the creation tools in the palette). 
-The annotated Ecore metamodel is then processed by Jorvik and transformed into a UML profile and related Papyrus-specific models/files needed for a distributable Papyrus editor. This is done through a series of model management operations like model validation, model-to-model (M2M) and model-to-text (M2T) transformations. An overview of our proposed approach is presented in Figure~\ref{fig:approachOverview}. 
+The annotated Ecore metamodel is then processed by Jorvik and transformed into a UML profile and related Papyrus models/artefacts needed for a distributable Papyrus editor. This is done through a series of model management operations like model validation, model-to-model (M2M) and model-to-text (M2T) transformations. An overview of our proposed approach is presented in Figure~\ref{fig:approachOverview}. 
 We discuss the steps involved in the process in detail in the remainder of this section, followed by a running example. 
 Technical details about the different steps of the proposed approach are provided in Section~\ref{sec:implementation}.
 
-\begin{figure}[ht!]
+\begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{diagrams/approachOverview.pdf}
-	\caption[]{An overview of the proposed approach}
+	\caption{An overview of the proposed approach}
 	\label{fig:approachOverview}
-%	\vspace{-6mm}
 \end{figure}
 
 The first step is to create an annotated Ecore metamodel to define the intended DSL.
@@ -30,9 +29,9 @@ In order to do this, a number of annotation keywords are defined for the users t
 	This annotation can be applied either to an EClass or to an EReference.
 \end{enumerate}
 
-In the metamodel, all annotated EClasses are automatically transformed into stereotypes.
-Stereotypes are also created from annotated EReferences (more about this below). 
-Depending on the required graphical syntax of the stereotype (i.e., if it should be represented as a \textit{node} or as an \textit{edge} on the diagram), developers need to use the appropriate annotation on EClasses/EReferences (i.e., @Node or @Edge, respectivelly). 
+In the metamodel, all annotated EClasses are automatically transformed into \textit{Stereotype}s.
+\textit{Stereotype}s are also created from annotated EReferences (more about this below). 
+Depending on the required graphical syntax of the stereotype (i.e., if it should be represented as a \textit{node} or as an \textit{edge} on the diagram), developers need to use the appropriate annotations on EClasses/EReferences (i.e., @Node or @Edge, respectivelly). 
 A detailed list of all valid annotation properties is provided in Appendix~\ref{appendixA}. 
 
 With the annotated Ecore metamodel in place, the next step is to check the validity of the annotations in order to proceed with the generation process. 
@@ -44,11 +43,19 @@ The transformations are written in the Epsilon Transformation Language (ETL)~\ci
 In principle, any other model validation, M2M and M2T language could be used (e.g., ATL~\cite{jouault2006atl}). 
 The transformations produce the UML profile with the appropriate OCL constraints and all the configuration models and files needed by Papyrus. 
 In addition, an M2M transformation is also generated that can be used later by developers to transform the UML models that conform to the generated UML profile, back to EMF models that conform to the Ecore metamodel used as source. 
-This way, model management programs already developed to run against model conforming to the EMF metamodel can be re-used.
+The benefit of adopting this process is that model management programs already developed to run against model conforming to the EMF metamodel can be re-used.
 
 Jorvik offers the option of \textit{polishing transformations}, where developers are able to write their own (optional) transformations to fine-tune the generated artefacts produced by the built-in transformations. 
 In the following section, the proposed approach is explained via a running example.
 
+\subsection{Running Example}
+\label{sec:example}
+In this example we define a DSL - the Simple Development Process Language (SDPL) - in an annotated Ecore metamodel and we generate the corresponding UML profile and Papyrus graphical editor using Jorvik.
+We start by defining the abstract syntax of the DSL using  Emfatic\footnote{\url{https://www.eclipse.org/emfatic/}}, a textual notation for Ecore, which is shown in Listing~\ref{lst:annotatedSdplEmfatic} (ignore the annotations at this point). 
+A process defined in SDPL consists of \textit{Steps}, \textit{Tools} and \textit{Persons} participating in it. 
+Each ``Person'' is familiar with certain ``Tools'' and can have different \textit{Role}s in steps of a process, while each ``Step'' refers to the next step that follows using the \textit{next} reference.
+
+In order to generate the UML profile and the Papyrus graphical editor we need to add the following concrete syntax-related annotations shown in Listing~\ref{lst:annotatedSdplEmfatic}:
 
 \begin{figure}[ht!]
 	\lstinputlisting[caption={The annotated Emfatic code that defines the 
@@ -66,14 +73,6 @@ In the following section, the proposed approach is explained via a running examp
 	breaklines=true]{sdplAnnotated.emf}
 	\vspace*{-5mm}
 \end{figure}
-\subsection{Running Example}
-\label{sec:example}
-In this example we define a DSL - the Simple Development Process Language (SDPL) - in an annotated Ecore metamodel and we generate the corresponding UML profile and Papyrus graphical editor using Jorvik.
-We start by defining the abstract syntax of the DSL using  Emfatic\footnote{\url{https://www.eclipse.org/emfatic/}}, a textual notation for Ecore, which is shown in Listing~\ref{lst:annotatedSdplEmfatic} (ignore the annotations at this point). 
-A process defined in SDPL consists of \textit{Steps}, \textit{Tools} and \textit{Persons} participating in it. 
-Each ``Person'' is familiar with certain ``Tools'' and can have different \textit{Role}s in steps of a process, while each ``Step'' refers to the next step that follows using the \textit{next} reference.
-
-In order to generate the UML profile and the Papyrus graphical editor we need to add the following concrete syntax-related annotations shown in Listing~\ref{lst:annotatedSdplEmfatic}:
 
 \begin{itemize}
 	\item[--] \textbf{Line 2:} The name and the icon that should be used by Papyrus in the custom diagrams menus are defined using the \textit{name} and \textit{icon} properties of the \textit{@Diagram} annotation.
@@ -93,7 +92,6 @@ In order to generate the UML profile and the Papyrus graphical editor we need to
 	\item[--] \textbf{NB Line 8:} The \textit{next} EReference is not required to be displayed as an edge on the diagram thus it is not annotated with \emph{@Edge}. 
 	However, it will be a property of the ``Step" stereotype in the generated profile, so it can be set in the model (but it will not be displayed on the diagram).
 \end{itemize}
-
 
 The automated M2M and M2T transformations are then executed on the Ecore file and the produced SDPL Papyrus editor is presented in Figure~\ref{fig:sdplEditor}. 
 
@@ -138,7 +136,7 @@ The EGL template in Listing~\ref{lst:cssPolishingExample} generates a CSS rule i
 It stores all the elements in the Ecore metamodel that are annotated as @Node (line 6) in a collection and iterates though them in lines 7-10. 
 For each of the node stereotypes, it generates the static text ``[appliedStereotypes~='' followed by the name of each stereotype and a comma. 
 At the end it prints the curly brackets (lines 10 and 12) and the text ``fontColor:red;'' in line 11. 
-The resulted output that is amended automatically in the original CSS file by the polishing transformation is the one shown in Listing~\ref{lst:cssPolishingOutput}.
+The resulted output that is amended automatically in the original CSS file by the polishing transformation is shown in Listing~\ref{lst:cssPolishingOutput}.
 
 \begin{figure}[ht!]
 	\vspace*{-5mm}
