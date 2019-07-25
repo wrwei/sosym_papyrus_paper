@@ -43,7 +43,7 @@ The transformations are written in the Epsilon Transformation Language (ETL)~\ci
 In principle, any other model validation, M2M and M2T language could be used (e.g., ATL~\cite{jouault2006atl}). 
 The transformations produce the UML profile with the appropriate OCL constraints and all the configuration models and files needed by Papyrus. 
 In addition, an M2M transformation is also generated that can be used later by developers to transform the UML models that conform to the generated UML profile, back to EMF models that conform to the Ecore metamodel used as source. 
-The benefit of adopting this process is that model management programs already developed to run against model conforming to the EMF metamodel can be re-used.
+The benefit of adopting this process is that model management programs already developed to run against models conforming to the EMF metamodel can be re-used.
 
 Jorvik offers the option of \textit{polishing transformations}, where developers are able to write their own (optional) transformations to fine-tune the generated artefacts produced by the built-in transformations. 
 In the following section, the proposed approach is explained via a running example.
@@ -80,7 +80,7 @@ In order to generate the UML profile and the Papyrus graphical editor we need to
 	The \textit{base} parameter is used to define which UML meta-element the stereotype should extend (i.e., Class\footnote{Although profiles are meant to accommodate ``natural'' extensions to UML artefacts, sometimes is the case that generic meta-elements are used instead. 
 	For example, in the Archimate for Papyrus tool presented in Section~\ref{sec:efficiencyEvaluation}, the Use Case meta-element is used as base for the \textit{Business Service} stereotype, or Class as the base for the \textit{Business Role} stereotype. 
 	Thus, the selection of the most appropriate base element is left for the user.} in the stereotypes of this example\footnote{\textit{Class} is in fact \textit{UML::Class}, we omit the ``UML::'' prefix to improve clarity.}). The shape on the canvas and the icon in the palette for each stereotype are given using the \textit{shape} and \textit{icon} annotation details. We also change the font style by setting the \textit{bold} details to true (see line 10).
-	\item[--] \textbf{Line 19 \& 22} The EReference ``familiarWith" and the ``Role" EClass are added in the profile as stereotypes that extend the meta-element \textit{Association} of UML (UML::Association). 
+	\item[--] \textbf{Lines 19 \& 22} The EReference ``familiarWith" and the ``Role" EClass are added in the profile as stereotypes that extend the meta-element \textit{Association} of UML (UML::Association). 
 	These stereotypes should be represented as links in the diagrams and thus are annotated with the \textit{@Edge} string.
 	In contrast to the ``familiarWith" EReference, the types the 
 	``Roles" edge should be able to connect are not know and need to be 
@@ -89,7 +89,7 @@ In order to generate the UML profile and the Papyrus graphical editor we need to
 	This denotes that the source/target nodes of this connector are mapped to the values of the
 	EReferences: ``src" and ``tar" respectively. 
 	We also set the font height to 15 for the labels of the ``familiarWith" edges (see line 19).
-	\item[--] \textbf{NB Line 8:} The \textit{next} EReference is not required to be displayed as an edge on the diagram thus it is not annotated with \emph{@Edge}. 
+	\item[--] \textbf{NB:} In line 8, the \textit{next} EReference is not required to be displayed as an edge on the diagram thus it is not annotated with \emph{@Edge}. 
 	However, it will be a property of the ``Step" stereotype in the generated profile, so it can be set in the model (but it will not be displayed on the diagram).
 \end{itemize}
 
@@ -136,7 +136,7 @@ The EGL template in Listing~\ref{lst:cssPolishingExample} generates a CSS rule i
 It stores all the elements in the Ecore metamodel that are annotated as @Node (line 6) in a collection and iterates though them in lines 7-10. 
 For each of the node stereotypes, it generates the static text ``[appliedStereotypes~='' followed by the name of each stereotype and a comma. 
 At the end it prints the curly brackets (lines 10 and 12) and the text ``fontColor:red;'' in line 11. 
-The resulted output that is amended automatically in the original CSS file by the polishing transformation is shown in Listing~\ref{lst:cssPolishingOutput}.
+The resulted output that is amended automatically in the original CSS file (by the polishing transformation) is shown in Listing~\ref{lst:cssPolishingOutput}.
 
 \begin{figure}[ht!]
 	\vspace*{-5mm}

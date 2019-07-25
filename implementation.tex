@@ -21,7 +21,7 @@ As the transformations consist of about 1000 lines of code we will describe them
 \subsection{Pre-transformation Validation (\#1)}
 To check the correctness of the annotated Ecore metamodel, a model validation program is firstly executed against the metamodel.
 The program is written using EVL and consists of several rules that check if the annotated Ecore elements have all the necessary information (e.g., a UML base class) and if the values provided are correct (e.g., font size for labels is a positive integer). 
-Listing~\ref{lst:evlRulesBold} presents an example of a rule written in EVL which checks if the value provided for the ``bold'' details in a @Node annotation is correct (i.e., true or false). More specifically, in lines 2--3 a guard is applied to check that the rule is only applied to elements that have the @Node annotation attached to them (line 2) while tests the rule only on those annotations that have the ``bold'' detail defined (line 3). 
+Listing~\ref{lst:evlRulesBold} presents an example of a rule written in EVL which checks if the value provided for the ``bold'' details in a @Node annotation is correct (i.e., true or false). More specifically, in lines 2--3 a guard is applied to check that the rule is only applied to elements that have the @Node annotation attached to them (line 2) while it tests the rule only on those annotations that have the ``bold'' detail defined (line 3). 
 In lines 4--6, the condition to check is provided, which is that the value of the ``bold'' detail is either \textit{true} or \textit{false}. 
 Finally, in lines 7--8 a message is displayed to the users in case the rule is violated providing information regarding the acceptable values and the name of the element(s) that violated this rule.
 
