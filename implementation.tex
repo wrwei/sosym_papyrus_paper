@@ -11,7 +11,7 @@ In this section, we discuss the technical implementation of Jorvik which underpi
 	%	\vspace*{-3mm}
 \end{figure}
 
-Figure~\ref{fig:transformationWorkflow} shows workflow of Jorvik. 
+Figure~\ref{fig:transformationWorkflow} shows workflow of \textit{Jorvik}. 
 Each step in the workflow is identified by a number (\#1 -- \#9 in Figure~\ref{fig:transformationWorkflow}) for easier reference. 
 Before generating all the artefacts, a pre-transformation validation script (\#1 in Figure~\ref{fig:transformationWorkflow}) is executed to verify the correctness of the annotations, and provide useful feedback to the users if there is anything wrong. 
 Moreover, supporting files needed for the creation of the Papyrus Plug-in are also generated while icons and shapes are placed next to the annotated metamodel (\#8 in Figure~\ref{fig:transformationWorkflow}). 
@@ -63,7 +63,7 @@ Table~\ref{tab:evlRules} enumerates all the rules included in the pre-transforma
 \label{sec:profileGeneration}
 The EMF to UML Profile Generation executes a model-to-model transformation written in ETL. 
 The source model of this transformation is the annotated Ecore metamodel (e.g.,  Listing~\ref{lst:annotatedSdplEmfatic}) and the target model is a UML profile model.
-This transformation consists of two main rules, one that creates a Stereotype for each EClass element of the metamodel and a second that creates a \textit{Stereotype} for each EReference annotated as @Edge.
+This transformation consists of two main rules, one that creates a Stereotype for each EClass element of the metamodel and a second that creates a \textit{Stereotype} for each EReference annotated as @Edge:
 
 \begin{itemize}
 	\item[--] \textbf{rule eclass2stereotype:} This transformation rule transforms each EClass element in the annotated Ecore metamodel to an element of type stereotype in the target UML model. 
@@ -177,7 +177,7 @@ In this way, when an element is created in the diagram using the palette, behind
 \subsection{CSS File Generation (\#5)}
 \label{sec:cssGeneration}
 As stated above, the look and feel of diagram elements in Papyrus can be customised using CSS. 
-In this transformation we generate the CSS style rules that define the appearance of nodes and edges in diagrams. 
+In this transformation we generate our default CSS style rules that define the appearance of nodes and edges in diagrams. 
 Each node on a diagram has a set of compartments where the attributes, shapes, etc. appear. 
 Initially, for all nodes that will appear on the diagram, we create a CSS rule to hide all their compartments and another rule to enable the compartment that holds the shape. 
 The latter rule also hides the default shape inherited from the meta-element that the stereotype extends. 
@@ -220,7 +220,7 @@ The Architecture model then needs to be registered and acts as the entry point t
 
 \subsection{Icons, Shapes and Supporting Files (\#8)}
 \label{sec:supportingFiles}
-Jorvik supports the generation of the UML profile and the infrastructure for the Papyrus diagram in either a new Eclipse plug-in project or in the same plug-in project where the annotated Ecore metamodel resides. 
+\textit{Jorvik} supports the generation of the UML profile and the infrastructure for the Papyrus diagram in either a new Eclipse plug-in project or in the same plug-in project where the annotated Ecore metamodel resides. 
 In both scenarios, the ``MANIFEST.MF'', the ``build.properties'' and the ``plugin.xml'' files are created (or overridden respectively). 
 %The first includes the list of all the required bundles while the second points the project to the locations of the ``MANIFEST.MF'' and ``plugin.xml'' files. 
 The ``MANIFEST.MF'' file includes a list of all required bundles/plug-ins.
@@ -271,6 +271,7 @@ In our example (line 6 in Listing \ref{lst:etlGeneratedRule}), the expression ``
 necessary (if the source elements have not been transformed, as shown in the transformation trace) and put the transformed elements into sub-collections 
 (denoted by $sc$). 
 After the ETL engine goes through all the elements in $ct$, the sub-collections $sc$s are returned (flattened to a single collection if more than one) and are added to ``t.familiarWith''.
+
 
 
 \subsection{Polishing Transformations (\#2b - \#5b)} 

@@ -32,17 +32,17 @@ In this paper, we simplify and automate the process of developing distributable 
 We present \textit{Jorvik}, an approach supported by an Eclipse Plug-in, which enables the use of annotated Ecore metamodels to capture the abstract and graphical syntax of UML profiles at a high-level of abstraction. These metamodels are then automatically transformed to UML profiles, and artefacts that contribute to distributable Papyrus graphical editors based on the UML profiles. 
 
 
-We evaluate the efficiency of Jorvik for the automatic generation of Archimate, a non-trivial enterprise modelling language, and its corresponding Papyrus editor against an equivalent developer-driven UML profile and its Papyrus editor. 
+We evaluate the efficiency of \textit{Jorvik} for the automatic generation of Archimate, a non-trivial enterprise modelling language, and its corresponding Papyrus editor against an equivalent developer-driven UML profile and its Papyrus editor. 
 We then apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, to demonstrate its generality and wide applicability. 
-Furthermore, we evaluate the productivity improvement of Jorvik in a user study where developers are asked to create two UML profiles and their Papyrus graphical editors manually and with Jorvik.
-We report the findings of our study and we report the efficiency of Jorvik based on the results. 
+Furthermore, we evaluate the productivity improvement of \textit{Jorvik} in a user study where developers are asked to create two UML profiles and their Papyrus graphical editors manually and with \textit{Jorvik}.
+We report the findings of our study and we report the efficiency of \textit{Jorvik} based on the results. 
 
 This paper significantly extends the prototype approach for automated generation of UML profile graphical editors for Papyrus from our conference paper~\cite{zolotas2018towards} in the following ways:
 \begin{enumerate}
-	\item \textit{We perform a refactoring of Jorvik to adapt to the new underlying structure of Papyrus 3.0 and above.} --
+	\item \textit{We perform a refactoring of \textit{Jorvik} to adapt to the new underlying structure of Papyrus 3.0 and above.} --
 	Since Papyrus 3.0, its underlying metamodels have changed, and the process for creating a Papyrus editor has changed significantly. 
 	We therefore re-implemented a majority of our work to adapt to the changes. 
-	\item \textit{We enhance considerably the experimental evaluation by conducting user experiments to compare Jorvik with the default Papyrus approach.} --
+	\item \textit{We enhance considerably the experimental evaluation by conducting user experiments to compare \textit{Jorvik} with the default Papyrus approach.} --
 	Significant time has been spent on studying the efficiency of our approach, compared to the manual approach.
 	\item \textit{We develop a validation script that checks the annotated Ecore metamodels given as input to our approach.} -- The validation script provides useful feedback to the users to assist them in creating correct annotations.
 	\item \textit{We support more styling properties for diagrams created with our approach.} -- We add support for font styling and we add support for line styling.

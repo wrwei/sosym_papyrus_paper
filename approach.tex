@@ -2,10 +2,10 @@
 \label{sec:approach}
 In this section we present \textit{Jorvik}, an automatic generation tool for Papyrus UML profiles and their respective graphical editors.
 %Using Jorvik, we minimise the labour intensive and repetitive tasks required in the manual creation process.
-Through Jorvik, developers can define the abstract syntax and the concrete (graphical) syntax of their DSLs (i.e., the UML profile) in the form of an \textit{annotated Ecore metamodel}.
+Through \textit{Jorvik}, developers can define the abstract syntax and the concrete (graphical) syntax of their DSLs (i.e., the UML profile) in the form of an \textit{annotated Ecore metamodel}.
 The annotations can be used to specify the stereotypes to be created in the UML profile and what meta-elements they extend. 
 With the annotations, the developers can also specify the graphical syntax and related information (e.g., shapes for the stereotypes and the icons for the creation tools in the palette). 
-The annotated Ecore metamodel is then processed by Jorvik and transformed into a UML profile and related Papyrus models/artefacts needed for a distributable Papyrus editor. This is done through a series of model management operations like model validation, model-to-model (M2M) and model-to-text (M2T) transformations. An overview of our proposed approach is presented in Figure~\ref{fig:approachOverview}. 
+The annotated Ecore metamodel is then processed by \textit{Jorvik} and transformed into a UML profile and related Papyrus models/artefacts needed for a distributable Papyrus editor. This is done through a series of model management operations like model validation, model-to-model (M2M) and model-to-text (M2T) transformations. An overview of our proposed approach is presented in Figure~\ref{fig:approachOverview}. 
 We discuss the steps involved in the process in detail in the remainder of this section, followed by a running example. 
 Technical details about the different steps of the proposed approach are provided in Section~\ref{sec:implementation}.
 
@@ -36,21 +36,21 @@ A detailed list of all valid annotation properties is provided in Appendix~\ref{
 
 With the annotated Ecore metamodel in place, the next step is to check the validity of the annotations in order to proceed with the generation process. 
 Therefore, a custom-made model validation script written in the Epsilon Validation Language (EVL)~\cite{evlKolovos} (see Figure~\ref{fig:approachOverview}) is used.
-The validation rules (which we describe in detail in Section~\ref{sec:implementation}) check if the annotations provided and their attributes match the expected ones by Jorvik (e.g., each annotated element includes a reference to the UML base element it extends). 
+The validation rules (which we describe in detail in Section~\ref{sec:implementation}) check if the annotations provided and their attributes match the expected ones by \textit{Jorvik} (e.g., each annotated element includes a reference to the UML base element it extends). 
 If the validation fails, feedback is provided to users to fix the problems detected. 
 Otherwise, the annotated Ecore metamodel is consumed by a workflow of M2M and M2T  transformations illustrated in Figure~\ref{fig:transformationWorkflow} and described in detail in Section~\ref{sec:implementation}. 
 The transformations are written in the Epsilon Transformation Language (ETL)~\cite{Kolovos2008} and the Epsilon Generation Language (EGL)~\cite{rose2008egl}. 
-In principle, any other model validation, M2M and M2T language could be used (e.g., ATL~\cite{jouault2006atl}). 
+In principle, any other model validation, M2M and M2T language could be used (e.g., ATL~\cite{jouault2006atl} and Acceleo~\cite{}). 
 The transformations produce the UML profile with the appropriate OCL constraints and all the configuration models and files needed by Papyrus. 
 In addition, an M2M transformation is also generated that can be used later by developers to transform the UML models that conform to the generated UML profile, back to EMF models that conform to the Ecore metamodel used as source. 
 The benefit of adopting this process is that model management programs already developed to run against models conforming to the EMF metamodel can be re-used.
 
-Jorvik offers the option of \textit{polishing transformations}, where developers are able to write their own (optional) transformations to fine-tune the generated artefacts produced by the built-in transformations. 
+\textit{Jorvik} offers the option of \textit{polishing transformations}, where developers are able to write their own (optional) transformations to fine-tune the generated artefacts produced by the built-in transformations. 
 In the following section, the proposed approach is explained via a running example.
 
 \subsection{Running Example}
 \label{sec:example}
-In this example we define a DSL - the Simple Development Process Language (SDPL) - in an annotated Ecore metamodel and we generate the corresponding UML profile and Papyrus graphical editor using Jorvik.
+In this example we define a DSL - the Simple Development Process Language (SDPL) - in an annotated Ecore metamodel and we generate the corresponding UML profile and Papyrus graphical editor using \textit{Jorvik}.
 We start by defining the abstract syntax of the DSL using  Emfatic\footnote{\url{https://www.eclipse.org/emfatic/}}, a textual notation for Ecore, which is shown in Listing~\ref{lst:annotatedSdplEmfatic} (ignore the annotations at this point). 
 A process defined in SDPL consists of \textit{Steps}, \textit{Tools} and \textit{Persons} participating in it. 
 Each ``Person'' is familiar with certain ``Tools'' and can have different \textit{Role}s in steps of a process, while each ``Step'' refers to the next step that follows using the \textit{next} reference.
