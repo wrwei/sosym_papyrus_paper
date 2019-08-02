@@ -205,15 +205,16 @@ The Java class is generated using a model-to-text transformation written in EGL.
 \label{sec:architectureModel}
 Papyrus adopted the notion of an Architecture model in order to describe the architecture of the graphical editors since Papyrus 3.0+.
 This transformation synthesises an Architecture model using a model creation program written in the Epsilon Object Language (EOL) \cite{kolovos2006epsilon}. 
-The program needs 1) the annotated Ecore metamodel for the DSL, 2) the Element Types Configuration model, 3) the Palette Configuration model, 4) the UML metamodel, 5) the Creation Command Java class and 6) the CSS custom style sheet as inputs. 
+The program needs 1) the annotated Ecore metamodel for the DSL, 2) the Element Types Configuration model and 3) the Palette Configuration model thus it should be executed after the transformations that generate the latter 2 artefacts (i.e., Steps \#3 and \#4).
+%, 4) the UML metamodel, 5) the Creation Command Java class and 6) the CSS custom style sheet as inputs. 
 In particular, in the Architecture model, the generation program creates:
 \begin{itemize}
 	\item An \textit{ArchitectureDomain} which represents the domain of the DSL;
 	\item A number of \textit{Concern}s to describe the concerns of the domain;
 	\item A number of \textit{Stakeholder}s involved in the domain;
 	\item An \textit{ArchitectureDescriptionLanguage} to describe the architecture, which consists of a number of \textit{Viewpoint}s, a number of \textit{PapyrusDiagram}s. 
-	The Element Types Configuration and the Creation Command class are needed in the \textit{ArchitectureDescriptionLanguage}. 
-	The Palette Configuration model and the CSS sheets are needed in \textit{PapyrusDiagram}s.
+	The \textit{ArchitectureDescriptionLanguage} points to the Element Types Configuration and the Creation Command class. 
+	The \textit{PapyrusDiagram}s point to the Palette Configuration model and the CSS file.
 \end{itemize}
 
 The Architecture model then needs to be registered and acts as the entry point to all the models/files for a Papyrus editor, which is done in Step \#9.
@@ -230,7 +231,7 @@ For the creation of a Papyrus editor, in the ``plugin.xml'', three extension poi
 \begin{itemize}
 	\item \textit{org.eclipse.emf.ecore.uri\_mapping}, in which the users create a mapping between the path of the folder that hold their UML profile, and a PATHMAP, which they can reference in the files/models they create;
 	\item \textit{org.eclipse.papyrus.uml.extensionpoints.UMLProfile}, which points to the location of the UML profile that the users define;
-	\item \textit{org.eclipse.papyrus.infra.architecture.models}, which points to the location of the Architecture model that the users define in Step \#7.
+	\item \textit{org.eclipse.papyrus.infra.architecture.models}, which points to the location of the Architecture model that the transformation generated in Step \#7.
 \end{itemize}
 
 For the scenario where the Papyrus plug-in is created as a new project, the shapes (SVG files) and the icons (PNG files) are copied to the newly created Plug-in project. 
