@@ -50,6 +50,8 @@ breaklines=6true]{evlRulesBold.evl}
 		8 & An acceptable fontHeight value for Node/Edge annotations is provided & The value is a positive integer\\ \hline
 		9 & Node annotations have acceptable details provided & There are no other details provided rather than base, fontHeight and/or bold \\ \hline
 		10 & Edge annotations have acceptable details provided & There are no other details provided rather than base, source, target, fontHeight, bold, and/or lineStyle\\ \hline
+		11 & Edge annotated elements have different names & There are no elements annotated as @Edge that have the same name \\ \hline
+	%~\footnote{A same rule for @Node annotations is not necessary as @Node can be applied on EClasses only and EMF does not allow two EClasses with the same name by default.}
 	\end{tabular}
 	\caption{The list of the rules checked for the annotated Ecore metamodel.}
 	\label{tab:evlRules}
@@ -69,7 +71,7 @@ This transformation consists of two main rules, one that creates a Stereotype fo
 	\item[--] \textbf{rule eclass2stereotype:} This transformation rule transforms each EClass element in the annotated Ecore metamodel to an element of type stereotype in the target UML model. 
 	All attributes of each EClass are also transformed across to the created stereotype. 
 	\item[--] \textbf{rule reference2stereotype:} This rule creates a new stereotype with the same name in the UML profile model for each of the EReferences that are annotated as @Edge in the Ecore metamodel. 
-	No attributes are added to the stereotype as EReferences do not support attributes in Ecore\footnote{It is the users' responsibilities to make sure that they handle name collisions for EReferences themselves (for that EClasses may have EReferences with the same name).}.
+	No attributes are added to the stereotype as EReferences do not support attributes in Ecore.
 \end{itemize}
 
 When all stereotypes are created, a number of post-transformation operations are executed to 1) create the generalisation relationships between the stereotypes, 2) add the references/containment relationships between the stereotypes, 3) create the extension with the UML base meta-element and 4) generate and add the needed OCL constraints for each edge: 
