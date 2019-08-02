@@ -274,31 +274,33 @@ necessary (if the source elements have not been transformed, as shown in the tra
 After the ETL engine goes through all the elements in $ct$, the sub-collections $sc$s are returned (flattened to a single collection if more than one) and are added to ``t.familiarWith''.
 
 
-
+\vspace{5mm}
 \subsection{Polishing Transformations (\#2b - \#5b)} 
 \label{sec:transformationPatches}
 
-\begin{table}[h]
-	\caption{Polishing Transformations File Names}
-	\centering
-	\setlength{\tabcolsep}{3.5pt} 
-	\begin{tabular}{|c|c|}
-		\cline{1-2}
-		\textbf{Transformation ID}  & \textbf{Required File Name}\\ \hline
-		\textbf{\#2} & emf2umlProfile.etl\\ \hline
-		\textbf{\#3} & elementTypesConfigurationsM2M.etl\\ \hline
-		\textbf{\#4} & paletteConfigurationM2M.etl\\ \hline
-		\textbf{\#5} & cssFileGeneration.egl\\ \hline
-		\cline{1-2}
-	\end{tabular}
-	\label{tab:polishingTransformationsNames}
-\end{table}
-
-For transformations \#2- \#5, users are able to define polishing transformations that complement those included in our implementation. 
+For transformations \#2 - \#5, users are able to define polishing transformations (\#2b - \#5b) that complement those included in our implementation. 
 After each built-in transformation is executed, the workflow looks to find a transformation with the same file name next to the Ecore metamodel. 
 If a file with the same name exists, it is executed against the Ecore metamodel and targets the already created output model of the original transformation. 
 The execution of the polishing transformation is set \textit{not} to overwrite the target model but to refine it instead.
 Table~\ref{tab:polishingTransformationsNames} shows the names that each polishing transformation is expected to have.
+
+\begin{table}[ht!]
+	\centering
+%	\setlength{\tabcolsep}{3.5pt} 
+	\begin{tabular}{|c|c|}
+		\cline{1-2}
+		\textbf{Transformation ID}  & \textbf{Required File Name}\\ \hline
+		\textbf{\#2b} & emf2umlProfile.etl\\ \hline
+		\textbf{\#3b} & elementTypesConfigurationsM2M.etl\\ \hline
+		\textbf{\#4b} & paletteConfigurationM2M.etl\\ \hline
+		\textbf{\#5b} & cssFileGeneration.egl\\ \hline
+		\cline{1-2}
+	\end{tabular}
+	\caption{Polishing Transformations File Names}
+	\label{tab:polishingTransformationsNames}
+\end{table}
+
+
 
 \subsection{Adding support for nested relations}
 In EMF, a reference between two classes can be flagged as a containment relation, which is consistent with the \emph{containment} definition of UML associations (with exception of the deletion cascade mechanism).
@@ -306,8 +308,8 @@ These types of relations, when presented visually, can benefit from showing the 
 For example, if a \texttt{package} is represented with an empty rectangle, classes contained in the package would appear inside this rectangle.
 
 Ideally, a custom profile editor should allow this containment relations to be represented as visual containment too.
-Papyrus does allow to provide custom shapes for elements, so we explored the feasibility of supporting visual containments too.
-However, the current structure of the visual editor does not allow this functionality.
+Papyrus does allow providing custom shapes for elements, so we explored the feasibility of supporting visual containments too.
+However, the current structure of the Papyrus visual editor does not allow this functionality.
 Currently, the \emph{shape} concept at the editor level provides separate graphical sections for the custom shape and the contained elements.
 These two sections are presented visually one after the other.
 Hence, with the current Papyrus implementation it is not possible to have nested elements inside a custom shape.
