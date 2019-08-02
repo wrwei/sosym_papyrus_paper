@@ -262,7 +262,6 @@ This rule transforms elements stereotyped as ``Person'' in the UML model to elem
 %Epsilon Transformation Language (ETL) \cite{} is a hybrid model-to-model transformation languages which provides both a declarative rule-based execution scheme and imperative features for handling complex transformation scenarios. In Listing~\ref{lst:etlGeneratedRule}, rule \emph{PersonUML2PersonEMF} is responsible to transform a \emph{Person} in the UML model to a \emph{Person} in the EMF model. 
 
 ETL provides the $::=$ operator for rule resolution. 
-The ETL engine keeps transformation traces which links source elements to target elements of the transformation. 
 When $::=$ is used, the ETL execution engine inspects the established transformation traces and invokes the applicable rules (if necessary) to calculate the counterparts of the source elements contained in the collection. 
 
 %If \emph{equivalents()} is applied to a single element, it returns a collection which contains the counterpart(s) of the element in the target model. If \emph{equivalents()} is applied to a collection of elements, it returns a collection of collection (each collection in the result contains the counterparts of the element in the target model). 
@@ -277,7 +276,7 @@ After the ETL engine goes through all the elements in $ct$, the sub-collections 
 \subsection{Polishing Transformations (\#2b - \#5b)} 
 \label{sec:transformationPatches}
 
-For transformations \#2 - \#5, users are able to define polishing transformations (\#2b - \#5b) that complement those included in our implementation. 
+For transformations \#2 - \#5, users are able to define polishing transformations (\#2b - \#5b, whereas \#2b - \#4b are model-to-model transformations and \#5b is a model-to-text transformation) that complement those included in our implementation. 
 After each built-in transformation is executed, the workflow looks to find a transformation with the same file name next to the Ecore metamodel. 
 If a file with the same name exists, it is executed against the Ecore metamodel and targets the already created output model of the original transformation. 
 The execution of the polishing transformation is set \textit{not} to overwrite the target model but to refine it instead.
