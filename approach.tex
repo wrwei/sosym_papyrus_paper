@@ -55,7 +55,7 @@ We start by defining the abstract syntax of the DSL using  Emfatic\footnote{\url
 A process defined in SDPL consists of \textit{Steps}, \textit{Tools} and \textit{Persons} participating in it. 
 Each ``Person'' is familiar with certain ``Tools'' and can have different \textit{Role}s in steps of a process, while each ``Step'' refers to the next step that follows using the \textit{next} reference.
 
-In order to generate the UML profile and the Papyrus graphical editor we need to add the following concrete syntax-related annotations shown in Listing~\ref{lst:annotatedSdplEmfatic}:
+In order to generate the UML profile and the Papyrus graphical editor we need to add the following concrete syntax-related annotations shown in Listing~\ref{lst:annotatedSdplEmfatic}. Due to the relevance of our work with Eugenia~\cite{kolovos2015eugenia}, a tool that uses the same principles for the generation of GMF editors and inspired our work, and to be as consistent as possible, the syntax of our annotations match those in Eugenia, where possible.
 
 \begin{figure}[ht!]
 	\lstinputlisting[caption={The annotated Emfatic code that defines the 
