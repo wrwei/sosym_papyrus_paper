@@ -21,12 +21,12 @@ As the transformations consist of about 1000 lines of code we will describe them
 \subsection{Pre-transformation Validation (\#1)}
 To check the correctness of the annotated Ecore metamodel, a model validation program is firstly executed against the metamodel.
 The program is written using EVL and consists of several rules that check if the annotated Ecore elements have all the necessary information (e.g., a UML base class) and if the values provided are correct (e.g., font size for labels is a positive integer). 
-Listing~\ref{lst:evlRulesBold} presents an example of a rule written in EVL which checks if the value provided for the ``bold'' details in a @Node annotation is correct (i.e., true or false)~\footnote{Interested readers can find the Ecore metamodel that includes some of the elements used in this EVL example and other listings of this paper in \url{http://www.kermeta.org/docs/org.kermeta.ecore.documentation/build/html.chunked/Ecore-MDK/ch02.html}}. More specifically, in lines 2--3 a guard is applied to check that the rule is only applied to elements that have the @Node annotation attached to them (line 2) while it tests the rule only on those annotations that have the ``bold'' detail defined (line 3). 
-In lines 4--6, the condition to check is provided, which is that the value of the ``bold'' detail is either \textit{true} or \textit{false}. 
+Listing~\ref{lst:evlRulesBold} presents an example of a rule written in EVL which checks if the value provided for the `bold' details in a @Node annotation is correct (i.e., true or false)~\footnote{Interested readers can find the Ecore metamodel that includes some of the elements used in this EVL example and other listings of this paper in \url{http://www.kermeta.org/docs/org.kermeta.ecore.documentation/build/html.chunked/Ecore-MDK/ch02.html}}. More specifically, in lines 2--3 a guard is applied to check that the rule is only applied to elements that have the @Node annotation attached to them (line 2) while it tests the rule only on those annotations that have the `bold' detail defined (line 3). 
+In lines 4--6, the condition to check is provided, which is that the value of the `bold' detail is either \textit{true} or \textit{false}. 
 Finally, in lines 7--8 a message is displayed to the users in case the rule is violated providing information regarding the acceptable values and the name of the element(s) that violated this rule.
 
 \lstinputlisting[
-caption={Example rule that checks that the values provided to the ``bold'' styling detail for @Node annotations is correct.},
+caption={Example rule that checks that the values provided to the `bold' styling detail for @Node annotations is correct.},
 label={lst:evlRulesBold},
 captionpos=b, 
 language=EVL, 
@@ -100,23 +100,23 @@ To illustrate the OCL constraints, we provide a partial view of the SDPL UML pro
 	\label{fig:sample_profile}
 \end{figure}
 
-In Figure \ref{fig:sample_profile}, there are three \textit{Stereotype}s. ``Person" and ``Tool" extend meta-element UML::Class, and they correspond to classes ``Person" and ``Tool" in the metamodel shown in Listing \ref{lst:annotatedSdplEmfatic}. 
-Stereotype ``familiarWith", which extends meta-element UML::Association, corresponds to the reference``familiarWith" in the ``Person" class in Listing \ref{lst:annotatedSdplEmfatic}.
+In Figure \ref{fig:sample_profile}, there are three \textit{Stereotype}s. `Person" and `Tool" extend meta-element UML::Class, and they correspond to classes `Person" and `Tool" in the metamodel shown in Listing \ref{lst:annotatedSdplEmfatic}. 
+Stereotype `familiarWith", which extends meta-element UML::Association, corresponds to the reference`familiarWith" in the `Person" class in Listing \ref{lst:annotatedSdplEmfatic}.
 
-In Figure~\ref{fig:sdplEditor}, the ``familiarWith" association is used to connect ``Person Alice" with ``Tool StarUML". 
-However, Papyrus by default, allows the ``familiarWith: stereotype to be applied to any \emph{Association}, and not strictly to \emph{Associations} which connect ``Person" and ``Tool" stereotyped elements. 
+In Figure~\ref{fig:sdplEditor}, the `familiarWith" association is used to connect `Person Alice" with `Tool StarUML". 
+However, Papyrus by default, allows the `familiarWith: stereotype to be applied to any \emph{Association}, and not strictly to \emph{Associations} which connect `Person" and `Tool" stereotyped elements. 
 Therefore, constraints are needed to check (at least) two aspects:
 
 \begin{itemize}
-	\item \textbf{End Types}: one of the elements a ``familiarWith" association connects to, has the ``Person" steretotype applied to it while the other has the ``Tool" stereotypes applied to it;
-	\item \textbf{Navigability}: the ``familiarWith" association starts from an element stereotyped as ``Person" and points to an element stereotyped as ``Tool".
+	\item \textbf{End Types}: one of the elements a `familiarWith" association connects to, has the `Person" steretotype applied to it while the other has the `Tool" stereotypes applied to it;
+	\item \textbf{Navigability}: the `familiarWith" association starts from an element stereotyped as `Person" and points to an element stereotyped as `Tool".
 \end{itemize}
 
 \subsubsection{End Types}
 Listing \ref{lst:endTypes} shows the OCL code for the \emph{End Types} constraint. 
-Line 1 accesses the types (instances of UML::Class that have stereotypes defined in the profile applied to them) that ``familiarWith" connects. 
-Lines 3 and 4 check if the types that ``familiarWith" connects are of type that either has stereotype ``Person" or ``Tool". 
-In this way, if a ``familiarWith" association connects two types that are not ``Person" or a ``Tool", the constraint fails.
+Line 1 accesses the types (instances of UML::Class that have stereotypes defined in the profile applied to them) that `familiarWith" connects. 
+Lines 3 and 4 check if the types that `familiarWith" connects are either a `Person" \textit{Stereotype} or a `Tool" \textit{Stereotype}. 
+In this way, if a `familiarWith" association connects two types that are not `Person" or a `Tool", the constraint fails.
 
 \lstinputlisting[
 	caption={The End Types constraint in OCL},
@@ -133,9 +133,9 @@ In this way, if a ``familiarWith" association connects two types that are not ``
 \subsubsection{Navigability}
 Listing \ref{lst:navigability} shows the OCL code for the \emph{Navigability} constraint. 
 In this case, we are interested in checking the \emph{isNavigable} property of each end. 
-Thus, in lines 2 and 3, we obtain the member ends that ``familiarWith" connects with. 
-If these ends are obtained successfully (line 4), we check that the \emph{personEnd} (connecting element stereotyped as ``Person") is not navigable (line 5) and the \emph{toolEnd} (connecting element stereotyped as ``Tool") is navigable (line 6). 
-Therefore, we are checking that a ``familiarWith" association can only go from ``Person" to ``Tool" and not the other way around. 
+Thus, in lines 2 and 3, we obtain the member ends that `familiarWith" connects with. 
+If these ends are obtained successfully (line 4), we check that the \emph{personEnd} (connecting element stereotyped as `Person") is not navigable (line 5) and the \emph{toolEnd} (connecting element stereotyped as `Tool") is navigable (line 6). 
+Therefore, we are checking that a `familiarWith" association can only go from `Person" to `Tool" and not the other way around. 
 We need to highlight, that currently, opposite references are not supported; plans for future work are outlined in Section~\ref{sec:future}.
 
 \begin{figure}[h]
@@ -147,13 +147,13 @@ We need to highlight, that currently, opposite references are not supported; pla
 \end{figure}
 
 With these two constraints implemented, we are able to automatically generate OCL constraints for stereotypes that extend UML::Association. 
-We use the \emph{End Types} and \emph{Navigability} constraints as templates with dynamic sections (where the specific stereotype names are inserted dynamically, e.g., ``Person" and ``Tool"). 
+We use the \emph{End Types} and \emph{Navigability} constraints as templates with dynamic sections (where the specific stereotype names are inserted dynamically, e.g., `Person" and `Tool"). 
 So far we have only explored constraints for stereotypes that extend UML::Association. 
 The constraint templates for stereotypes that extend other UML relationships need to be developed separately as the means to access source/target elements of the relationship are different.
 
 \subsection{Element Types  Configuration Transformation(\#3)}
 \label{sec:elementTypes}
-Apart from the UML profile, Papyrus graphical editors require an Element Types Configuration model, which associates the \textit{Stereotype}s defined in the UML profile with their abstract syntax (the meta-elements in UML they extend) and their concrete syntax (the graphical notations of the meta-elements in UML they extend). 
+Apart from the UML profile, Papyrus graphical editors require an Element Types Configuration model, which associates the \textit{Stereotype}s defined in the UML profile with their abstract syntax (the meta-elements in UML they extend) and their concrete syntax (the graphical notations of the meta-elements in UML they extend)\footnote{For detailed explanation for the ElementTypesConfiguration framework of Papyrus, please refer to Papyrus Guide/Toolsmith Guide/ElementTypeConfiguration Framework in Papyrus official documentation}. 
 
 This transformation is responsible for creating an Element Types Configuration model (of extension .elementtypesconfiguration) that contains type specialisation information for the stereotypes in the UML profile. 
 %Since our previous work \cite{zolotas2018towards}, the \textit{ElementTypesConfiguration} metamodel for Papyrus has changed. 
@@ -185,7 +185,7 @@ Initially, for all nodes that will appear on the diagram, we create a CSS rule t
 The latter rule also hides the default shape inherited from the meta-element that the stereotype extends. 
 Then, for each stereotype that appears as a node, a CSS rule is generated to place the SVG figure in the shape compartment. 
 For elements of type \textit{Stereotype}, the assignment of the SVG shapes to the stereotypes is achieved by assigning the path of the SVG file to the \textit{svgFile} property available in CSS. 
-Finally, we generate the CSS rules for each edge, e.g., if a \emph{lineStyle} parameter is set, then the \textit{lineStyle} property for that stereotype is set to the value of the lineStyle parameter (e.g., ``solid'', ``dashed'', etc.).
+Finally, we generate the CSS rules for each edge, e.g., if a \emph{lineStyle} parameter is set, then the \textit{lineStyle} property for that stereotype is set to the value of the lineStyle parameter (e.g., `solid', `dashed', etc.).
 
 \subsection{Creation Command Generation (\#6)}
 \label{sec:creationCommand}
@@ -223,29 +223,28 @@ The Architecture model then needs to be registered and acts as the entry point t
 
 \subsection{Icons, Shapes and Supporting Files (\#8)}
 \label{sec:supportingFiles}
-\textit{Jorvik} supports the generation of the UML profile and the infrastructure for the Papyrus diagram in either a new Eclipse plug-in project or in the same plug-in project where the annotated Ecore metamodel resides. 
-In both scenarios, the ``MANIFEST.MF'', the ``build.properties'' and the ``plugin.xml'' files are created (or overridden respectively). 
-%The first includes the list of all the required bundles while the second points the project to the locations of the ``MANIFEST.MF'' and ``plugin.xml'' files. 
-The ``MANIFEST.MF'' file includes a list of all required bundles/plug-ins.
-The ``build .properties'' file guides the build process of the Eclipse plug-in.
-The ``plugin.xml'' file includes all the necessary extensions for Papyrus to be able to register the UML profile and create the diagrams (e.g., extensions that point to the Architecture model). 
-For the creation of a Papyrus editor, in the ``plugin.xml'', three extension points need to be implemented:
+\textit{Jorvik} supports the generation of the UML profile and its supporting editor in either a new Eclipse plug-in project or in the same Eclipse plug-in project where the annotated Ecore metamodel resides. 
+In both scenarios, the `MANIFEST.MF', the `build.properties' and the `plugin.xml' files are created (or overridden respectively). 
+%The first includes the list of all the required bundles while the second points the project to the locations of the 'MANIFEST.MF' and 'plugin.xml' files. 
+%The 'MANIFEST.MF' file includes a list of all required bundles/plug-ins.
+%The 'build .properties' file guides the build process of the Eclipse plug-in.
+The `plugin.xml' file includes all the necessary extensions for Papyrus to be able to register the UML profile and create the diagrams (e.g., extensions that point to the Architecture model). 
+For the creation of a Papyrus editor, in the `plugin.xml', three extension points need to be implemented:
 \begin{itemize}
 	\item \textit{org.eclipse.emf.ecore.uri\_mapping}, in which the users create a mapping between the path of the folder that hold their UML profile, and a PATHMAP, which they can reference in the files/models they create;
 	\item \textit{org.eclipse.papyrus.uml.extensionpoints.UMLProfile}, which points to the location of the UML profile that the users define;
 	\item \textit{org.eclipse.papyrus.infra.architecture.models}, which points to the location of the Architecture model that the transformation generated in Step \#7.
 \end{itemize}
-
 For the scenario where the Papyrus plug-in is created as a new project, the shapes (SVG files) and the icons (PNG files) are copied to the newly created Plug-in project. 
-For the scenario where the UML profile and editor are generated in the same project in which the Ecore source file resides, the shapes and icons files do not need to be copied as they already exist.
+%For the scenario where the UML profile and editor are generated in the same project in which the Ecore source file resides, the shapes and icons files do not need to be copied as they already exist.
 
-Finally, two files that only consist of the XML and the XMI header (namely ``*.profile.di'' and ``*.profile.notation'') are generated. 
-These files are necessary for Papyrus to construct the UML profile model\footnote{The diagram layout information requires coordinates related information in the diagram, therefore it is not related to this work}. 
+Finally, two files that only consist of the XML and the XMI header (namely `*.profile.di' and `*.profile.notation') are generated. 
+These files are necessary for Papyrus to construct the UML profile model\footnote{The diagram layout information cannot be generated and is not related to this work}. 
 
 \subsection{UML to EMF Transformation Generation (\#9)}
 \label{sec:uml2emf}
 \lstinputlisting[
-caption={Example of an auto-generated ETL rule that transforms \\elements stereotyped as ``Person'' in the UML model to elements of \\type ``Person'' in an EMF model.},
+caption={Example of an auto-generated ETL rule that transforms \\elements stereotyped as `Person' in the UML model to elements of \\type `Person' in an EMF model.},
 label={lst:etlGeneratedRule},
 captionpos=b, 
 language=ETL, 
@@ -259,7 +258,7 @@ This M2T transformation generates the ETL file that can be used to transform the
 One rule is generated for each of the stereotypes that transforms them back to the appropriate type of the Ecore metamodel. 
 Each stereotype has the same attributes and references as the original EClass, therefore, this EGL script also generates the statements in each rule that populate the attributes and the references of the newly created instance of each EClass with the equivalent values of the UML model. 
 An example of an auto-generated rule is shown in Listing~\ref{lst:etlGeneratedRule}. 
-This rule transforms elements stereotyped as ``Person'' in the UML model to elements of type ``Person'' in an EMF model which conforms to the Ecore metamodel presented in Listing~\ref{lst:annotatedSdplEmfatic}.
+This rule transforms elements stereotyped as `Person' in the UML model to elements of type `Person' in an EMF model which conforms to the Ecore metamodel presented in Listing~\ref{lst:annotatedSdplEmfatic}.
 
 
 %Epsilon Transformation Language (ETL) \cite{} is a hybrid model-to-model transformation languages which provides both a declarative rule-based execution scheme and imperative features for handling complex transformation scenarios. In Listing~\ref{lst:etlGeneratedRule}, rule \emph{PersonUML2PersonEMF} is responsible to transform a \emph{Person} in the UML model to a \emph{Person} in the EMF model. 
@@ -269,10 +268,10 @@ When $::=$ is used, the ETL execution engine inspects the established transforma
 
 %If \emph{equivalents()} is applied to a single element, it returns a collection which contains the counterpart(s) of the element in the target model. If \emph{equivalents()} is applied to a collection of elements, it returns a collection of collection (each collection in the result contains the counterparts of the element in the target model). 
 
-In our example (line 6 in Listing \ref{lst:etlGeneratedRule}), the expression ``s.familiarWith'' returns a collection of \emph{UMLProcess!Tool}s (denoted by $ct$). By using ``::='', the ETL engine will look for the rules that transform \emph{UMLProcess!Tool} to \emph{EMFProcess!Tool} and invoke the rules if 
+In our example (line 6 in Listing \ref{lst:etlGeneratedRule}), the expression `s.familiarWith' returns a collection of \emph{UMLProcess!Tool}s (denoted by $ct$). By using `::=', the ETL engine will look for the rules that transform \emph{UMLProcess!Tool} to \emph{EMFProcess!Tool} and invoke the rules if 
 necessary (if the source elements have not been transformed, as shown in the transformation trace) and put the transformed elements into sub-collections 
 (denoted by $sc$). 
-After the ETL engine goes through all the elements in $ct$, the sub-collections $sc$s are returned (flattened to a single collection if more than one) and are added to ``t.familiarWith''.
+After the ETL engine goes through all the elements in $ct$, the sub-collections $sc$s are returned (flattened to a single collection if more than one) and are added to `t.familiarWith'.
 
 
 \vspace{5mm}

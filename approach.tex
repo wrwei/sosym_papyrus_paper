@@ -42,7 +42,7 @@ Otherwise, the annotated Ecore metamodel is consumed by a workflow of M2M and M2
 The transformations are written in the Epsilon Transformation Language (ETL)~\cite{Kolovos2008} and the Epsilon Generation Language (EGL)~\cite{rose2008egl}. 
 In principle, any other model validation, M2M and M2T language could be used (e.g., ATL~\cite{jouault2006atl} and Acceleo~\cite{}). 
 The transformations produce the UML profile with the appropriate OCL constraints and all the configuration models and files needed by Papyrus. 
-In addition, an M2M transformation is also generated that can be used later by developers to transform the UML models that conform to the generated UML profile, back to EMF models that conform to the Ecore metamodel used as source. 
+In addition, an M2M transformation is also generated that can be used later by developers to transform the UML models that conform to the generated UML profile, back to EMF models that conform to the Ecore metamodel used as source (in cases where the users change their UML profiles, they wish to propagate the changes back to their EMF metamodels). 
 The benefit of adopting this process is that model management programs already developed to run against models conforming to the EMF metamodel can be re-used.
 
 \textit{Jorvik} offers the option of \textit{polishing transformations}, where developers are able to write their own (optional) transformations to fine-tune the generated artefacts produced by the built-in transformations. 
