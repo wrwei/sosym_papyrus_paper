@@ -79,7 +79,7 @@ When all stereotypes are created, a number of post-transformation operations are
 \begin{enumerate}[label=\arabic*)]
 	\item For each superclass of an EClass in the metamodel we create a \textit{Generalisation} UML element. 
 	The generalisation element is added to the stereotype created for this specific EClass and refers via the \textit{generalization} reference to the stereotype that was created for the superclass.
-	\item For each reference (ref or val) in the metamodel a new \textit{Property} UML element is created and added to the stereotype that represents the EClass. 
+	\item For each reference (\textit{ref} or \textit{val}, where \textit{ref} denotes a non-containment reference and \textit{val} denotes a containment reference) in the metamodel a new \textit{Property} UML element is created and added to the stereotype that represents the EClass. 
 	A new \textit{Association} UML element is also created and added to the stereotype. The name and the multiplicities are also set.
 	\item By default the stereotypes extend the \textit{Class} base element unless a different value is passed in the \textit{base} property of the @Node/@Edge annotation. 
 	In this post-transformation operation the necessary \textit{Import Metaclass} element and \textit{Extension} reference are created and attached to the stereotype.
@@ -113,7 +113,7 @@ Therefore, constraints are needed to check (at least) two aspects:
 \end{itemize}
 
 \subsubsection{End Types}
-Listing \ref{lst:endTypes} shows the OCL code for the \emph{End Types} constraint. 
+Listing \ref{lst:endTypes} shows the OCL code for the \emph{End Types} constraint\footnote{Please refer to Section 11.8.1 in the UML2.5.0 specification \url{https://www.omg.org/spec/UML}}. 
 Line 1 accesses the types (instances of UML::Class that have stereotypes defined in the profile applied to them) that `familiarWith" connects. 
 Lines 3 and 4 check if the types that `familiarWith" connects are either a `Person" \textit{Stereotype} or a `Tool" \textit{Stereotype}. 
 In this way, if a `familiarWith" association connects two types that are not `Person" or a `Tool", the constraint fails.

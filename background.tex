@@ -12,7 +12,7 @@ In order to create a new UML Profile, developers need to create instances of \te
 Papyrus offers, among other choices, the mechanism of creating UML profiles using a \textit{Profile Diagram} editor. 
 Users can use the palette provided in the UML Profile Diagram editor to create all elements required to form a UML profile.
 The properties of each element (e.g., data types of properties, multiplicity, navigability, etc.) can then be set using the properties view. 
-In a profile, each \textit{Stereotype} needs to extend a UML concept (hereby referred to as \textit{base element} or \textit{meta-element}). 
+In a profile, each \textit{Stereotype} needs to extend a UML concept (hereby referred to as \textit{meta-element}). 
 The users need to define which meta-elements their \textit{Stereotype}s extend. 
 This is achieved by importing the meta-elements and by adding appropriate extension links between their \textit{Stereotype}s and the meta-elements by using the tool provided in the palette.
 The process of creating a UML profile can be repetitive and labour-intensive, depending on the size of the profile.
@@ -43,7 +43,7 @@ In addition, users typically need to remember the meta-element that each \textit
 % Although the aforementioned manual creation and use of the profile sometimes covers all the needs of the stakeholders and includes trade-offs they are willing to take, it is usually the case that stakeholders require the definition of custom shapes for the stereotypes and/or a custom palette of stereotypes. The later is important if one thinks that in smaller profiles, users actually need to navigate through tenths of elements available in the default palette, to pick the one that should be used and apply the stereotype. 
 To address this recurring concern, Papyrus offers at least three possible options for creating a custom palette which allows users to create UML elements and apply selected \textit{Stereotype}s on them in a single step. 
 %Papyrus provides the facility to customise the palette for an open editor. 
-In the first option, users can make use of the customisation facility to create their own palettes, and then specify what \textit{Stereotype}s should be instantiated for the creation tools in the palette.
+For the first option, users can make use of the customisation facility to create their own palettes, and then specify what \textit{Stereotype}s should be instantiated for the creation tools in the palette.
 Although this is an easy-to-use approach, it must be done manually every time a new diagram is created.
 In addition, it cannot be shared in case the editor needs to be distributed to collaborators. 
 %The first option involves customisation through a user interface where users add elements in the palette for their stereotypes. 
@@ -51,7 +51,7 @@ In addition, it cannot be shared in case the editor needs to be distributed to c
 The second option involves the manual definition of an XML-based palette configuration file which is automatically loaded every time the profile is applied to a diagram. 
 This option however, is discouraged by Papyrus as it does not allow the full use of Papyrus functionality.
 Furthermore, this option is based on a deprecated framework, hence its use is discouraged. 
-The third option is to create a UML profile editor, which includes the manual creation of a number of inter-related models and artefacts, including a palette configuration model (and an elementTypesConfiguration model, which is used to associate \textit{Stereotype}s in the UML profile with its UML meta-element and the concrete syntax of the meta-element). 
+The third option is to create a Papyrus editor associated to the UML profile, which includes the manual creation of a number of inter-related models and artefacts, including a palette configuration model, an ElementTypesConfiguration model, which is used to associate \textit{Stereotype}s in the UML profile with its UML meta-element and the concrete syntax of the meta-element, etc. 
 Although this option provides a whole solution to create a UML profile editor, in the paper we illustrate that it is a labour-intensive and error prone process.
 
 %\begin{figure}[ht]
@@ -82,7 +82,7 @@ The CSS can be written once but need to be loaded each time \textit{manually} on
 \end{figure}
 
 To create a distributable (i.e. an Eclipse plugin) graphical editor that has diagrams tailored for the profile and to avoid all the aforementioned drawbacks, users need to create a number of inter-related models and files, and to implement extension points in an Eclipse plug-in project. 
-Figure~\ref{fig:neededPapyrusFiles_new} shows all the artefacts needed to be created for having a distributable Papyrus UML profile editor for Papyrus 3.0+\footnote{Metamodels for Element Types Configuration, Palette Configuration have been changed since our previous work (rendered in blue). The Architecture model and the Java Creation Command class are new concepts introduced in Papyrus 3.0 since our previous work (rendered in green).}.
+Figure~\ref{fig:neededPapyrusFiles_new} shows all the artefacts needed to be created for having a distributable Papyrus UML profile editor for Papyrus 3.0+\footnote{Metamodels for Element Types Configuration, Palette Configuration have been changed since our previous work (pre-Papyrus 3.0, rendered in blue). The Architecture model and the Java Creation Command class are new concepts introduced in Papyrus 3.0+ since our previous work (rendered in green).}.
 These artefacts include:
 \begin{itemize}
 	\item An Element Types Configuration model;
@@ -101,7 +101,11 @@ Detailed discussions about the artefacts needed in order to create a UML profile
 A few hundred lines of code need to be written while tedious and repetitive tasks (e.g., model creation) should be done. 
 This is backed by our studies in the evaluation, which is discussed in Section~\ref{sec:evaluation}.
 
-As mentioned in \cite{kehrer2014versioning}, it could be the case that in different phases of the system enginering process, different metamodels of the same modelling language could be used based on the current phase's needs. Papyrus opted for the option that allows the definition of UML profiles based on a metamodel that follows the specifications defined by the OMG standard. As a result, it might be the case that problems that arise when using tools that implement such metamodels are due to the use of an inappropriate version of the metamodel by the tool vendors. Examples of solutions in tackling such problems that are a result of potential design flaws in OMG specifications are presented in~\cite{alanen2005subset} and~\cite{kelter2008comparing}. However, our personal experience, which is verified by the evaluation results, shows that the problems with the creation of UML profiles and graphical editors in Papyrus, arise by the labour-intensive and repetitive tasks related mostly in the definition of all the other artefacts (which are a result of a design decision by the tool vendor) rather than the UML profile itself. We argue that this \textit{labour-intensive}, \textit{repetitive} and \textit{error-prone} tasks could be automated. 
+As mentioned in \cite{kehrer2014versioning}, in different phases of the system engineering process, different metamodels created using the same modelling language could be used based on the current phase's needs. 
+Papyrus opted for the option that allows the definition of UML profiles based on the UML specifications defined by the OMG standard. 
+As a result, it may be the case that problems, when using tools that implement UML, arise due to the use of an inappropriate version of the metamodel by the tool vendors. 
+Examples of solutions in tackling such problems that are a result of potential design flaws in OMG specifications are presented in~\cite{alanen2005subset} and~\cite{kelter2008comparing}. 
+However, our personal experience, which is verified by the evaluation results, shows that the problems with the creation of UML profiles and graphical editors in Papyrus, arise from the labour-intensive and repetitive tasks related mostly in the definition of all the other artefacts (which are a result of a design decision by the tool vendor) rather than the UML profile itself. 
+We argue that this \textit{labour-intensive}, \textit{repetitive} and \textit{error-prone} tasks could be automated. 
 
-In this paper, we present our tool - \textit{Jorvik}, which uses a single-source input to automatically generate a UML profile and models/files mentioned above for the generation of a distributable UML profile graphical editor for Papyrus. 
-%This approach is described in Section~\ref{sec:approach} that follows. 
+In this paper, we present our tool - \textit{Jorvik}, which uses a single-source input to automatically generate a UML profile and models/files mentioned above for the generation of a distributable Papyrus editor that supports the UML profile. 
