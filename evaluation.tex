@@ -97,8 +97,8 @@ In addition to the generation of the Archimate profile/editors, we test \textit{
 The names of the metamodels (including Archimate) and their size (in terms of types) are provided in Table~\ref{tab:metamodels}. 
 Next to the size, in parenthesis, the number of types that should be transformed so they can be instantiated as nodes/edges is also provided.
 
-As illustrated in Table~\ref{tab:metamodels}, the metamodels vary in size, from small profiles (with 5 stereotypes) to large profiles (with up to 57 
-stereotypes). 
+As illustrated in Table~\ref{tab:metamodels}, the metamodels vary in size, from small profiles (with 5 \textit{Stereotype}s) to large profiles (with up to 57 
+\textit{Stereotype}s). 
 The approach is able to produce the profiles and the editors for \textit{all} metamodels, demonstrating that it can be used to generate the 
 desired artefacts for a wide spectrum of domains. 
 The time needed for the generation varies from miliseconds up to a few seconds. 
@@ -146,7 +146,7 @@ Initially we spent 3 months on creating an example editor, due to the lack of do
 After we found out how to create an editor, we recorded the amount of time required for us to perform the eight steps to derive the deadlines. 
 We then normalise the deadlines through a pilot study with a volunteer from our research group (we also make adjustments to our experiment set-up in the pilot study based on what we learnt from it). 
 
-In each step, the participants are asked to complete a minimal task first (e.g., for UML profile, create a stereotype that is displayed as a node and a stereotype that is displayed as an edge)\footnote{Detailed descriptions of the tasks can be found at \url{https://github.com/wrwei/Jorvik/tree/master/User_Experiment}}. 
+In each step, the participants are asked to complete a minimal task first (e.g., for UML profile, create a \textit{Stereotype} that is displayed as a node and a \textit{Stereotype} that is displayed as an edge)\footnote{Detailed descriptions of the tasks can be found at \url{https://github.com/wrwei/Jorvik/tree/master/User_Experiment}}. 
 They are asked to continue with the rest if there is still time left. 
 If the participants miss the deadline but they are working towards the correct solution, they are asked to give an estimate of how long they believe it would take them to finish the whole step.
 At the beginning of each step, we provide a piece of \textit{Default} knowledge\footnote{See an example at \url{https://github.com/wrwei/Jorvik/blob/master/User_Experiment/Step1_Default.pdf}}, which covers ground knowledge for the step to be completed. 
@@ -184,7 +184,7 @@ The task descriptions are as follows:
 	\item Creation Command - Participants are asked to create the creation command Java class to initialise the Papyrus diagram .
 	\item Architecture Model - Participants are asked to create an Architecture model for the editor/profile.
 	\item Plug-in Configuration - Participants are asked to configure their plug-ins in order to make use of all the models/artefacts to form a working editor
-	\item OCL constraints (optional) - In this optional task, participants are asked to create OCL constraints mentioned in Section~\ref{sec:constraints} for all connector stereotypes, within 60 minutes. 
+	\item OCL constraints (optional) - In this optional task, participants are asked to create OCL constraints mentioned in Section~\ref{sec:constraints} for all connector \textit{Stereotype}s, within 60 minutes. 
 	We do not expect this task to be taken by participants, as it typically requires experienced MDE practitioners 2 weeks to complete the constraint templates described in Section~\ref{sec:constraints}.
 	For the record, no participants agreed to take this optional task.
 \end{enumerate}

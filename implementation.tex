@@ -2,7 +2,6 @@
 \label{sec:implementation}
 In this section, we discuss the technical implementation of Jorvik which underpins the process of our approach discussed in the previous section. 
 
-
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=1\textwidth]{diagrams/transformationWorkflow.pdf}
@@ -21,9 +20,10 @@ As the transformations consist of about 1000 lines of code we will describe them
 \subsection{Pre-transformation Validation (\#1)}
 To check the correctness of the annotated Ecore metamodel, a model validation program is firstly executed against the metamodel.
 The program is written using EVL and consists of several rules that check if the annotated Ecore elements have all the necessary information (e.g., a UML base class) and if the values provided are correct (e.g., font size for labels is a positive integer). 
-Listing~\ref{lst:evlRulesBold} presents an example of a rule written in EVL which checks if the value provided for the `bold' details in a @Node annotation is correct (i.e., true or false)~\footnote{Interested readers can find the Ecore metamodel that includes some of the elements used in this EVL example and other listings of this paper in \url{http://www.kermeta.org/docs/org.kermeta.ecore.documentation/build/html.chunked/Ecore-MDK/ch02.html}}. More specifically, in lines 2--3 a guard is applied to check that the rule is only applied to elements that have the @Node annotation attached to them (line 2) while it tests the rule only on those annotations that have the `bold' detail defined (line 3). 
-In lines 4--6, the condition to check is provided, which is that the value of the `bold' detail is either \textit{true} or \textit{false}. 
-Finally, in lines 7--8 a message is displayed to the users in case the rule is violated providing information regarding the acceptable values and the name of the element(s) that violated this rule.
+Listing~\ref{lst:evlRulesBold} presents an example of a rule written in EVL which checks if the value provided for the `bold' details in a @Node annotation is correct (i.e., true or false)~\footnote{Interested readers can find the Ecore metamodel that includes some of the elements used in this EVL example and other listings of this paper in \url{http://www.kermeta.org/docs/org.kermeta.ecore.documentation/build/html.chunked/Ecore-MDK/ch02.html}}.
+% More specifically, in lines 2--3 a guard is applied to check that the rule is only applied to elements that have the @Node annotation attached to them (line 2) while it tests the rule only on those annotations that have the `bold' detail defined (line 3). 
+%In lines 4--6, the condition to check is provided, which is that the value of the `bold' detail is either \textit{true} or \textit{false}. 
+%Finally, in lines 7--8 a message is displayed to the users in case the rule is violated providing information regarding the acceptable values and the name of the element(s) that violated this rule.
 
 \lstinputlisting[
 caption={Example rule that checks that the values provided to the `bold' styling detail for @Node annotations is correct.},
@@ -65,33 +65,33 @@ Table~\ref{tab:evlRules} enumerates all the rules included in the pre-transforma
 \label{sec:profileGeneration}
 The EMF to UML Profile Generation executes a model-to-model transformation written in ETL. 
 The source model of this transformation is the annotated Ecore metamodel (e.g.,  Listing~\ref{lst:annotatedSdplEmfatic}) and the target model is a UML profile model.
-This transformation consists of two main rules, one that creates a Stereotype for each EClass element of the metamodel and a second that creates a \textit{Stereotype} for each EReference annotated as @Edge:
+This transformation consists of two main rules, one that creates a \textit{Stereotype} for each EClass element of the metamodel and a second that creates a \textit{Stereotype} for each EReference annotated as @Edge:
 
 \begin{itemize}
-	\item[--] \textbf{rule eclass2stereotype:} This transformation rule transforms each EClass element in the annotated Ecore metamodel to an element of type stereotype in the target UML model. 
-	All attributes of each EClass are also transformed across to the created stereotype. 
-	\item[--] \textbf{rule reference2stereotype:} This rule creates a new stereotype with the same name in the UML profile model for each of the EReferences that are annotated as @Edge in the Ecore metamodel. 
-	No attributes are added to the stereotype as EReferences do not support attributes in Ecore.
+	\item[--] \textbf{rule eclass2stereotype:} This transformation rule transforms each EClass element in the annotated Ecore metamodel to an element of type \textit{Stereotype} in the target UML model. 
+	All attributes of each EClass are also transformed across to the created \textit{Stereotype}. 
+	\item[--] \textbf{rule reference2stereotype:} This rule creates a new \textit{Stereotype} with the same name in the UML profile model for each of the EReferences that are annotated as @Edge in the Ecore metamodel. 
+	No attributes are added to the \textit{Stereotype} as EReferences do not support attributes in Ecore.
 \end{itemize}
 
-When all stereotypes are created, a number of post-transformation operations are executed to 1) create the generalisation relationships between the stereotypes, 2) add the references/containment relationships between the stereotypes, 3) create the extension with the UML base meta-element and 4) generate and add the needed OCL constraints for each edge: 
+When all \textit{Stereotype}s are created, a number of post-transformation operations are executed to 1) create the generalisation relationships between the \textit{Stereotype}s, 2) add the references/containment relationships between the \textit{Stereotype}s, 3) create the extension with the UML base meta-element and 4) generate and add the needed OCL constraints for each edge: 
 
 \begin{enumerate}[label=\arabic*)]
 	\item For each superclass of an EClass in the metamodel we create a \textit{Generalisation} UML element. 
-	The generalisation element is added to the stereotype created for this specific EClass and refers via the \textit{generalization} reference to the stereotype that was created for the superclass.
-	\item For each reference (\textit{ref} or \textit{val}, where \textit{ref} denotes a non-containment reference and \textit{val} denotes a containment reference) in the metamodel a new \textit{Property} UML element is created and added to the stereotype that represents the EClass. 
-	A new \textit{Association} UML element is also created and added to the stereotype. The name and the multiplicities are also set.
-	\item By default the stereotypes extend the \textit{Class} base element unless a different value is passed in the \textit{base} property of the @Node/@Edge annotation. 
-	In this post-transformation operation the necessary \textit{Import Metaclass} element and \textit{Extension} reference are created and attached to the stereotype.
-	\item In the last operation, the OCL constraints are created for each stereotype that will be represented as an edge on the diagram. 
-	Two \textit{Constraint} and two \textit{OpaqueExpression} elements are created for each edge stereotype that check the two necessary constraints. 
+	The generalisation element is added to the \textit{Stereotype} created for this specific EClass and refers via the \textit{generalization} reference to the \textit{Stereotype} that was created for the superclass.
+	\item For each reference (\textit{ref} or \textit{val}, where \textit{ref} denotes a non-containment reference and \textit{val} denotes a containment reference) in the metamodel a new \textit{Property} UML element is created and added to the \textit{Stereotype} that represents the EClass. 
+	A new \textit{Association} UML element is also created and added to the \textit{Stereotype}. The name and the multiplicities are also set.
+	\item By default the \textit{Stereotype} extend the \textit{Class} base element unless a different value is passed in the \textit{base} property of the @Node/@Edge annotation. 
+	In this post-transformation operation the necessary \textit{Import Metaclass} element and \textit{Extension} reference are created and attached to the \textit{Stereotype}.
+	\item In the last operation, the OCL constraints are created for each \textit{Stereotype} that will be represented as an edge on the diagram. 
+	Two \textit{Constraint} and two \textit{OpaqueExpression} elements are created for each edge \textit{Stereotype} that check the two necessary constraints. 
 	The OCL constraints are explained in details in the section that follows.
 \end{enumerate}
 
 \subsection{OCL Constraints}
 \label{sec:constraints}
 
-To illustrate the OCL constraints, we provide a partial view of the SDPL UML profile in Figure \ref{fig:sample_profile}\footnote{The attributes of the stereotypes are omitted for simplicity.}.
+To illustrate the OCL constraints, we provide a partial view of the SDPL UML profile in Figure \ref{fig:sample_profile}\footnote{The attributes of the \textit{Stereotype}s are omitted for simplicity.}.
 
 \begin{figure}[ht!]
 	\centering
@@ -102,19 +102,18 @@ To illustrate the OCL constraints, we provide a partial view of the SDPL UML pro
 
 In Figure \ref{fig:sample_profile}, there are three \textit{Stereotype}s. `Person" and `Tool" extend meta-element UML::Class, and they correspond to classes `Person" and `Tool" in the metamodel shown in Listing \ref{lst:annotatedSdplEmfatic}. 
 Stereotype `familiarWith", which extends meta-element UML::Association, corresponds to the reference`familiarWith" in the `Person" class in Listing \ref{lst:annotatedSdplEmfatic}.
-
 In Figure~\ref{fig:sdplEditor}, the `familiarWith" association is used to connect `Person Alice" with `Tool StarUML". 
-However, Papyrus by default, allows the `familiarWith: stereotype to be applied to any \emph{Association}, and not strictly to \emph{Associations} which connect `Person" and `Tool" stereotyped elements. 
+However, Papyrus by default, allows the `familiarWith: \textit{Stereotype} to be applied to any \emph{Association}, and not strictly to \emph{Associations} which connect `Person" and `Tool" stereotyped elements. 
 Therefore, constraints are needed to check (at least) two aspects:
 
 \begin{itemize}
-	\item \textbf{End Types}: one of the elements a `familiarWith" association connects to, has the `Person" steretotype applied to it while the other has the `Tool" stereotypes applied to it;
+	\item \textbf{End Types}: one of the elements a `familiarWith" association connects to, has the `Person" steretotype applied to it while the other has the `Tool" \textit{Stereotype}s applied to it;
 	\item \textbf{Navigability}: the `familiarWith" association starts from an element stereotyped as `Person" and points to an element stereotyped as `Tool".
 \end{itemize}
 
 \subsubsection{End Types}
-Listing \ref{lst:endTypes} shows the OCL code for the \emph{End Types} constraint\footnote{Please refer to Section 11.8.1 in the UML2.5.0 specification \url{https://www.omg.org/spec/UML}}. 
-Line 1 accesses the types (instances of UML::Class that have stereotypes defined in the profile applied to them) that `familiarWith" connects. 
+Listing \ref{lst:endTypes} shows the OCL code for the \emph{End Types} constraint\footnote{Please refer to Section 11.8.1 in the UML2.5.0 specification for properties of UML::Association \url{https://www.omg.org/spec/UML}}. 
+Line 1 accesses the types (instances of UML::Class that have \textit{Stereotype}s defined in the profile applied to them) that `familiarWith" connects. 
 Lines 3 and 4 check if the types that `familiarWith" connects are either a `Person" \textit{Stereotype} or a `Tool" \textit{Stereotype}. 
 In this way, if a `familiarWith" association connects two types that are not `Person" or a `Tool", the constraint fails.
 
@@ -146,21 +145,21 @@ We need to highlight, that currently, opposite references are not supported; pla
 %	\vspace*{-5mm}
 \end{figure}
 
-With these two constraints implemented, we are able to automatically generate OCL constraints for stereotypes that extend UML::Association. 
-We use the \emph{End Types} and \emph{Navigability} constraints as templates with dynamic sections (where the specific stereotype names are inserted dynamically, e.g., `Person" and `Tool"). 
-So far we have only explored constraints for stereotypes that extend UML::Association. 
-The constraint templates for stereotypes that extend other UML relationships need to be developed separately as the means to access source/target elements of the relationship are different.
+With these two constraints implemented, we are able to automatically generate OCL constraints for \textit{Stereotype}s that extend UML::Association. 
+We use the \emph{End Types} and \emph{Navigability} constraints as templates with dynamic sections (where the specific \textit{Stereotype} names are inserted dynamically, e.g., `Person" and `Tool"). 
+So far we have only explored constraints for \textit{Stereotype}s that extend UML::Association. 
+The constraint templates for \textit{Stereotype}s that extend other UML relationships need to be developed separately as the means to access source/target elements of the relationship are different.
 
 \subsection{Element Types  Configuration Transformation(\#3)}
 \label{sec:elementTypes}
 Apart from the UML profile, Papyrus graphical editors require an Element Types Configuration model, which associates the \textit{Stereotype}s defined in the UML profile with their abstract syntax (the meta-elements in UML they extend) and their concrete syntax (the graphical notations of the meta-elements in UML they extend)\footnote{For detailed explanation for the ElementTypesConfiguration framework of Papyrus, please refer to Papyrus Guide/Toolsmith Guide/ElementTypeConfiguration Framework in Papyrus official documentation}. 
 
-This transformation is responsible for creating an Element Types Configuration model (of extension .elementtypesconfiguration) that contains type specialisation information for the stereotypes in the UML profile. 
+This transformation is responsible for creating an Element Types Configuration model (of extension .elementtypesconfiguration) that contains type specialisation information for the \textit{Stereotype}s in the UML profile. 
 %Since our previous work \cite{zolotas2018towards}, the \textit{ElementTypesConfiguration} metamodel for Papyrus has changed. 
 %As a result, we have to re-implement this transformation. 
-For each element of type \textit{Stereotype}, two \textit{SpecializationTypeConfiguration}s are created, one links the stereotype to its UML meta-element, another links the stereotype to the concrete syntax of its UML meta-element.
-For example, a stereotype that extends UML::Class needs to specialise the UML::Class \textit{MetamodelTypeConfiguration} defined in the UML Element Types Configuration model; and it needs to specialise the Class Shape \textit{SpecializationTypeConfiguration} defined in the UML Diagram Element Types Configuration model\footnote{Both models reside in the Papyrus Plug-in \textit{org.eclipse.papyrus.uml.service.types}}. 
-In addition to \textit{SpecializationTypeConfiguration}s, for each \textit{Stereotype} element an \textit{ApplyStereotypeAdviceConfiguration} needs to be created, which associates the \textit{SpecializationTypeConfiguration} to the actual stereotype in the UML profile.
+For each element of type \textit{Stereotype}, two \textit{SpecializationTypeConfiguration}s are created, one links the \textit{Stereotype} to its UML meta-element, another links the \textit{Stereotype} to the concrete syntax of its UML meta-element.
+For example, a \textit{Stereotype} that extends UML::Class needs to specialise the UML::Class \textit{MetamodelTypeConfiguration} defined in the UML Element Types Configuration model; and it needs to specialise the Class Shape \textit{SpecializationTypeConfiguration} defined in the UML Diagram Element Types Configuration model\footnote{Both models reside in the Papyrus Plug-in \textit{org.eclipse.papyrus.uml.service.types}}. 
+In addition to \textit{SpecializationTypeConfiguration}s, for each \textit{Stereotype} element an \textit{ApplyStereotypeAdviceConfiguration} needs to be created, which associates the \textit{SpecializationTypeConfiguration} to the actual \textit{Stereotype} in the UML profile.
 
 %The transformed Element Types Configuration model is a crucial part to Papyrus graphical editor creation, it is used in conjunction with other models/artefacts and it drives the creation of model elements in the editor.
 
@@ -182,10 +181,10 @@ As stated above, the look and feel of diagram elements in Papyrus can be customi
 In this transformation we generate our default CSS style rules that define the appearance of nodes and edges in diagrams. 
 Each node on a diagram has a set of compartments where the attributes, shapes, etc. appear. 
 Initially, for all nodes that will appear on the diagram, we create a CSS rule to hide all their compartments and another rule to enable the compartment that holds the shape. 
-The latter rule also hides the default shape inherited from the meta-element that the stereotype extends. 
-Then, for each stereotype that appears as a node, a CSS rule is generated to place the SVG figure in the shape compartment. 
-For elements of type \textit{Stereotype}, the assignment of the SVG shapes to the stereotypes is achieved by assigning the path of the SVG file to the \textit{svgFile} property available in CSS. 
-Finally, we generate the CSS rules for each edge, e.g., if a \emph{lineStyle} parameter is set, then the \textit{lineStyle} property for that stereotype is set to the value of the lineStyle parameter (e.g., `solid', `dashed', etc.).
+The latter rule also hides the default shape inherited from the meta-element that the \textit{Stereotype} extends. 
+Then, for each \textit{Stereotype} that appears as a node, a CSS rule is generated to place the SVG figure in the shape compartment. 
+For elements of type \textit{Stereotype}, the assignment of the SVG shapes to the \textit{Stereotype}s is achieved by assigning the path of the SVG file to the \textit{svgFile} property available in CSS. 
+Finally, we generate the CSS rules for each edge, e.g., if a \emph{lineStyle} parameter is set, then the \textit{lineStyle} property for that \textit{Stereotype} is set to the value of the lineStyle parameter (e.g., `solid', `dashed', etc.).
 
 \subsection{Creation Command Generation (\#6)}
 \label{sec:creationCommand}
@@ -255,8 +254,9 @@ numberstyle=\tiny,
 breaklines=true]{etlExample.etl}
 
 This M2T transformation generates the ETL file that can be used to transform the UML models created in Papyrus and conform to the UML Profile generated by our approach, back to EMF models that conform to the source Ecore metamodel given as input to the approach. 
-One rule is generated for each of the stereotypes that transforms them back to the appropriate type of the Ecore metamodel. 
-Each stereotype has the same attributes and references as the original EClass, therefore, this EGL script also generates the statements in each rule that populate the attributes and the references of the newly created instance of each EClass with the equivalent values of the UML model. 
+The reason behind this is to allow the users to propagate any changes they make in their transformed UML profiles back to their EMF models.
+One rule is generated for each of the \textit{Stereotype}s that transforms them back to the appropriate type of the Ecore metamodel. 
+Each \textit{Stereotype} has the same attributes and references as the original EClass, therefore, this EGL script also generates the statements in each rule that populate the attributes and the references of the newly created instance of each EClass with the equivalent values of the UML model. 
 An example of an auto-generated rule is shown in Listing~\ref{lst:etlGeneratedRule}. 
 This rule transforms elements stereotyped as `Person' in the UML model to elements of type `Person' in an EMF model which conforms to the Ecore metamodel presented in Listing~\ref{lst:annotatedSdplEmfatic}.
 

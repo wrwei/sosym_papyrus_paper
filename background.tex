@@ -1,13 +1,13 @@
 \section{Background and Motivation}
 \label{sec:background}
 
-In this section we outline the process for defining a UML profile and the supporting graphical model editing facilities for the UML profile in Papyrus. 
+In this section we outline the process for defining a UML profile and its supporting graphical editing facilities in Papyrus. 
 This process typically involves the manual creation of a number of inter-related models and configuration files.
-We motivate the need of automatic generation of these artefacts by highlighting the labour-intensive and error prone activities involved in the UML profile generation process.
+We motivate the need of automatic generation of these artefacts by highlighting the labour-intensive and error prone activities involved in creating a UML profile and its supporting Papyrus editor.
 
 \subsection{UML Profile}
 A UML Profile in Papyrus is an EMF model that conforms to the UML Ecore metamodel. 
-In order to create a new UML Profile, developers need to create instances of \textit{Stereotype, Property, Association}, etc. to create the elements of their domain specific modeling languages, and their properties and relationships among the elements.
+In order to create a new UML Profile, developers need to create instances of \textit{Stereotype, Property, Association}, etc. to create the elements of their domain specific modeling languages, their properties and relationships among the elements.
 
 Papyrus offers, among other choices, the mechanism of creating UML profiles using a \textit{Profile Diagram} editor. 
 Users can use the palette provided in the UML Profile Diagram editor to create all elements required to form a UML profile.
@@ -17,7 +17,7 @@ The users need to define which meta-elements their \textit{Stereotype}s extend.
 This is achieved by importing the meta-elements and by adding appropriate extension links between their \textit{Stereotype}s and the meta-elements by using the tool provided in the palette.
 The process of creating a UML profile can be repetitive and labour-intensive, depending on the size of the profile.
 Having created a profile, users can then apply it to a UML model. 
-Users typically create instances of UML meta-elements (e.g., UML::Class) and apply their \textit{Stereotype}s defined in their UML profiles. 
+To do this, users typically create instances of UML meta-elements (e.g., UML::Class) and apply their \textit{Stereotype}s defined in their UML profiles. 
 For example, if a \textit{Stereotype} extends the UML::Class meta-element, users can apply it to selected instances of UML::Class in their models. 
 In this sense, the users are creating instances of the elements they define in their DSLs. 
 

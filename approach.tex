@@ -23,17 +23,17 @@ In order to do this, a number of annotation keywords are defined for the users t
 
 \begin{enumerate}[label=\arabic*.]
 	\item \textbf{@Diagram} annotations are used to define diagram-specific information like the name and the icon of the diagram. This annotation can be applied to EPackages and should always be applied to the EPackage at the top level.
-	\item \textbf{@Node} annotations are used to indicate the stereotypes that should be instantiated as nodes in the diagrams. 
-	The UML meta-element that this stereotype extends is provided through the \emph{base} property. 
+	\item \textbf{@Node} annotations are used to indicate the  \textit{Stereotype}s that should be instantiated as nodes in the diagrams. 
+	The UML meta-element that this  \textit{Stereotype} extends is provided through the \emph{base} property. 
 	The SVG shape to be used on the canvas and the icon of the specific element in the palette are specified through the \emph{shape} and \emph{icon} properties, respectively. 
-	\item \textbf{@Edge} annotations are used to denote stereotypes that should be instantiated as edges in the diagrams. 
-	The UML meta-element extended by this stereotype is provided through the \emph{base} property\footnote{Due to the vast amount of edge types in UML, we currently support only the following types: Association, Dependency, Generalization, Realization, Usage and InformationFlow}. The icon of the specific element in the palette is also passed as property along with the desired style of the line. 
+	\item \textbf{@Edge} annotations are used to denote  \textit{Stereotype}s that should be instantiated as edges in the diagrams. 
+	The UML meta-element extended by this  \textit{Stereotype} is provided through the \emph{base} property\footnote{Due to the vast amount of edge types in UML, we currently support only the following types: Association, Dependency, Generalization, Realization, Usage and InformationFlow}. The icon of the specific element in the palette is also passed as property along with the desired style of the line. 
 	This annotation can be applied either to an EClass or to an EReference.
 \end{enumerate}
 
 In the metamodel, all annotated EClasses are automatically transformed into \textit{Stereotype}s.
 \textit{Stereotype}s are also created from annotated EReferences (more about this below). 
-Depending on the required graphical syntax of the stereotype (i.e., if it should be represented as a \textit{node} or as an \textit{edge} on the diagram), developers need to use the appropriate annotations on EClasses/EReferences (i.e., @Node or @Edge, respectivelly). 
+Depending on the required graphical syntax of the \textit{Stereotype} (i.e., if it should be represented as a \textit{node} or as an \textit{edge} on the diagram), developers need to use the appropriate annotations on EClasses/EReferences (i.e., @Node or @Edge, respectivelly). 
 A detailed list of all valid annotation properties is provided in Appendix~\ref{appendixA}. 
 
 With the annotated Ecore metamodel in place, the next step is to check the validity of the annotations in order to proceed with the generation process. 
@@ -59,7 +59,7 @@ Each `Person' is familiar with certain `Tools' and can have different \textit{Ro
 
 In order to generate the UML profile and the Papyrus graphical editor we need to add the following concrete syntax-related annotations shown in Listing~\ref{lst:annotatedSdplEmfatic}. Due to the relevance of our work with Eugenia~\cite{kolovos2015eugenia}, a tool that uses the same principles for the generation of GMF editors and inspired our work, and to be as consistent as possible, the syntax of our annotations match those in Eugenia, where possible.
 
-\begin{figure}[ht!]
+\begin{figure}
 	\lstinputlisting[caption={The annotated Emfatic code that defines the 
 		metamodel 
 		of\\ SDPL and can be used to generate the UML profile and the 
@@ -73,27 +73,26 @@ In order to generate the UML profile and the Papyrus graphical editor we need to
 	numbersep=5pt, 
 	numberstyle=\tiny,  
 	breaklines=true]{sdplAnnotated.emf}
-	\vspace*{-5mm}
 \end{figure}
 
 \begin{itemize}
 	\item[--] \textbf{Line 2:} The name and the icon that should be used by Papyrus in the custom diagrams menus are defined using the \textit{name} and \textit{icon} properties of the \textit{@Diagram} annotation.
-	\item[--] \textbf{Lines 5, 10 \& 15:} The \textit{@Node} annotation is used to define that the three concepts (i.e., `Steps", `Roles" and `Tools") should be stereotypes in the UML profile that will be represented as nodes on the diagram. 
-	The \textit{base} parameter is used to define which UML meta-element the stereotype should extend (i.e., Class\footnote{Although profiles are meant to accommodate `natural' extensions to UML artefacts, sometimes is the case that generic meta-elements are used instead. 
-	For example, in the Archimate for Papyrus tool presented in Section~\ref{sec:efficiencyEvaluation}, the Use Case meta-element is used as base for the \textit{Business Service} stereotype, or Class as the base for the \textit{Business Role} stereotype. 
-	Thus, the selection of the most appropriate base element is left for the user.} in the stereotypes of this example\footnote{\textit{Class} is in fact \textit{UML::Class}, we omit the `UML::' prefix to improve clarity.}). The shape on the canvas and the icon in the palette for each stereotype are given using the \textit{shape} and \textit{icon} annotation details. We also change the font style by setting the \textit{bold} details to true (see line 10).
-	\item[--] \textbf{Lines 19 \& 22} The EReference `familiarWith" and the `Role" EClass are added in the profile as stereotypes that extend the meta-element \textit{Association} of UML (UML::Association). 
-	These stereotypes should be represented as links in the diagrams and thus are annotated with the \textit{@Edge} string.
-	In contrast to the `familiarWith' EReference, the types the 
-	`Roles" edge should be able to connect are not know and need to be 
-	specified as properties of the annotation (i.e., \textit{source=`src'} 
-	and \textit{target=`tar'}). 
+	\item[--] \textbf{Lines 5, 10 \& 15:} The \textit{@Node} annotation is used to define that the three DSL elements (i.e., `Steps", `Roles" and `Tools") should be \textit{Stereotype}s in the UML profile that will be represented as nodes in the diagram. 
+	The \textit{base} parameter is used to define which UML meta-element the \textit{Stereotype} should extend (i.e., Class %\footnote{Although profiles are meant to accommodate `natural' extensions to UML artefacts, sometimes it is the case that generic meta-elements are used instead. 
+%	For example, in the Archimate for Papyrus tool presented in Section~\ref{sec:efficiencyEvaluation}, the Use Case meta-element is used as base for the \textit{Business Service} stereotype, or Class as the base for the \textit{Business Role} stereotype. 
+%	Thus, the selection of the most appropriate base element is left for the user.} 
+	in this example\footnote{\textit{Class} is in fact \textit{UML::Class}, we omit the `UML::' prefix to improve clarity.}). The shape of the node in the diagram and the icon in the palette for each \textit{Stereotype} are given using the \textit{shape} and \textit{icon} annotation details. 
+	We also change the font style by setting the \textit{bold} details to true (see line 10).
+	\item[--] \textbf{Lines 19 \& 22} The EReference `familiarWith" and the `Role" EClass are added in the profile as \textit{Stereotype}s that extend the meta-element \textit{Association} of UML (UML::Association). 
+	These \textit{Stereotype}s should be represented as links in the diagrams and thus are annotated with the \textit{@Edge} annotation.
+	In contrast to the `familiarWith' EReference, the types the `Roles" edge should be able to connect are not know and need to be specified as properties of the annotation (i.e., \textit{source=`src'} and \textit{target=`tar'}). 
 	This denotes that the source/target nodes of this connector are mapped to the values of the	EReferences: `src" and `tar" respectively. 
 	Note in here we use keywords \textit{source} and \textit{target} to denote the origin of the Association (\textit{ownedEnd}) and the destiny of the Association (\textit{memberEnd}). 
 	We do this to avoid confusions to EMF users (as EReferences may naturally map to Association). However, there are other types of edges that we support, i.e. Dependency, Generalization, Usage, Realization and InformationFlow. These types are UML::DirectedRelationship and therefore also have \textit{source} and \textit{target}.
+	It is to be noed that the \textit{@Edge} annotation is applicable to EReferences with any multiplicity.
 	In line 19, we set the font height to 15 for the labels of the `familiarWith" edges.
 	\item[--] \textbf{NB:} In line 8, the \textit{next} EReference is not required to be displayed as an edge on the diagram thus it is not annotated with \emph{@Edge}. 
-	However, it will be a property of the `Step" stereotype in the generated profile, so it can be set in the model (but it will not be displayed on the diagram).
+	However, it will be a property of the `Step"  \textit{Stereotype} in the generated profile, so it can be set in the model (but it will not be displayed on the diagram).
 \end{itemize}
 
 The automated M2M and M2T transformations are then executed on the Ecore file and the produced SDPL Papyrus editor (with supporting palette and custom shapes for the SDPL profile) is presented in Figure~\ref{fig:sdplEditor}. 
@@ -108,13 +107,13 @@ The automated M2M and M2T transformations are then executed on the Ecore file an
 \end{figure}
 
 \subsection{Polishing Transformations}
-The generated editor is fully functional but it can be further customised to fit users' custom needs. 
-For example, by default, our automatic transformations dictate the diagram, through the CSS file to show the stereotype name applied to each node. 
-However, in this example we want to hide the stereotype names and display labels in red font. 
+The generated editor is fully functional but it can be further customised to fit the users' custom needs. 
+For example, by default, our automatic transformations dictate the diagram, through the CSS file to show the  \textit{Stereotype} name applied to each node. 
+However, in this example we want to hide the \textit{Stereotype} names and display labels in red font. 
 This can be achieved by manually amending the generated CSS file. 
 However, the CSS file will be automatically overridden if the user regenerates the profile and the editor in the future (e.g., because of a change in the metamodel). 
-To avoid this, users can use the -- optional -- CSS generation polishing transformation (\#5b in Figure~\ref{fig:transformationWorkflow}) shown in Listing~\ref{lst:cssPolishingExample}. 
-Every time the profile and editor generation is executed, the polishing transformation will be called and will set the visibility of the stereotypes to false automatically. 
+To avoid this, users can use the *optional* CSS generation polishing transformation (\#5b in Figure~\ref{fig:transformationWorkflow}) shown in Listing~\ref{lst:cssPolishingExample}. 
+Every time the profile and editor generation is executed, the polishing transformation will be executed, which will set the visibility of the \textit{Stereotype}s to false automatically. 
 
 \begin{figure}[ht!]
 	\lstinputlisting[
@@ -145,12 +144,21 @@ Every time the profile and editor generation is executed, the polishing transfor
 	%	\vspace*{-5mm}
 \end{figure}
 
-The EGL template in Listing~\ref{lst:cssPolishingExample} generates a CSS rule in lines 1-3 that sets the visibility property of the stereotypes' labels to false. 
+The EGL template in Listing~\ref{lst:cssPolishingExample} generates a CSS rule in lines 1-3 that sets the visibility property of the  \textit{Stereotype}s' labels to false. 
 It stores all the elements in the Ecore metamodel that are annotated as @Node (line 6) in a collection and iterates though them in lines 7-10. 
-For each of the node stereotypes, it generates the static text `[appliedStereotypes~=' followed by the name of each stereotype and a comma. 
+For each of the node \textit{Stereotype}s, it generates the static text `[appliedStereotypes~=' followed by the name of each  \textit{Stereotype} and a comma. 
 At the end it prints the curly brackets (lines 10 and 12) and the text `fontColor:red;' in line 11. 
 The resulted output that is amended automatically in the original CSS file (by the polishing transformation) is shown in Listing~\ref{lst:cssPolishingOutput}.
 
+\begin{figure}[ht!]
+
+	\lstinputlisting[caption={The output that is amended in the original CSS 
+		file using the\\ CSS polishing transformation of 
+		Listing~\ref{lst:cssPolishingExample}},label={lst:cssPolishingOutput},captionpos=b,
+	language=CSS, tabsize=2, numbers=left, numbersep=5pt, numberstyle=\tiny, 
+	breaklines=true]{cssPolishingOutput.egl}
+	%	\vspace*{-5mm}
+\end{figure}
 
 
 %Beyond providing a disciplined mechanism for customising the produced UML 

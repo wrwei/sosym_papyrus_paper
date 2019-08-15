@@ -3,12 +3,12 @@
 
 \subsection{UML Profiles}
 Building on the powerful concepts and semantics of UML, and its wide adoption in modelling artefacts of object oriented software and systems, UML profiles enable the development of DSLs by extending (and constraining) elements from the UML metamodel~\cite{FuentesFernandez2004:UMLME}. 
-More specifically, UML profiles make use of extension mechanisms (e.g., stereotypes, tagged definitions and constraints) through which engineers can 
+More specifically, UML profiles make use of extension mechanisms (e.g., \textit{Stereotype}s, tagged definitions and constraints) through which engineers can 
 specialise generic UML elements and define DSLs that conform to the concepts and nature of specific application domains~\cite{Selic2007:ISORC}. 
 Compared to creating a tailor-made DSL by defining its metamodel and developing supporting tools from scratch, the use of UML profiles introduces several benefits including lightweight language extension, dynamic model extension, model-based representation, preservation of metamodel state and employment of already available UML-based tools~\cite{langer2011uml}. 
 Driven by these benefits, several UML profiles have been standardised by the OMG including MARTE~\cite{omg2011marte} and SySML~\cite{friedenthal2014practical}) which are now included in most widely used UML tools (e.g., Papyrus~\cite{lanusse2009papyrus}). 
 
-In safety-critical application domains such as railway, avionics and network infrastructures, developed UML profiles support the specification and examination of security patterns~\cite{Bouaziz2012:ICCSE,Rodriguez2010:SERENE}, analysis of intrusion detection scenarios~\cite{hussein2006umlintr}, and modelling and verification of safety-critical software~\cite{Bernardi2013:JRESS,zoughbi2007uml}.
+In safety-critical application domains such as railway, avionics and network infrastructures, developed UML profiles support the specification and examination of security patterns~\cite{Bouaziz2012:ICCSE,Rodriguez2010:SERENE}, analysis of intrusion detection scenarios~\cite{hussein2006umlintr}, and modelling and verification of safety-critical software~\cite{Bernardi2013:JRESS, zoughbi2007uml, wei2019model}.
 %The flexibility and open-ended boundaries of UML profiles facilitated the development of profiles in applications as diverse as performance analysis~\cite{xu2003performance} and Quality-of-Service investigation~\cite{cortellessa2004towards} in component-based systems, as well as context modelling in mobile distributed systems~\cite{Simons2007:JVLC}, Web applications~\cite{Moreno2007:IETS} and smart homecare services~\cite{Walderhaug2009:MODELS}. 
 
 
@@ -29,59 +29,42 @@ In contrast, Jorvik automates the process of generating UML profiles using a sin
 %A manual definition of a UML profile typically is a tedious, time-consuming 
 %and error-prone process
 \subsection{Automatic Generation of UML Profiles}
-Relevant to Jorvik is research introducing methodologies for the automatic 
-generation of UML profiles from an Ecore-based metamodel~\cite{Kraas17}. 
-The work in~\cite{Lagarde2008:FASE} proposes a partially automated approach for 
-generating UML profiles using a set of specific design patterns. However, this 
-approach requires the manual definition of an initial UML profile skeleton, 
-which is typically a tedious and error-prone task~\cite{Wimmer2009:IJWIS}. 
-The methodology introduced in~\cite{Giachetti2008:ER,Giachetti2009:CAISE} 
-facilitates the derivation of a UML profile using a simpler DSL as input.
-The methodology requires the manual definition of an intermediate metamodel 
-that captures the abstract syntax to be integrated into a UML profile. 
-The intermediate metamodel is then compared against the UML 
-metamodel to identify a set of required UML extensions, as well 
-as the transformation of the intermediate metamodel into a corresponding 
-functioning UML profile. 
-Similarly,~\cite{Kraas17} introduces an approach for the automatic derivation of a UML profile and a corresponding set of OCL expressions
-for stereotype attributes using annotated MOF-based metamodels.
+Relevant to Jorvik is research introducing methodologies for the automatic generation of UML profiles from an Ecore-based metamodel~\cite{Kraas17}. 
+The work in~\cite{Lagarde2008:FASE} proposes a partially automated approach for generating UML profiles using a set of specific design patterns. However, this approach requires the manual definition of an initial UML profile skeleton, which is typically a tedious and error-prone task~\cite{Wimmer2009:IJWIS}. 
+The methodology introduced in~\cite{Giachetti2008:ER,Giachetti2009:CAISE} facilitates the derivation of a UML profile using a simpler DSL as input.
+The methodology requires the manual definition of an intermediate metamodel that captures the abstract syntax to be integrated into a UML profile. 
+The intermediate metamodel is then compared against the UML metamodel to identify a set of required UML extensions, as well as the transformation of the intermediate metamodel into a corresponding functioning UML profile. 
+Similarly,~\cite{Kraas17} introduces an approach for the automatic derivation of a UML profile and a corresponding set of OCL expressions for \textit{Stereotype} attributes using annotated MOF-based metamodels.
 Another relevant research work is JUMP~\cite{Bergmayr2014:MODELS} that supports the automatic generation of profiles from annotated Java libraries~\cite{Bergmayr2014:MODELS}.
-Despite the potential of these approaches, they usually involve
-non-trivial human-driven tasks, e.g., a UML profile 
-skeleton~\cite{Lagarde2008:FASE} or an intermediate 
-metamodel~\cite{Giachetti2008:ER,Giachetti2009:CAISE}, or have limited capabilities (e.g., support of UML profile derivation with generation of OCL constraints~\cite{Kraas17}). In contrast, Jorvik builds on top of standard Ecore metamodels that form the building blocks of MDE~\cite{omg2014meta}. 
+Despite the potential of these approaches, they usually involve non-trivial human-driven tasks, e.g., a UML profile skeleton~\cite{Lagarde2008:FASE} or an intermediate metamodel~\cite{Giachetti2008:ER,Giachetti2009:CAISE}, or have limited capabilities (e.g., support of UML profile derivation with generation of OCL constraints~\cite{Kraas17}). 
+In contrast, Jorvik builds on top of standard Ecore metamodels that form the building blocks of MDE~\cite{omg2014meta}. 
 Furthermore, Jorvik facilitates the development of a fully-fledged UML profile and a distributable Papyrus graphical editor including the generation of OCL constraints and the definition of optional polishing transformations (cf. 
 Section~\ref{sec:transformationPatches}).
 %supports the customisation of UML profiles including the generation of OCL constraints, as well as the generation of the corresponding Papyrus plugin, through the definition of optional polishing transformations (cf. Section~\ref{sec:transformationPatches}).
 
 
 \subsection{From Ecore to UML profiles and back}
-Jorvik also subsumes research that focuses on bridging the gap between 
-MOF-based metamodels (e.g., Ecore) and UML profiles.
+Jorvik also subsumes research that focuses on bridging the gap between MOF-based metamodels (e.g., Ecore) and UML profiles.
 % and illustrating how derived models can be used interchangeably. 
-In~\cite{abouzahra2005practical}, the authors propose a methodology 
-that consumes a UML profile and its corresponding Ecore metamodel, and uses
-M2M transformation and model weaving to transform UML models to 
-Ecore models, and vice versa. The methodology proposed 
-in~\cite{Wimmer2009:IJWIS} simplifies the specification of mappings 
-between a profile and its corresponding Ecore metamodel using a dedicated 
-bridging language. Through an automatic generation process that consumes
-these mappings, the technique produces UML profiles and suitable model 
-transformations. 
-Along the same path, the approach in~\cite{Giachetti2009:ICRCIS} employs an 
-integration metamodel to facilitate the interchange of modelling information 
-between Ecore-based models and UML models. Compared to this research, Jorvik automatically generates UML 
-profiles (like~\cite{Wimmer2009:IJWIS} 
-and~\cite{Giachetti2009:ICRCIS}), but requires only a single annotated Ecore 
-metamodel and does not need any mediator 
-languages~\cite{Wimmer2009:IJWIS} 
-or integration metamodels~\cite{Giachetti2009:ICRCIS}. Also, the transformation 
-of models from UML profiles to Ecore is only a small part of our generic 
-approach~(Section \ref{sec:uml2emf}) that generates not only a fully-fledged 
-UML profile but also a distributable custom graphical editor as an Eclipse plugin. 
+In~\cite{abouzahra2005practical}, the authors propose a methodology that consumes a UML profile and its corresponding Ecore metamodel, and uses M2M transformation and model weaving to transform UML models to Ecore models, and vice versa. 
+The methodology proposed in~\cite{Wimmer2009:IJWIS} simplifies the specification of mappings between a profile and its corresponding Ecore metamodel using a dedicated 
+bridging language. 
+Through an automatic generation process that consumes these mappings, the technique produces UML profiles and suitable model transformations. 
+Along the same path, the approach in~\cite{Giachetti2009:ICRCIS} employs an integration metamodel to facilitate the interchange of modelling information between Ecore-based models and UML models. 
+Compared to this research, Jorvik automatically generates UML profiles (like~\cite{Wimmer2009:IJWIS} and~\cite{Giachetti2009:ICRCIS}), but requires only a single annotated Ecore metamodel and does not need any mediator languages~\cite{Wimmer2009:IJWIS} or integration metamodels~\cite{Giachetti2009:ICRCIS}. 
+Also, the transformation of models from UML profiles to Ecore is only a small part of our generic approach~(Section \ref{sec:uml2emf}) that generates not only a fully-fledged UML profile but also a distributable custom graphical editor as an Eclipse plugin. 
 
- 
+\subsection{Automatic generation of modeling facilities}
+There are a number of works that uses MDE techniques to generate modeling facilities for models. 
+The most widely used tool for graphical modelling is the Graphical Modeling Framework \cite{eclipseGMP} (GMF) provides editor generation facilities for EMF models. 
+GMF provides the foundation for a number of tools. 
+However, as stated in \cite{kolovos2015eugenia}, creating graphical editors in GMF typically involves non-trivial, repetitive and error-prone tasks.
+Hence, a number of tools emerged, such as Sirius \cite{viyovic2014sirius}, Eugenia \cite{kolovos2015eugenia}, and Papyrus.
+Whilst other tools focus on creating editing facilities for EMF models, Papyrus provides an open source solution for UML modelling and UML Profiling.
 
+It is to be noted that editors are only one particular aspect of an MDE environment supporting UML profiles. 
+There are a number of tools which focus on transformations, validations, code generations and comparison tools for UML models. 
+For example, a work which addresses the generation of basic change operations over UML profile models has been presented in \cite{kelter2008comparing, alanen2005subset}.
 
 %The issue of defining a bridge between specific technical spaces and MDA has 
 %been addressed in several works, such as

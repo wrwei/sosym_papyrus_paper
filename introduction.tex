@@ -3,23 +3,23 @@
 
 The Unified Modelling Language (UML)~\cite{UML2015OMG} is the \emph{de facto} standard for object-oriented software and systems modelling. 
 It offers a broad range of abstractions that can be used to express different views of a system, including Class, Use Case, State, Collaboration and Sequence diagrams. 
-Since version 2.0, UML offers an extension and customisation mechanism called \emph{UML Profiling}~\cite{FuentesFernandez2004:UMLME}.
+Since version 2.0, UML offers an extension and customisation mechanism named \emph{UML Profiling}~\cite{FuentesFernandez2004:UMLME}.
 UML profiling enables the users to derive Domain-Specific Languages (DSL) from UML's set of general language concepts.
 The flexibility and open-ended boundaries of UML profiles facilitated the development of profiles in applications such as performance analysis~\cite{xu2003performance}, Quality-of-Service investigation~\cite{cortellessa2004towards} in component-based systems, as well as context modelling in mobile distributed systems~\cite{Simons2007:JVLC}, Web applications~\cite{Moreno2007:IETS} and smart homecare services~\cite{Walderhaug2009:MODELS}. 
 
 An important advantage of UML profiling for designing DSLs is that it allows the reuse of existing UML tools whilst exploiting readily, widely available UML expertise.
-The basic premise of UML profiling is that all domain specific concepts are derived as extensions or refinements of existing UML concepts (called UML \textit{meta-element}s). 
+The basic premise of UML profiling is that all domain specific concepts are derived as extensions or refinements of existing UML concepts (referred to as UML \textit{meta-element}s). 
 The extension mechanism is realised using UML \textit{Stereotype}s, which extend standard UML \textit{meta-elements} to describe user defined DSLs. 
 Consequently, a profile-based UML model can be created and manipulated by any tool that supports standard UML. 
 Moreover, the concepts underlying profile specialisations of existing UML concepts enables users with UML knowledge to adapt to the approach with less effort.
 
 %With profiles, UML offers a way for users to build Domain-Specific Modelling Languages (DSML) by re-using and extending UML concepts. 
-Although Domain-Specific Modelling Languages and tools that support them, like Sirius~\cite{viyovic2014sirius} \will{need to mention Sirius in related work} or Eugenia~\cite{kolovos2015eugenia}, are becoming more popular, UML is still widely used in Model-Based Software Engineering (MBSE)~\cite{erickson2007theoretical}. 
+Although Domain-Specific Modelling Languages and tools that support them, like Sirius~\cite{viyovic2014sirius}  or Eugenia~\cite{kolovos2015eugenia}, are becoming more popular, UML is still widely used in Model-Based Software Engineering (MBSE)~\cite{erickson2007theoretical}. 
 As a result, alternative ways to define Domain-Specific Languages using dedicated metamodels and textual/graphical editors are available to the users~\cite{Bergmayr2014:MODELS,Pardillo2010:MODELS}. 
 %Those approaches have their benefits and shortcomings which are, however, beyond the scope of this paper.   
 
 Papyrus \cite{lanusse2009papyrus} is a leading open-source UML modelling tool developed under the Eclipse Foundation and driven by the PolarSys Initiative and the Papyrus Industry Consortium, which are spearheaded by large high-technology companies such as Airbus, Thales, Saab and Ericsson. 
-After more than a decade in development, Papyrus is close to developing a critical mass for wider adoption in industry as means of 1) escaping proprietary UML tooling lock-in, 2) leveraging the MBSE-related developments in the Eclipse modelling ecosystem enabling automated management of UML models (e.g. model validation and model-to-model (M2M) and model-to-text (M2T) transformation languages), and 3) enabling multi-paradigm modelling using a combination of UML and EMF-based DSLs. 
+After more than a decade of development, Papyrus is close to becoming a critical mass for wider adoption in industry as means of 1) escaping proprietary UML tooling lock-in, 2) leveraging the MBSE-related developments in the Eclipse modelling ecosystem enabling automated management of UML models (e.g. model validation and model-to-model (M2M) and model-to-text (M2T) transformation languages), and 3) enabling multi-paradigm modelling using a combination of UML and EMF-based DSLs. 
 OMG-compliant UML profiles, like SysML~\cite{friedenthal2014practical} and MARTE~\cite{omg2011marte} offer implementations for Papyrus. 
 As highlighted in the recent systematic survey on execution of UML models and UML profiles~\cite{ciccozzi2018execution}, Papyrus is the most widely used tool for developing UML profiles. 
 
@@ -29,26 +29,26 @@ As reported in~\cite{Wimmer2009:IJWIS}, the manual definition of new UML profile
 Papyrus also supports the creation of profile-specific graphical editors which enables the users to define their own creation palettes, custom styles and related artefacts based on their own UML profiles. 
 However, the process of creating profile-specific graphical editors is typically difficult because it requires a high level of modelling expertise and it can also be a repetitive and error-prone process.
 
-In this paper, we simplify and automate the process of developing distributable Papyrus UML profile specific editors. 
+In this paper, we simplify and automate the process of developing distributable Papyrus UML profiles and their supporting editors. 
 We present \textit{Jorvik}, an approach supported by an Eclipse Plug-in, which enables the use of annotated Ecore metamodels to capture the abstract and graphical syntax of UML profiles at a high-level of abstraction. These metamodels are then automatically transformed to UML profiles, and artefacts that contribute to distributable Papyrus graphical editors based on the UML profiles. 
 
 
-We evaluate the efficiency of \textit{Jorvik} for the automatic generation of Archimate, a non-trivial enterprise modelling language, and its corresponding Papyrus editor against an equivalent developer-driven UML profile and its Papyrus editor. 
+We evaluate the efficiency of \textit{Jorvik} for the automatic generation of Archimate, a non-trivial enterprise modelling language, and its corresponding Papyrus editor against an equivalent manually created UML profile and its Papyrus editor. 
 We then apply our approach on several other DSMLs of varying size and complexity~\cite{williams2013metamodels}, to demonstrate its generality and wide applicability. 
 Furthermore, we evaluate the productivity improvement of \textit{Jorvik} in a user study where developers are asked to create two UML profiles and their Papyrus graphical editors, both manually and with \textit{Jorvik}.
-We report our findings and report the efficiency of \textit{Jorvik} based on the results. 
+We report our findings, and the efficiency of \textit{Jorvik} based on the results. 
 
 This paper extends the prototype approach for automated generation of UML profile graphical editors for Papyrus from our conference paper~\cite{zolotas2018towards} in the following ways:
 \begin{enumerate}
-	\item \textit{Refactoring of \textit{Jorvik} to adapt to the new underlying structure of Papyrus 3.0+.} -- 
+	\item \textit{Refactoring of \textit{Jorvik} to adapt to the new underlying structure of Papyrus 3.0+.} 
 	Since Papyrus 3.0, a standard of creating Papyrus editors have been introduced (i.e. using the new Architecture design). 
 	This involves changes to Papyrus' underlying metamodels. 
 	In turn, the process of creating editors have changed significantly.
 	We therefore re-implement a majority of our work to adapt the changes. 
-	\item \textit{Enhanced experimental evaluations by conducting user experiments.} --
+	\item \textit{Enhanced experimental evaluations by conducting user experiments.}
 	Significant time has been spent on studying the efficiency of our approach, compared to the manual approach.
-	\item \textit{Additional validations to check user defined DSLs.} -- Additional validation script provides useful feedback to the users to assist them in creating correct DSLs (with proper annotations).
-	\item \textit{Support of more styling properties for diagrams created with our approach.} -- We add support for font styling and we add support for line styling.
+	\item \textit{Additional validations to check user defined DSLs.} Additional validation script provides useful feedback to the users to assist them in creating correct DSLs (with proper annotations).
+	\item \textit{Support of more styling properties for diagrams created with our approach.} We add support for font styling and we add support for line styling.
 
 \end{enumerate}
 The rest of the paper is organised as follows. 
